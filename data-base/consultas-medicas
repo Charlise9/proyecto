@@ -1,0 +1,5 @@
+users (#id, name, surname, login, password, dni, social_security_number, birth_date, address, location, phone_number, email)
+medical_consultations (#id, seriousness, description, -id_user, consultation_date, -id_doctor, -id_specialists_group)
+doctors (#id, name, surname, collegiate_number, years_of_experience, -id_specialists_group)
+specialists_groups (#id, speciality_name)
+consultation_answers (#id, date, diagnosis, treatment, observations, -id_doctor, -id_specialists_group, -id_user_owner, -id_user_rating)
