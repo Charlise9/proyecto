@@ -1,5 +1,9 @@
-users (#id, name, surname, login, password, dni, social_security_number, birth_date, address, location, phone_number, email)
-medical_consultations (#id, seriousness, description, -id_user, consultation_date, -id_doctor, -id_specialists_group)
-doctors (#id, name, surname, collegiate_number, years_of_experience, -id_specialists_group)
-specialists_groups (#id, speciality_name)
-consultation_answers (#id, date, diagnosis, treatment, observations, -id_doctor, -id_specialists_group, -id_user_owner, -id_user_rating)
+users (#id, name, surname, email, password, dni, social_security_number, birth_date, address, location, phone_number, role)
+
+medical_consultations (#id, seriousness, description, symptoms, medical_history, -id_user, consultation_date, -id_doctor)
+
+doctors (#id, name, surname, email, password, dni, phone_number, birth_date, address, location, collegiate_number, years_of_experience, speciality)
+
+consultation_answers (#id, date, diagnosis, treatment, observations, -id_doctor, -id_user, rate, verified)
+
+
