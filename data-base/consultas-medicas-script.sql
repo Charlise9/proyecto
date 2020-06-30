@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS medical_consultations (
     consultation_date DATETIME,
     id_doctor INT UNSIGNED,
     FOREIGN KEY (id_doctor) REFERENCES doctors (id),
+    id_consultation_answer INT UNSIGNED,
+    FOREIGN KEY (id_consultation_answer) REFERENCES consultation_answers (id),
     creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     upgrading_date DATETIME
 );
@@ -59,10 +61,6 @@ CREATE TABLE IF NOT EXISTS consultation_answers (
     diagnosis VARCHAR(100) NOT NULL,
     treatment VARCHAR(100)NOT NULL,
     observations VARCHAR(1000) NOT NULL,
-    id_doctor INT UNSIGNED,
-    FOREIGN KEY (id_doctor) REFERENCES doctors (id),
-    id_user INT UNSIGNED,
-    FOREIGN KEY (id_user) REFERENCES users (id),
     rate ENUM('El tratamiento me curó', 'El tratamiento no me curó'),
     verified ENUM('El paciente se curó', 'El paciente no se curó'),
     creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
