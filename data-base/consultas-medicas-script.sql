@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS medical_consultations (
     medical_history VARCHAR(500),
     id_user INT UNSIGNED,
     FOREIGN KEY (id_user) REFERENCES users (id),
-    consultation_date DATETIME,
+    date DATETIME,
     id_doctor INT UNSIGNED,
     FOREIGN KEY (id_doctor) REFERENCES doctors (id),
     id_consultation_answer INT UNSIGNED,

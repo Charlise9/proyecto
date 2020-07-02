@@ -351,7 +351,6 @@ paciente<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:M
       </data>
     </node>
     <node id="n25">
-      <data key="d5"/>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
           <y:Geometry height="45.0" width="105.0" x="260.5" y="645.0"/>
@@ -360,6 +359,20 @@ paciente<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:M
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="45.90625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="91.064453125" x="6.9677734375" xml:space="preserve" y="-0.453125">Ver el historial
 consultas del
 médico<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:StyleProperties>
+            <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
+          </y:StyleProperties>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n26">
+      <data key="d5"/>
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.entityRelationship.small_entity">
+          <y:Geometry height="40.0" width="121.0" x="1129.0" y="456.5"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="125.48828125" x="-2.244140625" xml:space="preserve" y="11.015625">Verificar puntuación<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:StyleProperties>
             <y:Property class="java.lang.Boolean" name="y.view.ShadowNodePainter.SHADOW_PAINTING" value="true"/>
           </y:StyleProperties>
@@ -672,7 +685,6 @@ médico<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:Mo
       </data>
     </edge>
     <edge id="e25" source="n9" target="n25">
-      <data key="d9"/>
       <data key="d10">
         <y:GenericEdge configuration="com.yworks.bpmn.Connection">
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -682,6 +694,17 @@ médico<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:Mo
             <y:Property class="com.yworks.yfiles.bpmn.view.BPMNTypeEnum" name="com.yworks.bpmn.type" value="CONNECTION_TYPE_SEQUENCE_FLOW"/>
           </y:StyleProperties>
         </y:GenericEdge>
+      </data>
+    </edge>
+    <edge id="e26" source="n22" target="n26">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
       </data>
     </edge>
   </graph>
