@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50),
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(50) NOT NULL,
     dni VARCHAR(9),
     social_security_number VARCHAR(15),
