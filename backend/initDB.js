@@ -3,7 +3,7 @@ require("dotenv").config();
 //const faker = require("faker/locale/es");
 const { getConnection } = require("./db");
 //const { formatDateToDB } = require("./helpers");
-//const { random } = require("lodash");
+const { random } = require("lodash");
 
 let connection;
 
@@ -27,10 +27,9 @@ async function main() {
         CREATE TABLE users(
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             registration_date DATETIME NOT NULL,
-            name VARCHAR(50),
-            surname VARCHAR(50),
+            name VARCHAR(100),
             email VARCHAR(100) UNIQUE NOT NULL,
-            password VARCHAR(50) NOT NULL,
+            password TINYTEXT NOT NULL,
             dni VARCHAR(9),
             social_security_number VARCHAR(15),
             birth_date DATE,
@@ -50,10 +49,9 @@ async function main() {
         CREATE TABLE doctors(
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             registration_date DATETIME NOT NULL,
-            name VARCHAR(50),
-            surname VARCHAR(50),
+            name VARCHAR(100),
             email VARCHAR(50) UNIQUE NOT NULL,
-            password VARCHAR(50) NOT NULL,
+            password TINYTEXT NOT NULL,
             dni VARCHAR(9),
             phone_number VARCHAR(12),
             birth_date DATE,
@@ -76,9 +74,10 @@ async function main() {
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             date DATETIME NOT NULL,
             seriusness ENUM('ALTA', 'MEDIA', 'BAJA') NOT NULL,
-            description VARCHAR(1000),
             symptoms VARCHAR(100),
             medical_history VARCHAR(500),
+            description VARCHAR(1000),
+            image TINYTEXT,
             id_user INT UNSIGNED,
             FOREIGN KEY (id_user) REFERENCES users (id),
             id_doctor INT UNSIGNED,
@@ -105,7 +104,24 @@ async function main() {
         SET FOREIGN_KEY_CHECKS = 1;
         `);
 
-    console.log("Creando usuario administrador");
+    console.log("Creando usuario paciente administrador");
+
+    await connection.query(`
+      INSERT INTO users(registration_date, name, email, password, role, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "Carlos Barrientos", "carlosbarrientosguillen@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      `);
+
+    console.log("Creando usuario médico administrador");
+
+    await connection.query(`
+      INSERT INTO doctors(registration_date, name, email, password, collegiate_number, speciality, role, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "Ágata Vázquez", "carlosbarrientosguillen@gmail.com", SHA2("${
+        process.env.DEFAULT_ADMIN_PASSWORD
+      }", 512), "${random(
+      1000000000,
+      9999999999
+    )}", "Ginecología", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      `);
   } catch (error) {
     console.error(error);
   } finally {

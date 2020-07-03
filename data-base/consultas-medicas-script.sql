@@ -4,10 +4,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE IF NOT EXISTS users (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    surname VARCHAR(50),
+    name VARCHAR(100) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password TINYTEXT NOT NULL,
     dni VARCHAR(9),
     social_security_number VARCHAR(15),
     birth_date DATE,
@@ -25,9 +24,9 @@ CREATE TABLE IF NOT EXISTS medical_consultations (
     description VARCHAR(1000) NOT NULL,
     symptoms VARCHAR(200),
     medical_history VARCHAR(500),
+    image TINYTEXT,
     id_user INT UNSIGNED,
     FOREIGN KEY (id_user) REFERENCES users (id),
-    date DATETIME,
     id_doctor INT UNSIGNED,
     FOREIGN KEY (id_doctor) REFERENCES doctors (id),
     id_consultation_answer INT UNSIGNED,
@@ -38,10 +37,9 @@ CREATE TABLE IF NOT EXISTS medical_consultations (
 
 CREATE TABLE IF NOT EXISTS doctors (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    surname VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL,
 	email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password TINYTEXT NOT NULL,
     dni VARCHAR(9),
     phone_number VARCHAR(12),
     birth_date DATE,
