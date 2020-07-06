@@ -211,25 +211,8 @@ async function main() {
     `);
     }
 
-    console.log("Metiendo datos de prueba en medical_consultations");
-    const medicalConsultationsEntries = 50;
-
-    for (let index = 0; index < medicalConsultationsEntries; index++) {
-      const date = formatDateToDB(faker.date.recent());
-
-      await connection.query(`
-      INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, id_user, id_doctor)
-      VALUES("${date}", "${
-        seriousness[random(0, 2)]
-      }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
-        2,
-        users + 1
-      )}", "${random(2, doctors + 1)}")
-      `);
-    }
-
     console.log("metiendo datos de prueba en consultation_answers");
-    const consultationAnswersEntries = medicalConsultationsEntries;
+    const consultationAnswersEntries = 50;
 
     for (let index = 0; index < consultationAnswersEntries; index++) {
       const date = formatDateToDB(faker.date.recent());
@@ -239,6 +222,23 @@ async function main() {
       await connection.query(`
       INSERT INTO consultation_answers(date, diagnosis, treatment, observations, rate, verified, last_update)
       VALUES("${date}", "${faker.lorem.sentence()}", "${faker.lorem.sentences()}", "${faker.lorem.paragraphs()}", "${rate}", "SI", UTC_TIMESTAMP)
+      `);
+    }
+
+    console.log("Metiendo datos de prueba en medical_consultations");
+    const medicalConsultationsEntries = 50;
+
+    for (let index = 0; index < medicalConsultationsEntries; index++) {
+      const date = formatDateToDB(faker.date.recent());
+
+      await connection.query(`
+      INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, id_user, id_doctor, id_consultation_answer)
+      VALUES("${date}", "${
+        seriousness[random(0, 2)]
+      }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
+        2,
+        users + 1
+      )}", "${random(2, doctors + 1)}", "${index + 1}")
       `);
     }
   } catch (error) {
