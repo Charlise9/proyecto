@@ -1,9 +1,52 @@
 require("dotenv").config();
 
-//const faker = require("faker/locale/es");
+const faker = require("faker/locale/es");
 const { getConnection } = require("./db");
-//const { formatDateToDB } = require("./helpers");
+const {
+  formatDateToDB,
+  formatBirthdayToDB,
+  formatExperience,
+} = require("./helpers");
 const { random } = require("lodash");
+const { add } = require("date-fns");
+
+const abc = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+
+const speciality = [
+  "Médico de familia",
+  "Endocrinología",
+  "Dermatología",
+  "Ginecología",
+];
+
+const seriousness = ["ALTA", "MEDIA", "BAJA"];
 
 let connection;
 
@@ -58,7 +101,7 @@ async function main() {
             address VARCHAR(100),
             location VARCHAR(50),
             collegiate_number VARCHAR(10) UNIQUE NOT NULL,
-            years_of_experience DATE,
+            experience VARCHAR(20),
             speciality VARCHAR(100),
             role ENUM('admin', 'normal') DEFAULT 'normal' NOT NULL,
             active BOOLEAN DEFAULT false,
@@ -74,7 +117,7 @@ async function main() {
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             date DATETIME NOT NULL,
             seriusness ENUM('ALTA', 'MEDIA', 'BAJA') NOT NULL,
-            symptoms VARCHAR(100),
+            symptoms VARCHAR(300),
             medical_history VARCHAR(500),
             description VARCHAR(1000),
             image TINYTEXT,
@@ -92,10 +135,10 @@ async function main() {
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             date DATETIME NOT NULL,
             diagnosis VARCHAR(100) NOT NULL,
-            treatment VARCHAR(100) NOT NULL,
+            treatment VARCHAR(500) NOT NULL,
             observations VARCHAR(1000) NOT NULL,
             rate ENUM('El tratamiento me curó', 'El tratamiento no me curó'),
-            verified ENUM('El paciente se curó', 'El paciente no se curó'),
+            verified ENUM('SI', 'NO'),
             last_update DATETIME NOT NULL            
         );
         `);
@@ -111,6 +154,27 @@ async function main() {
       VALUES(UTC_TIMESTAMP, "Carlos Barrientos", "carlosbarrientosguillen@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
+    console.log("Metiendo datos de prueba en users");
+    const users = 30;
+
+    for (let index = 0; index < users; index++) {
+      const name = faker.name.findName();
+      const email = faker.internet.email();
+      const dni = random(10000000, 99999999) + abc[random(0, 25)];
+      const ssNumber = random(100000000000000, 999999999999999);
+      const birth = formatBirthdayToDB(
+        faker.date.between("1950-01-01", "2001-12-31")
+      );
+      const address = faker.address.streetAddress();
+      const location = faker.address.city();
+      const phoneNumber = random(600000000, 699999999);
+
+      await connection.query(`
+      INSERT INTO users(registration_date, name, email, password, dni, social_security_number, birth_date, address, location, phone_number, role, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${ssNumber}", "${birth}","${address}", "${location}", "${phoneNumber}", "normal", UTC_TIMESTAMP, UTC_TIMESTAMP)
+      `);
+    }
+
     console.log("Creando usuario médico administrador");
 
     await connection.query(`
@@ -122,6 +186,61 @@ async function main() {
       9999999999
     )}", "Ginecología", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
+
+    console.log("Metiendo datos de prueba en doctors");
+    const doctors = 20;
+
+    for (let index = 0; index < doctors; index++) {
+      const name = faker.name.findName();
+      const email = faker.internet.email();
+      const dni = random(10000000, 99999999) + abc[random(0, 25)];
+      const collegiateNumber = random(1000000000, 9999999999);
+      const birthDay = faker.date.between("1960-01-01", "2001-12-31");
+      const birth = formatBirthdayToDB(birthDay);
+      const experience = add(birthDay, { years: 25 });
+      const yearsExperience = formatExperience(experience);
+      const address = faker.address.streetAddress();
+      const location = faker.address.city();
+      const phoneNumber = random(600000000, 699999999);
+
+      await connection.query(`
+      INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, role, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${yearsExperience}", "${
+        speciality[random(0, 3)]
+      }","normal", UTC_TIMESTAMP, UTC_TIMESTAMP)
+    `);
+    }
+
+    console.log("Metiendo datos de prueba en medical_consultations");
+    const medicalConsultationsEntries = 50;
+
+    for (let index = 0; index < medicalConsultationsEntries; index++) {
+      const date = formatDateToDB(faker.date.recent());
+
+      await connection.query(`
+      INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, id_user, id_doctor)
+      VALUES("${date}", "${
+        seriousness[random(0, 2)]
+      }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
+        2,
+        users + 1
+      )}", "${random(2, doctors + 1)}")
+      `);
+    }
+
+    console.log("metiendo datos de prueba en consultation_answers");
+    const consultationAnswersEntries = medicalConsultationsEntries;
+
+    for (let index = 0; index < consultationAnswersEntries; index++) {
+      const date = formatDateToDB(faker.date.recent());
+      const rating = ["El tratamiento me curó", "El tratamiento no me curó"];
+      const rate = rating[random(0, 1)];
+
+      await connection.query(`
+      INSERT INTO consultation_answers(date, diagnosis, treatment, observations, rate, verified, last_update)
+      VALUES("${date}", "${faker.lorem.sentence()}", "${faker.lorem.sentences()}", "${faker.lorem.paragraphs()}", "${rate}", "SI", UTC_TIMESTAMP)
+      `);
+    }
   } catch (error) {
     console.error(error);
   } finally {
