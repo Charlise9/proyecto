@@ -18,6 +18,11 @@ const recoverUserPassword = require("./controllers/users/recoverUserPassword");
 const resetUserPassword = require("./controllers/users/resetUserPassword");
 const deleteUser = require("./controllers/users/deleteUser");
 
+// Doctor controllers
+const newDoctor = require("./controllers/doctors/newDoctor");
+const validateDoctor = require("./controllers/doctors/validateDoctor");
+const loginDoctor = require("./controllers/doctors/loginDoctor");
+
 const app = express();
 
 // Middlewares iniciales
@@ -65,32 +70,35 @@ app.post("/users/:id/password", isUser, editUserPassword);
 // Público
 app.post("/users/recover-password", recoverUserPassword);
 
-// Resetear password de usuario
+// Resetear password de usuario (HECHO)
 // POST - /users/recover-password
 // Público
 app.post("/users/reset-password", resetUserPassword);
 
-// Borrar un usuario
+// Borrar un usuario (HECHO)
 // DELETE - /users/:id
 // Sólo el usuario admin
 app.delete("/users/:id", isUser, isAdmin, deleteUser);
 
 // MÉDICO
 
-// Registrarse
+// Registrarse  (HECHO)
+// POST - /doctors
 // Público
+app.post("/doctors", newDoctor);
 
-// Validación de usuarios registrados
+// Validación de usuarios registrados (HECHO)
+// GET - /doctors/validate/:code
 // Público
+app.get("/doctors/validate/:code", validateDoctor);
 
-// Login de usuarios registrados
+// Login de usuarios registrados (HECHO)
+// POST - /doctors/login
 // Público
+app.post("/doctors/login", loginDoctor);
 
 // Ver información de un paciente
 // Solo la información de un paciente, sólo médicos registrados
-
-// Borrar un usuario
-// Sólo el usuario admin
 
 // Editar datos de usuario
 // Sólo el propio usuario
@@ -103,6 +111,9 @@ app.delete("/users/:id", isUser, isAdmin, deleteUser);
 
 // Resetear password de usuario
 // Público
+
+// Borrar un usuario
+// Sólo el usuario admin
 
 // ACCIONES RELACIONADAS CON LAS CONSULTAS
 
