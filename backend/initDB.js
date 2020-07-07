@@ -124,7 +124,7 @@ async function main() {
             description VARCHAR(1000),
             image TINYTEXT,
             id_user INT UNSIGNED,
-            FOREIGN KEY (id_user) REFERENCES users (id),
+            FOREIGN KEY (id_user) REFERENCES users (id) ON DELETE SET NULL,
             id_doctor INT UNSIGNED,
             FOREIGN KEY (id_doctor) REFERENCES doctors (id),
             id_consultation_answer INT UNSIGNED,

@@ -16,7 +16,7 @@ const editUser = require("./controllers/users/editUser");
 const editUserPassword = require("./controllers/users/editUserPassword");
 const recoverUserPassword = require("./controllers/users/recoverUserPassword");
 const resetUserPassword = require("./controllers/users/resetUserPassword");
-const deleteUser = require("./controllers/users/resetUserPassword");
+const deleteUser = require("./controllers/users/deleteUser");
 
 const app = express();
 
