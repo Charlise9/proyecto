@@ -5,6 +5,19 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 
+const isUser = require("./middlewares/isUser");
+const isAdmin = require("./middlewares/isAdmin");
+
+// User controllers
+const newUser = require("./controllers/users/newUser");
+const validateUser = require("./controllers/users/validateUser");
+const loginUser = require("./controllers/users/loginUser");
+const editUser = require("./controllers/users/editUser");
+const editUserPassword = require("./controllers/users/editUserPassword");
+const recoverUserPassword = require("./controllers/users/recoverUserPassword");
+const resetUserPassword = require("./controllers/users/resetUserPassword");
+const deleteUser = require("./controllers/users/resetUserPassword");
+
 const app = express();
 
 // Middlewares iniciales
@@ -19,32 +32,48 @@ app.use(fileUpload());
 
 // PACIENTE
 
-// Registrarse
+// Registrarse (HECHO)
+// POST - /users
 // Público
+app.post("/users", newUser);
 
-// Validación de usuarios registrados
+// Validación de usuarios registrados (HECHO)
+// GET - /users/validate/:code
 // Público
+app.get("/users/validate/:code", validateUser);
 
-// Login de usuarios registrados
+// Login de usuarios registrados (HECHO)
+// POST - /users/login
 // Público
+app.post("/users/login", loginUser);
 
 // Ver información de un médico
 // Solo la información de un médico, es público excepto el historial, que sólo lo pueden ver los usuarios registrados
 
-// Borrar un usuario
-// Sólo el usuario admin
+// Editar datos de usuario (HECHO)
+// PUT - /users/:id
+// Sólo el propio usuario o usuario admin
+app.put("/users/:id", isUser, editUser);
 
-// Editar datos de usuario
-// Sólo el propio usuario
-
-// Editar password de usuario
+// Editar password de usuario (HECHO)
+// POST - /users/:id/password
 // Sólo el propio usuario o el usuario admin
+app.post("/users/:id/password", isUser, editUserPassword);
 
-// Enviar código de reset de password
+// Enviar código de reset de password (HECHO)
+// POST - /users/recover-password
 // Público
+app.post("/users/recover-password", recoverUserPassword);
 
 // Resetear password de usuario
+// POST - /users/recover-password
 // Público
+app.post("/users/reset-password", resetUserPassword);
+
+// Borrar un usuario
+// DELETE - /users/:id
+// Sólo el usuario admin
+app.delete("/users/:id", isUser, isAdmin, deleteUser);
 
 // MÉDICO
 
@@ -57,7 +86,7 @@ app.use(fileUpload());
 // Login de usuarios registrados
 // Público
 
-// Ver información de un médico
+// Ver información de un paciente
 // Solo la información de un paciente, sólo médicos registrados
 
 // Borrar un usuario
