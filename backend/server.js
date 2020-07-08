@@ -30,6 +30,10 @@ const recoverDoctorPassword = require("./controllers/doctors/recoverDoctorPasswo
 const resetDoctorPassword = require("./controllers/doctors/resetDoctorPassword");
 const getPatientInfo = require("./controllers/doctors/getPatientInfo");
 
+// Consults controllers
+const listDoctors = require("./controllers/consults/listDoctors");
+const getDoctor = require("./controllers/consults/getDoctor");
+
 const app = express();
 
 // Middlewares iniciales
@@ -107,7 +111,7 @@ app.get("/doctors/validate/:code", validateDoctor);
 // Público
 app.post("/doctors/login", loginDoctor);
 
-// Ver información de un paciente
+// Ver información de un paciente (HECHO)
 // GET - /users/:id
 // Solo la información de un paciente, sólo médicos registrados
 app.get("/users/info/:id", isDoctor, getPatientInfo);
@@ -139,11 +143,15 @@ app.post("/doctors/reset-password", resetDoctorPassword);
 
 // PACIENTES
 
-// Realizar una búsqueda
+// Realizar una búsqueda de médicos (HECHO)
+// GET - /doctors
 // Público
+app.get("/doctors", listDoctors);
 
-// Ver info de médico (seleccionar al médico y ver su perfil)
+// Ver info de médico (seleccionar al médico y ver su perfil) (HECHO)
+// GET - /doctors/:id
 // Público
+app.get("/doctors/:id", getDoctor);
 
 // Ver historial de consultas del médico
 // Sólo pacientes registrados, médico y admin
