@@ -13,6 +13,7 @@ const isAdmin = require("./middlewares/isAdmin");
 const newUser = require("./controllers/users/newUser");
 const validateUser = require("./controllers/users/validateUser");
 const loginUser = require("./controllers/users/loginUser");
+const getUser = require("./controllers/users/getUser");
 const editUser = require("./controllers/users/editUser");
 const editUserPassword = require("./controllers/users/editUserPassword");
 const recoverUserPassword = require("./controllers/users/recoverUserPassword");
@@ -27,6 +28,7 @@ const editDoctor = require("./controllers/doctors/editDoctor");
 const editDoctorPassword = require("./controllers/doctors/editDoctorPassword");
 const recoverDoctorPassword = require("./controllers/doctors/recoverDoctorPassword");
 const resetDoctorPassword = require("./controllers/doctors/resetDoctorPassword");
+const getPatientInfo = require("./controllers/doctors/getPatientInfo");
 
 const app = express();
 
@@ -57,8 +59,11 @@ app.get("/users/validate/:code", validateUser);
 // Público
 app.post("/users/login", loginUser);
 
-// Ver información de un médico
-// Solo la información de un médico, es público excepto el historial, que sólo lo pueden ver los usuarios registrados
+// Ver información de un usuario
+// GET - /users/:id
+// Sólo para usuarios registrados
+// Pero si el usuario es el mismo o admin debería mostrar toda la información
+app.get("/users/:id", isUser, getUser);
 
 // Editar datos de usuario (HECHO)
 // PUT - /users/:id
@@ -103,7 +108,9 @@ app.get("/doctors/validate/:code", validateDoctor);
 app.post("/doctors/login", loginDoctor);
 
 // Ver información de un paciente
+// GET - /users/:id
 // Solo la información de un paciente, sólo médicos registrados
+app.get("/users/info/:id", isDoctor, getPatientInfo);
 
 // Editar datos de doctor (HECHO)
 // PUT - /doctors/:id
