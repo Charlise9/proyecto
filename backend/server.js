@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 
 const isUser = require("./middlewares/isUser");
+const isDoctor = require("./middlewares/isDoctor");
 const isAdmin = require("./middlewares/isAdmin");
 
 // User controllers
@@ -22,6 +23,10 @@ const deleteUser = require("./controllers/users/deleteUser");
 const newDoctor = require("./controllers/doctors/newDoctor");
 const validateDoctor = require("./controllers/doctors/validateDoctor");
 const loginDoctor = require("./controllers/doctors/loginDoctor");
+const editDoctor = require("./controllers/doctors/editDoctor");
+const editDoctorPassword = require("./controllers/doctors/editDoctorPassword");
+const recoverDoctorPassword = require("./controllers/doctors/recoverDoctorPassword");
+const resetDoctorPassword = require("./controllers/doctors/resetDoctorPassword");
 
 const app = express();
 
@@ -100,20 +105,28 @@ app.post("/doctors/login", loginDoctor);
 // Ver información de un paciente
 // Solo la información de un paciente, sólo médicos registrados
 
-// Editar datos de usuario
-// Sólo el propio usuario
+// Editar datos de doctor (HECHO)
+// PUT - /doctors/:id
+// Sólo el propio usuario o usuario admin
+app.put("/doctors/:id", isDoctor, editDoctor);
 
-// Editar password de usuario
-// Sólo el propio usuario o el usuario admin
+// Editar password de doctor (HECHO)
+// POST - /doctors/:id/password
+// Sólo el propio doctor o el doctor admin
+app.post("/doctors/:id/password", isDoctor, editDoctorPassword);
 
-// Enviar código de reset de password
+// Enviar código de reset de password (HECHO)
+// POST - /doctors/recover-password
 // Público
+app.post("/doctors/recover-password", recoverDoctorPassword);
 
-// Resetear password de usuario
+// Resetear password de doctor (HECHO)
+// POST - /doctors/recover-password
 // Público
+app.post("/doctors/reset-password", resetDoctorPassword);
 
-// Borrar un usuario
-// Sólo el usuario admin
+// Borrar un doctor
+// Sólo el doctor admin
 
 // ACCIONES RELACIONADAS CON LAS CONSULTAS
 
