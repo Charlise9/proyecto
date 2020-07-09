@@ -33,7 +33,7 @@ async function newConsult(req, res, next) {
     const [result] = await connection.query(
       `
       INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, image, id_user, id_doctor)
-      VALUES(UTC_TIMESTAMP,?, ?, ?, ?, ?, ?, ?)
+      VALUES(UTC_TIMESTAMP,?, ?, ?, ?, ?, ?, ?,?)
       `,
       [
         seriusness,

@@ -35,6 +35,8 @@ const listDoctors = require("./controllers/consults/listDoctors");
 const getDoctor = require("./controllers/consults/getDoctor");
 const getDoctorConsults = require("./controllers/consults/getDoctorConsults");
 const newConsult = require("./controllers/consults/newConsult");
+const getUserConsults = require("./controllers/consults/getUserConsults");
+const getUnansweredConsults = require("./controllers/consults/getUnansweredConsults");
 
 const app = express();
 
@@ -158,12 +160,14 @@ app.get("/doctors/:id", getDoctor);
 app.get("/doctors/:id/consults", isUser, getDoctorConsults);
 
 // Enviar consulta al médico (HECHO)
-// Post - /doctors/:id/consults
+// POST - /doctors/:id/consults
 // Sólo pacientes registrados
 app.post("/doctors/:id/consults", isUser, newConsult);
 
-// Ver historial de consultas hechas
+// Ver historial de consultas hechas (HECHO)
+// GET - /users/:id/consults
 // Sólo pacientes registrados
+app.get("/users/:id/consults", isUser, getUserConsults);
 
 // Ver historial de respuestas de consultas recibidas
 // Sólo pacientes registrados
@@ -173,8 +177,10 @@ app.post("/doctors/:id/consults", isUser, newConsult);
 
 // MÉDICOS
 
-// Ver consultas pendientes de resolver
+// Ver consultas pendientes de resolver (HECHO)
+// GET - /doctors/:id/consults/unanswered
 // Sólo médicos
+app.get("/doctors/:id/consults/unanswered", isDoctor, getUnansweredConsults);
 
 // Responder a una consulta
 // Sólo médicos

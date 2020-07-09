@@ -1,6 +1,7 @@
 const { getConnection } = require("../../db");
+//const { formatDateToDB } = require("../../helpers");
 
-async function getDoctorConsults(req, res, next) {
+async function getUserConsults(req, res, next) {
   let connection;
 
   try {
@@ -24,11 +25,11 @@ async function getDoctorConsults(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT medical_consultations.id, medical_consultations.date, medical_consultations.seriusness, medical_consultations.symptoms, medical_consultations.medical_history, medical_consultations.description, medical_consultations.image, (SELECT name FROM users WHERE id_user = users.id) AS consult_patient, medical_consultations.id_consultation_answer
+        SELECT medical_consultations.id, medical_consultations.date, medical_consultations.seriusness, medical_consultations.symptoms, medical_consultations.medical_history, medical_consultations.description, medical_consultations.image, (SELECT name FROM doctors WHERE id_doctor = doctors.id) AS consult_doctor, medical_consultations.id_consultation_answer
         FROM medical_consultations
-            INNER JOIN doctors
-            ON medical_consultations.id_doctor = doctors.id
-        WHERE doctors.id=?
+            INNER JOIN users
+            ON medical_consultations.id_user = users.id
+        WHERE users.id=?
         ORDER BY ${orderBy} ${orderDirection}
 
         `,
@@ -46,4 +47,4 @@ async function getDoctorConsults(req, res, next) {
   }
 }
 
-module.exports = getDoctorConsults;
+module.exports = getUserConsults;

@@ -1,6 +1,6 @@
 const { getConnection } = require("../../db");
 
-async function getDoctorConsults(req, res, next) {
+async function getUnansweredConsults(req, res, next) {
   let connection;
 
   try {
@@ -13,11 +13,11 @@ async function getDoctorConsults(req, res, next) {
       (direction && direction.toLowerCase()) === "desc" ? "DESC" : "ASC";
 
     switch (order) {
-      case "seriusness":
-        orderBy = "seriusness";
+      case "date":
+        orderBy = "date";
         break;
       default:
-        orderBy = "date";
+        orderBy = "seriusness";
     }
 
     const { id } = req.params;
@@ -28,7 +28,7 @@ async function getDoctorConsults(req, res, next) {
         FROM medical_consultations
             INNER JOIN doctors
             ON medical_consultations.id_doctor = doctors.id
-        WHERE doctors.id=?
+        WHERE doctors.id=? AND medical_consultations.id_consultation_answer IS null
         ORDER BY ${orderBy} ${orderDirection}
 
         `,
@@ -46,4 +46,4 @@ async function getDoctorConsults(req, res, next) {
   }
 }
 
-module.exports = getDoctorConsults;
+module.exports = getUnansweredConsults;

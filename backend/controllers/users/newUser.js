@@ -58,7 +58,7 @@ async function newUser(req, res, next) {
     res.send({
       status: "ok",
       message:
-        "Usuario registrato. Mira tu email para activarlo. Mira en la carpeta de SPAM si no lo encuentras",
+        "Usuario registrado. Mira tu email para activarlo. Mira en la carpeta de SPAM si no lo encuentras",
     });
   } catch (error) {
     next(error);
