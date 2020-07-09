@@ -139,7 +139,7 @@ async function main() {
             diagnosis VARCHAR(100) NOT NULL,
             treatment VARCHAR(500) NOT NULL,
             observations VARCHAR(1000) NOT NULL,
-            rate ENUM('El tratamiento me curó', 'El tratamiento no me curó'),
+            rate BOOLEAN DEFAULT FALSE,
             verified ENUM('SI', 'NO'),
             last_update DATETIME NOT NULL            
         );
@@ -159,8 +159,8 @@ async function main() {
     console.log("Creando usuario anónimo");
 
     await connection.query(`
-     INSERT INTO users(registration_date, name, email, password, active, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "Anónimo", "carlosbarrientosguillen@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      INSERT INTO users(registration_date, name, email, password, role, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "Anónimo", "carlosbarrientos@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
     console.log("Metiendo datos de prueba en users");
@@ -225,8 +225,7 @@ async function main() {
 
     for (let index = 0; index < consultationAnswersEntries; index++) {
       const date = formatDateToDB(faker.date.recent());
-      const rating = ["El tratamiento me curó", "El tratamiento no me curó"];
-      const rate = rating[random(0, 1)];
+      const rate = random(0, 1);
 
       await connection.query(`
       INSERT INTO consultation_answers(date, diagnosis, treatment, observations, rate, verified, last_update)

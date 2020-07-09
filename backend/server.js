@@ -33,6 +33,8 @@ const getPatientInfo = require("./controllers/doctors/getPatientInfo");
 // Consults controllers
 const listDoctors = require("./controllers/consults/listDoctors");
 const getDoctor = require("./controllers/consults/getDoctor");
+const getDoctorConsults = require("./controllers/consults/getDoctorConsults");
+const newConsult = require("./controllers/consults/newConsult");
 
 const app = express();
 
@@ -136,9 +138,6 @@ app.post("/doctors/recover-password", recoverDoctorPassword);
 // Público
 app.post("/doctors/reset-password", resetDoctorPassword);
 
-// Borrar un doctor
-// Sólo el doctor admin
-
 // ACCIONES RELACIONADAS CON LAS CONSULTAS
 
 // PACIENTES
@@ -153,11 +152,15 @@ app.get("/doctors", listDoctors);
 // Público
 app.get("/doctors/:id", getDoctor);
 
-// Ver historial de consultas del médico
+// Ver historial de consultas del médico (HECHO)
+// GET - /doctors/:id/consults
 // Sólo pacientes registrados, médico y admin
+app.get("/doctors/:id/consults", isUser, getDoctorConsults);
 
-// Enviar consulta al médico
+// Enviar consulta al médico (HECHO)
+// Post - /doctors/:id/consults
 // Sólo pacientes registrados
+app.post("/doctors/:id/consults", isUser, newConsult);
 
 // Ver historial de consultas hechas
 // Sólo pacientes registrados

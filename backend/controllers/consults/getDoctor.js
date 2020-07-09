@@ -10,16 +10,25 @@ async function getDoctor(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT doctors.name, doctors.email, doctors.collegiate_number, doctors.experience, doctors.speciality, doctors.image, (SELECT COUNT(id_doctor) FROM medical_consultations WHERE id_doctor = doctors.id) AS number_of_consults
+        SELECT doctors.name, doctors.email, doctors.collegiate_number, doctors.experience, doctors.speciality, doctors.image 
         FROM doctors
         WHERE doctors.id=?
         `,
       [id]
     );
 
+    const [questions] = await connection.query(
+      `
+    SELECT COUNT(id) AS number_of_consults
+    FROM medical_consultations
+    WHERE id_doctor=?
+    `,
+      [id]
+    );
+
     res.send({
       status: "ok",
-      data: result[0],
+      data: { doctor: result[0], questions: questions[0] },
     });
   } catch (error) {
     next(error);
@@ -29,3 +38,5 @@ async function getDoctor(req, res, next) {
 }
 
 module.exports = getDoctor;
+
+// (SELECT SUM(consultation_answers.rate) FROM consultation_answers WHERE consultation_answers.id=medical_consultations.id_consultation_answer GROUP BY consultation_answers.id) AS rate
