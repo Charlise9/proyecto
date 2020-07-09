@@ -32,6 +32,15 @@ async function deleteUser(req, res, next) {
 
     await connection.query(
       `
+    UPDATE medical_consultations
+    SET id_user=2
+    WHERE id_user=?
+    `,
+      [id]
+    );
+
+    await connection.query(
+      `
       DELETE FROM users 
       WHERE id=?
     `,

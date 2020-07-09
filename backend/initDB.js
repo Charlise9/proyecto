@@ -124,7 +124,7 @@ async function main() {
             description VARCHAR(1000),
             image TINYTEXT,
             id_user INT UNSIGNED,
-            FOREIGN KEY (id_user) REFERENCES users (id) ON DELETE SET NULL,
+            FOREIGN KEY (id_user) REFERENCES users (id),
             id_doctor INT UNSIGNED,
             FOREIGN KEY (id_doctor) REFERENCES doctors (id),
             id_consultation_answer INT UNSIGNED,
@@ -154,6 +154,13 @@ async function main() {
     await connection.query(`
       INSERT INTO users(registration_date, name, email, password, role, active, last_update, last_auth_update)
       VALUES(UTC_TIMESTAMP, "Carlos Barrientos", "carlosbarrientosguillen@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      `);
+
+    console.log("Creando usuario anónimo");
+
+    await connection.query(`
+     INSERT INTO users(registration_date, name, email, password, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "Anónimo", "carlosbarrientosguillen@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
     console.log("Metiendo datos de prueba en users");
