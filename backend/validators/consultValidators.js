@@ -41,6 +41,38 @@ const newConsultSchema = Joi.object().keys({
     ),
 });
 
+// Valida nueva respuesta
+const newAnswerSchema = Joi.object().keys({
+  diagnosis: Joi.string()
+    .max(100)
+    .required()
+    .error(
+      generateError(
+        "El campo diagnóstico debe existir y no superar los 100 caracteres",
+        400
+      )
+    ),
+  treatment: Joi.string()
+    .max(500)
+    .required()
+    .error(
+      generateError(
+        "El campo tratamiento debe existir y no superar los 500 caracteres",
+        400
+      )
+    ),
+  observations: Joi.string()
+    .max(1000)
+    .required()
+    .error(
+      generateError(
+        "El campo observaciones debe existir y no superar los 1000 caracteres",
+        400
+      )
+    ),
+});
+
 module.exports = {
   newConsultSchema,
+  newAnswerSchema,
 };

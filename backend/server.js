@@ -37,6 +37,7 @@ const getDoctorConsults = require("./controllers/consults/getDoctorConsults");
 const newConsult = require("./controllers/consults/newConsult");
 const getUserConsults = require("./controllers/consults/getUserConsults");
 const getUnansweredConsults = require("./controllers/consults/getUnansweredConsults");
+const newAnswer = require("./controllers/consults/newAnswer");
 
 const app = express();
 
@@ -183,10 +184,14 @@ app.get("/users/:id/consults", isUser, getUserConsults);
 app.get("/doctors/:id/consults/unanswered", isDoctor, getUnansweredConsults);
 
 // Responder a una consulta
+// POST - /doctors/consults/unanswered/:id
 // Sólo médicos
+app.post("/doctors/consults/unanswered/:id", isDoctor, newAnswer);
 
-// Ver hisorial de consultas
+// Ver hisorial de consultas (HECHO)
+// GET - /doctors/:id/consults
 // Sólo el médico al que fue dirigida la consulta
+app.get("/doctors/:id/consults", isDoctor, getDoctorConsults);
 
 // Ver respuesta dada a X consulta
 // Sólo el médico que la hizo
