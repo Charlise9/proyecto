@@ -11,23 +11,17 @@ async function newAnswer(req, res, next) {
 
     // Sacar de req.body los datos que necesitio
     const { diagnosis, treatment, observations } = req.body;
-    //const { id } = req.params;
+    const { id } = req.params;
 
     // Ejecutar la query
     const [result] = await connection.query(
       `
-      INSERT INTO consultation_answers(date, diagnosis, treatment, observations, last_update)
-      VALUES(UTC_TIMESTAMP,?, ?, ?, UTC_TIMESTAMP)
+      INSERT INTO consultation_answers(date, diagnosis, treatment, observations, last_update, id_medical_consultation)
+      VALUES(UTC_TIMESTAMP,?, ?, ?, UTC_TIMESTAMP, ?)
       `,
-      [diagnosis, treatment, observations]
+      [diagnosis, treatment, observations, id]
     );
 
-    /* const [data] = await connection.query(`
-      UPDATE medical_consultations
-      SET id_consultation_answer=?
-      WHERE id=
-      `,[id]);
- */
     // Devolver el resultado
 
     res.send({

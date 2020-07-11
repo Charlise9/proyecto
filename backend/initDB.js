@@ -126,9 +126,8 @@ async function main() {
             id_user INT UNSIGNED,
             FOREIGN KEY (id_user) REFERENCES users (id),
             id_doctor INT UNSIGNED,
-            FOREIGN KEY (id_doctor) REFERENCES doctors (id),
-            id_consultation_answer INT UNSIGNED,
-            FOREIGN KEY (id_consultation_answer) REFERENCES consultation_answers (id)
+            FOREIGN KEY (id_doctor) REFERENCES doctors (id)
+            
         );
         `);
 
@@ -140,8 +139,10 @@ async function main() {
             treatment VARCHAR(500) NOT NULL,
             observations VARCHAR(1000) NOT NULL,
             rate BOOLEAN DEFAULT FALSE,
-            verified ENUM('SI', 'NO'),
-            last_update DATETIME NOT NULL            
+            verified BOOLEAN DEFAULT FALSE,
+            last_update DATETIME NOT NULL,
+            id_medical_consultation INT UNSIGNED,
+            FOREIGN KEY (id_medical_consultation) REFERENCES medical_consultations (id)           
         );
         `);
 
@@ -220,6 +221,23 @@ async function main() {
     `);
     }
 
+    console.log("Metiendo datos de prueba en medical_consultations");
+    const medicalConsultationsEntries = 50;
+
+    for (let index = 0; index < medicalConsultationsEntries; index++) {
+      const date = formatDateToDB(faker.date.recent());
+
+      await connection.query(`
+      INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, id_user, id_doctor)
+      VALUES("${date}", "${
+        seriousness[random(0, 2)]
+      }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
+        2,
+        users + 1
+      )}", "${random(2, doctors + 1)}")
+      `);
+    }
+
     console.log("metiendo datos de prueba en consultation_answers");
     const consultationAnswersEntries = 50;
 
@@ -228,25 +246,10 @@ async function main() {
       const rate = random(0, 1);
 
       await connection.query(`
-      INSERT INTO consultation_answers(date, diagnosis, treatment, observations, rate, verified, last_update)
-      VALUES("${date}", "${faker.lorem.sentence()}", "${faker.lorem.sentences()}", "${faker.lorem.paragraphs()}", "${rate}", "SI", UTC_TIMESTAMP)
-      `);
-    }
-
-    console.log("Metiendo datos de prueba en medical_consultations");
-    const medicalConsultationsEntries = 50;
-
-    for (let index = 0; index < medicalConsultationsEntries; index++) {
-      const date = formatDateToDB(faker.date.recent());
-
-      await connection.query(`
-      INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, id_user, id_doctor, id_consultation_answer)
-      VALUES("${date}", "${
-        seriousness[random(0, 2)]
-      }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
-        2,
-        users + 1
-      )}", "${random(2, doctors + 1)}", "${index + 1}")
+      INSERT INTO consultation_answers(date, diagnosis, treatment, observations, rate, verified, last_update, id_medical_consultation)
+      VALUES("${date}", "${faker.lorem.sentence()}", "${faker.lorem.sentences()}", "${faker.lorem.paragraphs()}", "${rate}", 1, UTC_TIMESTAMP, "${
+        index + 1
+      }")
       `);
     }
   } catch (error) {

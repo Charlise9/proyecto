@@ -183,10 +183,10 @@ app.get("/users/:id/consults", isUser, getUserConsults);
 // Sólo médicos
 app.get("/doctors/:id/consults/unanswered", isDoctor, getUnansweredConsults);
 
-// Responder a una consulta
-// POST - /doctors/consults/unanswered/:id
+// Responder a una consulta (HECHA)
+// POST - /consults/:id/answers
 // Sólo médicos
-app.post("/doctors/consults/unanswered/:id", isDoctor, newAnswer);
+app.post("/consults/:id/answers", isDoctor, newAnswer);
 
 // Ver hisorial de consultas (HECHO)
 // GET - /doctors/:id/consults

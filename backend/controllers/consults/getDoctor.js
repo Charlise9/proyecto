@@ -26,9 +26,21 @@ async function getDoctor(req, res, next) {
       [id]
     );
 
+    const [statistics] = await connection.query(
+      `SELECT COUNT(CA.id) AS number_of_consults, COUNT(IF(rate = true, 1, NULL)) AS positives, COUNT(IF(rate = false, 1, NULL)) AS negatives, 
+    COUNT(IF(verified = true, 1, NULL)) AS verifieds, COUNT(IF(verified = false, 1, NULL)) AS not_verifieds
+    FROM consultation_answers CA, medical_consultations MC
+    WHERE CA.id_medical_consultation = MC.id AND MC.id_doctor=?`,
+      [id]
+    );
+
     res.send({
       status: "ok",
-      data: { doctor: result[0], questions: questions[0] },
+      data: {
+        doctor: result[0],
+        questions: questions[0],
+        statistics: statistics[0],
+      },
     });
   } catch (error) {
     next(error);
