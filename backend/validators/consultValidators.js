@@ -85,8 +85,11 @@ const voteAnswerSchema = Joi.object().keys({
     ),
 });
 
+const verifiedVoteSchema = voteAnswerSchema;
+
 module.exports = {
   newConsultSchema,
   newAnswerSchema,
   voteAnswerSchema,
+  verifiedVoteSchema,
 };

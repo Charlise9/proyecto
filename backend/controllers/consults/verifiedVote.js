@@ -1,15 +1,15 @@
 const { getConnection } = require("../../db");
 
-const { voteAnswerSchema } = require("../../validators/consultValidators");
+const { verifiedVoteSchema } = require("../../validators/consultValidators");
 const { generateError } = require("../../helpers");
 
-async function voteAnswer(req, res, next) {
+async function verifiedVote(req, res, next) {
   let connection;
 
   try {
     connection = await getConnection();
 
-    await voteAnswerSchema.validateAsync(req.body);
+    await verifiedVoteSchema.validateAsync(req.body);
 
     const { id } = req.params;
     const { vote } = req.body;
@@ -27,26 +27,28 @@ async function voteAnswer(req, res, next) {
     // Comprobar que la respuesta va dirigida a mi usuario
     const [answerUserOwner] = await connection.query(
       `
-        SELECT MC.id_user
-        FROM consultation_answers CA, medical_consultations MC
-        WHERE CA.id_medical_consultation = MC.id
-        AND CA.id=? AND MC.id_user=?
-        `,
+      SELECT MC.id_doctor
+      FROM consultation_answers CA, medical_consultations MC
+      WHERE CA.id_medical_consultation = MC.id
+            AND CA.id=? AND MC.id_doctor=?
+    `,
       [id, req.auth.id]
     );
 
-    if (answerUserOwner[0].id_user !== req.auth.id) {
+    if (answerUserOwner[0].id_doctor !== req.auth.id) {
       throw generateError(
-        `No tienes permisos para votar la respuesta "${answer[0].id}"`,
+        `No tienes permisos para verificar el voto de la respuesta "${answer[0].id}"`,
         404
       );
     }
+
+    //console.log(answerUserOwner);
 
     // Guardar el voto en la base de datos
     await connection.query(
       `
       UPDATE consultation_answers
-      SET rate=?, last_update=UTC_TIMESTAMP
+      SET verified=?, last_update=UTC_TIMESTAMP
       WHERE id=?
     `,
       [vote, id]
@@ -63,4 +65,4 @@ async function voteAnswer(req, res, next) {
   }
 }
 
-module.exports = voteAnswer;
+module.exports = verifiedVote;

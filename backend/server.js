@@ -41,6 +41,7 @@ const newAnswer = require("./controllers/consults/newAnswer");
 const getUserAnswers = require("./controllers/consults/getUserAnswers");
 const getAnswer = require("./controllers/consults/getAnswer");
 const voteAnswer = require("./controllers/consults/voteAnswer");
+const verifiedVote = require("./controllers/consults/verifiedVote");
 
 const app = express();
 
@@ -178,7 +179,7 @@ app.get("/users/:id/consults", isUser, getUserConsults);
 // Sólo pacientes registrados
 app.get("/users/:id/answers", isUser, getUserAnswers);
 
-// Puntuar una respuesta
+// Puntuar una respuesta (HECHO)
 // POST -/users/:id/answers/vote
 // Sólo el paciente que realizó la consulta
 app.post("/users/answers/:id/vote", isUser, voteAnswer);
@@ -206,7 +207,9 @@ app.get("/doctors/:id/consults", isDoctor, getDoctorConsults);
 app.get("/consults/:id_doctor/:id_consult/answers", isDoctor, getAnswer);
 
 // Verificar una nota de paciente
+// POST -/doctors/:id/answers/verified
 // Sólo el médico que respondió la consulta
+app.post("/doctors/answers/:id/verified", isDoctor, verifiedVote);
 
 // Middleware finales
 
