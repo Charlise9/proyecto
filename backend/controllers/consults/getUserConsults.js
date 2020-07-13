@@ -25,7 +25,7 @@ async function getUserConsults(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT medical_consultations.id, medical_consultations.date, medical_consultations.seriusness, medical_consultations.symptoms, medical_consultations.medical_history, medical_consultations.description, medical_consultations.image, (SELECT name FROM doctors WHERE id_doctor = doctors.id) AS consult_doctor, medical_consultations.id_consultation_answer
+        SELECT medical_consultations.id, medical_consultations.date, medical_consultations.seriusness, medical_consultations.symptoms, medical_consultations.medical_history, medical_consultations.description, medical_consultations.image, (SELECT name FROM doctors WHERE id_doctor = doctors.id) AS consult_doctor, (SELECT id FROM consultation_answers WHERE id_medical_consultation = medical_consultations.id) AS answer
         FROM medical_consultations
             INNER JOIN users
             ON medical_consultations.id_user = users.id

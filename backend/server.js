@@ -38,6 +38,8 @@ const newConsult = require("./controllers/consults/newConsult");
 const getUserConsults = require("./controllers/consults/getUserConsults");
 const getUnansweredConsults = require("./controllers/consults/getUnansweredConsults");
 const newAnswer = require("./controllers/consults/newAnswer");
+const getUserAnswers = require("./controllers/consults/getUserAnswers");
+const getAnswer = require("./controllers/consults/getAnswer");
 
 const app = express();
 
@@ -170,8 +172,10 @@ app.post("/doctors/:id/consults", isUser, newConsult);
 // Sólo pacientes registrados
 app.get("/users/:id/consults", isUser, getUserConsults);
 
-// Ver historial de respuestas de consultas recibidas
+// Ver historial de respuestas de consultas recibidas (HECHO)
+// GET -/users/:id/answers
 // Sólo pacientes registrados
+app.get("/users/:id/answers", isUser, getUserAnswers);
 
 // Puntuar una respuesta
 // Sólo el paciente que realizó la consulta
@@ -193,11 +197,10 @@ app.post("/consults/:id/answers", isDoctor, newAnswer);
 // Sólo el médico al que fue dirigida la consulta
 app.get("/doctors/:id/consults", isDoctor, getDoctorConsults);
 
-// Ver respuesta dada a X consulta
+// Ver respuesta dada a X consulta (HECHO)
+// GET -/consults/:id/answers
 // Sólo el médico que la hizo
-
-// Ver puntuación de la consulta
-// Sólo el médico que la hizo
+app.get("/consults/:id_doctor/:id_consult/answers", isDoctor, getAnswer);
 
 // Verificar una nota de paciente
 // Sólo el médico que respondió la consulta
