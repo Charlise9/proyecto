@@ -180,8 +180,8 @@ async function main() {
       const phoneNumber = random(600000000, 699999999);
 
       await connection.query(`
-      INSERT INTO users(registration_date, name, email, password, dni, social_security_number, birth_date, address, location, phone_number, role, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${ssNumber}", "${birth}","${address}", "${location}", "${phoneNumber}", "normal", UTC_TIMESTAMP, UTC_TIMESTAMP)
+      INSERT INTO users(registration_date, name, email, password, dni, social_security_number, birth_date, address, location, phone_number, role, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${ssNumber}", "${birth}","${address}", "${location}", "${phoneNumber}", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
     }
 
@@ -214,10 +214,10 @@ async function main() {
       const phoneNumber = random(600000000, 699999999);
 
       await connection.query(`
-      INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, role, last_update, last_auth_update)
+      INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, role, active, last_update, last_auth_update)
       VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${yearsExperience}", "${
         speciality[random(0, 3)]
-      }","normal", UTC_TIMESTAMP, UTC_TIMESTAMP)
+      }","normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
     `);
     }
 

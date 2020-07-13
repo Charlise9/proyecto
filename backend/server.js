@@ -40,6 +40,7 @@ const getUnansweredConsults = require("./controllers/consults/getUnansweredConsu
 const newAnswer = require("./controllers/consults/newAnswer");
 const getUserAnswers = require("./controllers/consults/getUserAnswers");
 const getAnswer = require("./controllers/consults/getAnswer");
+const voteAnswer = require("./controllers/consults/voteAnswer");
 
 const app = express();
 
@@ -178,7 +179,9 @@ app.get("/users/:id/consults", isUser, getUserConsults);
 app.get("/users/:id/answers", isUser, getUserAnswers);
 
 // Puntuar una respuesta
+// POST -/users/:id/answers/vote
 // Sólo el paciente que realizó la consulta
+app.post("/users/answers/:id/vote", isUser, voteAnswer);
 
 // MÉDICOS
 

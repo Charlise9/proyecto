@@ -72,7 +72,21 @@ const newAnswerSchema = Joi.object().keys({
     ),
 });
 
+// Valida el voto de una entrada en el diario
+const voteAnswerSchema = Joi.object().keys({
+  vote: Joi.number()
+    .valid(true, false)
+    .required()
+    .error(
+      generateError(
+        "El campo voto debe existir y tener un valor entre true o false",
+        400
+      )
+    ),
+});
+
 module.exports = {
   newConsultSchema,
   newAnswerSchema,
+  voteAnswerSchema,
 };
