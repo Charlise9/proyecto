@@ -35,7 +35,7 @@ async function verifiedVote(req, res, next) {
       [id, req.auth.id]
     );
 
-    if (answerUserOwner[0].id_doctor !== req.auth.id) {
+    if (answerUserOwner.length === 0) {
       throw generateError(
         `No tienes permisos para verificar el voto de la respuesta "${answer[0].id}"`,
         404

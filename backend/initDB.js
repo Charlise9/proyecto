@@ -123,6 +123,7 @@ async function main() {
             medical_history VARCHAR(500),
             description VARCHAR(1000),
             image TINYTEXT,
+            document TINYTEXT,
             id_user INT UNSIGNED,
             FOREIGN KEY (id_user) REFERENCES users (id),
             id_doctor INT UNSIGNED,
@@ -190,11 +191,11 @@ async function main() {
     await connection.query(`
       INSERT INTO doctors(registration_date, name, email, password, collegiate_number, speciality, role, active, last_update, last_auth_update)
       VALUES(UTC_TIMESTAMP, "Ágata Vázquez", "carlosbarrientosguillen@gmail.com", SHA2("${
-        process.env.DEFAULT_ADMIN_PASSWORD
+      process.env.DEFAULT_ADMIN_PASSWORD
       }", 512), "${random(
-      1000000000,
-      9999999999
-    )}", "Ginecología", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+        1000000000,
+        9999999999
+      )}", "Ginecología", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
     console.log("Metiendo datos de prueba en doctors");
@@ -217,7 +218,7 @@ async function main() {
       INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, role, active, last_update, last_auth_update)
       VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${yearsExperience}", "${
         speciality[random(0, 3)]
-      }","normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+        }","normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
     `);
     }
 
@@ -231,10 +232,10 @@ async function main() {
       INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, id_user, id_doctor)
       VALUES("${date}", "${
         seriousness[random(0, 2)]
-      }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
-        2,
-        users + 1
-      )}", "${random(2, doctors + 1)}")
+        }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
+          2,
+          users + 1
+        )}", "${random(2, doctors + 1)}")
       `);
     }
 
@@ -249,7 +250,7 @@ async function main() {
       INSERT INTO consultation_answers(date, diagnosis, treatment, observations, rate, verified, last_update, id_medical_consultation)
       VALUES("${date}", "${faker.lorem.sentence()}", "${faker.lorem.sentences()}", "${faker.lorem.paragraphs()}", "${rate}", 1, UTC_TIMESTAMP, "${
         index + 1
-      }")
+        }")
       `);
     }
   } catch (error) {

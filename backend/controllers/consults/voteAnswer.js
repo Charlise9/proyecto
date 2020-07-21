@@ -34,8 +34,9 @@ async function voteAnswer(req, res, next) {
         `,
       [id, req.auth.id]
     );
+    console.log(id, req.auth.id);
 
-    if (answerUserOwner[0].id_user !== req.auth.id) {
+    if (answerUserOwner.length === 0) {
       throw generateError(
         `No tienes permisos para votar la respuesta "${answer[0].id}"`,
         404
