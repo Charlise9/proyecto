@@ -4,6 +4,7 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
+const cors = require('cors');
 
 const isUser = require("./middlewares/isUser");
 const isDoctor = require("./middlewares/isDoctor");
@@ -52,6 +53,8 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 // Procesado de body tipo form-data
 app.use(fileUpload());
+// Procesando el cors
+app.use(cors());
 
 // USUARIOS
 
