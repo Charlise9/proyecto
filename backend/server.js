@@ -55,6 +55,8 @@ app.use(bodyParser.json());
 app.use(fileUpload());
 // Procesando el cors
 app.use(cors());
+// Procesar imágenes
+app.use(express.static('static'));
 
 // USUARIOS
 

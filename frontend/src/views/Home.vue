@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Bienvenido a Consultas Médicas Online</h1>
-    <doctorscard :doctors="doctors" />
+    <doctorscard v-on:doctorsList="getDoctors" :doctors="doctors" />
   </div>
 </template>
 
@@ -21,22 +21,39 @@ export default {
   },
   methods: {
     // FUNCIÓN PARA MOSTRAR LOS DOCTORES
-    getDoctors() {
-      let self = this;
-      // LLAMADA DE AXIOS A SERVER
-      axios
-        .get("http://localhost:3000/doctors")
-        .then(function (response) {
-          console.log(response);
-          self.doctors = response.data.data;
-        })
-        .catch(function (error) {
-          console.log(error);
+    async getDoctors(search) {
+      try {
+        // LLAMADA DE AXIOS A SERVER
+        const response = await axios.get("http://localhost:3000/doctors", {
+          params: {
+            search: search,
+          },
         });
+
+        console.log(response.data);
+
+        this.doctors = response.data.data;
+      } catch (error) {
+        console.error;
+      }
+
+      /*  axios
+        .get("http://localhost:3000/doctors", {
+          params: {
+            search: search,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          this.doctors = response.data.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        }); */
     },
   },
   created() {
-    this.getDoctors();
+    // this.getDoctors();
   },
 };
 </script>
