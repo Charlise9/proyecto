@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <menucustom />
+    <router-view />
+    <footercustom />
   </div>
 </template>
+
+<script>
+import menucustom from "@/components/MenuCustom.vue";
+import footercustom from "@/components/FooterCustom.vue";
+
+export default {
+  name: "App",
+  components: {
+    menucustom,
+    footercustom,
+  },
+};
+</script>
 
 <style>
 #app {

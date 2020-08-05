@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h1>Bienvenido a Consultas Médicas Online</h1>
+    <vue-headful title="Clientes  | Inicio" />
+
+    <h1>Hack A DOCTOR</h1>
     <doctorscard v-on:doctorsList="getDoctors" :doctors="doctors" />
   </div>
 </template>
