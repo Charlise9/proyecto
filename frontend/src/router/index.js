@@ -25,9 +25,18 @@ const routes = [
     }
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue'),
+    path: '/login-patient',
+    name: 'LoginPatient',
+    component: () => import('../views/LoginPatient.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: true
+    }
+  },
+  {
+    path: '/login-doctor',
+    name: 'LoginDoctor',
+    component: () => import('../views/LoginDoctor.vue'),
     meta: {
       // RUTA PÚBLICA
       allowAnon: true

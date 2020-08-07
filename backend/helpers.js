@@ -6,7 +6,7 @@ const sharp = require("sharp");
 const uuid = require("uuid");
 
 const { format, formatDistanceToNowStrict } = require("date-fns");
-const es = require("date-fns/locale/es");
+const { es } = require("date-fns/locale");
 
 function formatDateToDB(date) {
   return format(new Date(date), "yyyy-MM-dd HH:mm:ss");
@@ -17,7 +17,7 @@ function formatBirthdayToDB(date) {
 }
 
 function formatExperience(date) {
-  return formatDistanceToNowStrict(new Date(date), "yyyy", { locale: es });
+  return formatDistanceToNowStrict(new Date(date), { locale: es });
 }
 
 function generateError(message, code) {

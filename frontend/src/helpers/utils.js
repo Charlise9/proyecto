@@ -22,6 +22,10 @@ export function loginPatient(user, password) {
                 // ME GUARDO EL ID
                 localStorage.setItem('ID', tokenDecoded.id)
                 console.log(tokenDecoded.id)
+
+                // ME GUARDO EL TIPO DE USUARIO
+                localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
+                console.log(tokenDecoded.kind_of_user)
             });
     } catch (error) {
         console.error;
@@ -48,6 +52,10 @@ export function loginDoctor(user, password) {
                 // ME GUARDO EL ID
                 localStorage.setItem('ID', tokenDecoded.id)
                 console.log(tokenDecoded.id)
+
+                // ME GUARDO EL TIPO DE USUARIO
+                localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
+                console.log(tokenDecoded.kind_of_user)
             })
     } catch (error) {
         console.error;
@@ -93,11 +101,18 @@ export function getId() {
     return localStorage.getItem('ID')
 }
 
+// FUNCIÓN PARA RECUPERAR EL TIPO DE USUARIO
+export function getKindOfUser() {
+    return localStorage.getItem('KIND_OF_USER')
+}
+
 // FUNCIÓN DE LOGOUT
 export function logout() {
     axios.defaults.headers.common['Authorization'] = ''
     localStorage.removeItem('AUTH_TOKEN_KEY');
     localStorage.removeItem('ID');
     localStorage.removeItem('ROLE');
+    localStorage.removeItem('KIND_OF_USER');
+
 
 }
