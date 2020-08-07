@@ -14,14 +14,17 @@
     -->
     <ul>
       <li v-for="doctor in doctors" :key="doctor.id">
-        <p>
-          <b>{{doctor.name}}</b>
-        </p>
+        <!-- <button class="name">
+          <a href>{{ doctor.name }}</a>
+        </button>-->
+        <router-link :to="{  name: 'DoctorProfile', params:{ id:doctor.id }}">{{ doctor.name}}</router-link>
         <p>
           <b>Especialidad:</b>
           <span>{{ doctor.speciality }}</span>
         </p>
-        <button>Ver perfil</button>
+        <router-link :to="{  name: 'DoctorProfile', params:{ id:doctor.id }}">
+          <button>Ver perfil</button>
+        </router-link>
       </li>
     </ul>
 
@@ -84,5 +87,21 @@ export default {
 <style scoped>
 ul {
   list-style: none;
+}
+
+ul li {
+  margin-bottom: 1.5rem;
+}
+
+.name {
+  border: none;
+  text-decoration: none;
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
 }
 </style>

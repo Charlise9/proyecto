@@ -10,7 +10,7 @@ async function getDoctor(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT doctors.name, doctors.email, doctors.collegiate_number, doctors.experience, doctors.speciality, doctors.image 
+        SELECT doctors.name, doctors.id, doctors.email, doctors.collegiate_number, doctors.experience, doctors.speciality, doctors.image 
         FROM doctors
         WHERE doctors.id=?
         `,
@@ -27,7 +27,7 @@ async function getDoctor(req, res, next) {
     );
 
     const [statistics] = await connection.query(
-      `SELECT COUNT(CA.id) AS number_of_consults, COUNT(IF(rate = true, 1, NULL)) AS positives, COUNT(IF(rate = false, 1, NULL)) AS negatives, 
+      `SELECT COUNT(CA.id) AS number_of_answers, COUNT(IF(rate = true, 1, NULL)) AS positives, COUNT(IF(rate = false, 1, NULL)) AS negatives, 
     COUNT(IF(verified = true, 1, NULL)) AS verifieds, COUNT(IF(verified = false, 1, NULL)) AS not_verifieds
     FROM consultation_answers CA, medical_consultations MC
     WHERE CA.id_medical_consultation = MC.id AND MC.id_doctor=?`,

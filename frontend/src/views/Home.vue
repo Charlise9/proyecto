@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <vue-headful title="Clientes  | Inicio" />
+    <vue-headful title="Hack A DOCTOR  | Inicio" />
 
     <h1>Hack A DOCTOR</h1>
     <doctorscard v-on:doctorsList="getDoctors" :doctors="doctors" />

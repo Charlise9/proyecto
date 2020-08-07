@@ -13,7 +13,16 @@ export function loginPatient(user, password) {
                 console.log(response)
                 // ME GUARDO EL TOKEN
                 setAuthToken(response.data.data.token);
-            })
+
+                // ME GUARDO EL ROL
+                const tokenDecoded = jwt(response.data.data.token)
+                localStorage.setItem('ROLE', tokenDecoded.role)
+                console.log(tokenDecoded.role)
+
+                // ME GUARDO EL ID
+                localStorage.setItem('ID', tokenDecoded.id)
+                console.log(tokenDecoded.id)
+            });
     } catch (error) {
         console.error;
     }
@@ -30,6 +39,15 @@ export function loginDoctor(user, password) {
                 console.log(response)
                 // ME GUARDO EL TOKEN
                 setAuthToken(response.data.data.token);
+
+                // ME GUARDO EL ROL
+                const tokenDecoded = jwt(response.data.data.token)
+                localStorage.setItem('ROLE', tokenDecoded.role)
+                console.log(tokenDecoded.role)
+
+                // ME GUARDO EL ID
+                localStorage.setItem('ID', tokenDecoded.id)
+                console.log(tokenDecoded.id)
             })
     } catch (error) {
         console.error;
@@ -70,8 +88,16 @@ export function isLoggedIn() {
     return !!authToken && !isExpired(authToken);
 }
 
+// FUNCIÓN PARA RECUPERAR EL ID DEL USUARIO
+export function getId() {
+    return localStorage.getItem('ID')
+}
+
 // FUNCIÓN DE LOGOUT
 export function logout() {
     axios.defaults.headers.common['Authorization'] = ''
     localStorage.removeItem('AUTH_TOKEN_KEY');
+    localStorage.removeItem('ID');
+    localStorage.removeItem('ROLE');
+
 }
