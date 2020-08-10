@@ -3,6 +3,14 @@ const { generateError } = require("../helpers");
 
 // Valida el registro de un doctor
 const newDoctorSchema = Joi.object().keys({
+  name: Joi.string()
+    .max(100)
+    .error(
+      generateError(
+        "El campo nombre no debe de tener más de 100 caracteres",
+        400
+      )
+    ),
   email: Joi.string()
     .email()
     .required()

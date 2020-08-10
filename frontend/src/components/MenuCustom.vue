@@ -35,11 +35,14 @@ export default {
   },
   methods: {
     logoutUser() {
+      this.hide = true;
       logout();
       this.$router.push("/");
-      location.reload();
+      /* setTimeout(() => {
+        location.reload();
+      }, 100); */
     },
-    /* async setUserName(userId) {
+    /* async setUserName(userId) {userId
       userId = getId();
 
       const token = getAuthToken();

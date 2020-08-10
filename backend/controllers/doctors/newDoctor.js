@@ -17,6 +17,7 @@ async function newDoctor(req, res, next) {
     await newDoctorSchema.validateAsync(req.body);
 
     const {
+      name,
       email,
       password,
       collegiateNumber,
@@ -60,10 +61,11 @@ async function newDoctor(req, res, next) {
     // meter el nuevo usuario en la base de datos sin activar
     await connection.query(
       `
-      INSERT INTO doctors(registration_date, email, password, collegiate_number, speciality, experience, registration_code, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, ?, SHA2(?, 512), ?, ?, ?, ?, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      INSERT INTO doctors(registration_date, name, email, password, collegiate_number, speciality, experience, registration_code, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, ?, ?, SHA2(?, 512), ?, ?, ?, ?, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `,
       [
+        name,
         email,
         password,
         collegiateNumber,

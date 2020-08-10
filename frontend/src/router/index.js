@@ -79,6 +79,24 @@ const routes = [
     }
   },
   {
+    path: '/patient-register',
+    name: 'PatientRegister',
+    component: () => import('../views/PatientRegister.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: true
+    }
+  },
+  {
+    path: '/doctor-register',
+    name: 'DoctorRegister',
+    component: () => import('../views/DoctorRegister.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: true
+    }
+  },
+  {
     path: '*',
     name: 'Error',
     component: () => import('../views/Error.vue'),

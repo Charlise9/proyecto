@@ -4,6 +4,9 @@
     <input v-model="userPatient" type="email" placeholder="Email de usuario" />
     <input v-model="passwordPatient" type="password" placeholder="Contraseña" />
     <button @click="loginPatientUser()">Login</button>
+    <router-link :to="{  name: 'PatientRegister' }">
+      <button>REGISTRARSE</button>
+    </router-link>
   </div>
 </template>
 

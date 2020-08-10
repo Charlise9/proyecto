@@ -3,6 +3,14 @@ const { generateError } = require("../helpers");
 
 // Valida el registro de un usuario
 const newUserSchema = Joi.object().keys({
+  name: Joi.string()
+    .max(100)
+    .error(
+      generateError(
+        "El campo nombre no debe de tener más de 100 caracteres",
+        400
+      )
+    ),
   email: Joi.string()
     .email()
     .required()
@@ -15,6 +23,19 @@ const newUserSchema = Joi.object().keys({
     .error(
       generateError(
         "El campo password debe existir y ser mayor de 8 caracteres"
+      )
+    ),
+  dni: Joi.string()
+    .min(9)
+    .max(9)
+    .error(generateError("El campo dni debe tener 9 caracteres", 400)),
+  socialSecurityNumber: Joi.string()
+    .min(15)
+    .max(15)
+    .required()
+    .error(
+      generateError(
+        "El campo Seguridad Social debe existir y tener 15 caracteres"
       )
     ),
 });
