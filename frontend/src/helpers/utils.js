@@ -19,6 +19,10 @@ export function loginPatient(user, password) {
                 localStorage.setItem('ROLE', tokenDecoded.role)
                 console.log(tokenDecoded.role)
 
+                // ME GUARDO EL NOMBRE
+                localStorage.setItem('NAME', tokenDecoded.name)
+                console.log(tokenDecoded.name)
+
                 // ME GUARDO EL ID
                 localStorage.setItem('ID', tokenDecoded.id)
                 console.log(tokenDecoded.id)
@@ -48,6 +52,10 @@ export function loginDoctor(user, password) {
                 const tokenDecoded = jwt(response.data.data.token)
                 localStorage.setItem('ROLE', tokenDecoded.role)
                 console.log(tokenDecoded.role)
+
+                // ME GUARDO EL NOMBRE
+                localStorage.setItem('NAME', tokenDecoded.name)
+                console.log(tokenDecoded.name)
 
                 // ME GUARDO EL ID
                 localStorage.setItem('ID', tokenDecoded.id)
@@ -113,6 +121,8 @@ export function logout() {
     localStorage.removeItem('ID');
     localStorage.removeItem('ROLE');
     localStorage.removeItem('KIND_OF_USER');
+    localStorage.removeItem('NAME');
+
 
 
 }

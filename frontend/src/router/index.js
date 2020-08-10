@@ -61,6 +61,24 @@ const routes = [
     }
   },
   {
+    path: '/viewdoctorprofile',
+    name: 'ViewDoctorProfile',
+    component: () => import('../views/ViewDoctorProfile.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+  {
+    path: '/viewuserprofile',
+    name: 'ViewUserProfile',
+    component: () => import('../views/ViewUserProfile.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+  {
     path: '*',
     name: 'Error',
     component: () => import('../views/Error.vue'),
@@ -78,7 +96,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (!to.meta.allowAnon && !isLoggedIn()) {
     next({
-      path: '/login',
+      path: '/login-patient',
       query: { redirect: to.fullPath }
     })
   } else {
