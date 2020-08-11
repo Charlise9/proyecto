@@ -41,7 +41,22 @@ const newUserSchema = Joi.object().keys({
 });
 
 // Valida el login de un usuario
-const loginUserSchema = newUserSchema;
+const loginUserSchema = Joi.object().keys({
+  email: Joi.string()
+    .email()
+    .required()
+    .error(
+      generateError("El campo email debe existir y ser un email válido", 400)
+    ),
+  password: Joi.string()
+    .min(8)
+    .required()
+    .error(
+      generateError(
+        "El campo password debe existir y ser mayor de 8 caracteres"
+      )
+    )
+});
 
 // Valida la edición de datos de un usuario
 const editUserSchema = Joi.object().keys({

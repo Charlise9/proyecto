@@ -38,9 +38,9 @@ export default {
       this.hide = true;
       logout();
       this.$router.push("/");
-      /* setTimeout(() => {
+      setTimeout(() => {
         location.reload();
-      }, 100); */
+      }, 1);
     },
     /* async setUserName(userId) {userId
       userId = getId();
@@ -125,6 +125,7 @@ export default {
       } else {
         this.iAmDoctor = false;
         this.iAmUser = false;
+        this.hide = true;
       }
     },
   },
