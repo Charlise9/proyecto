@@ -123,22 +123,4 @@ export default {
 </script>
 
 <style scoped>
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  background: rgb(0, 0, 0, 0.5);
-}
-
-.modalBox {
-  background-color: #fefefe;
-  margin: 2% auto;
-  padding: 3rem;
-  width: 80%;
-  border: 2px solid #e84a5f;
-  border-radius: 12px;
-}
 </style>

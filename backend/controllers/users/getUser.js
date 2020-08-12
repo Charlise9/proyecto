@@ -1,6 +1,6 @@
 const { getConnection } = require("../../db");
 
-const { formatDateToDB, formatBirthdayToDB } = require("../../helpers");
+const { /* formatDateToDB, */ formatBirthdayToDB } = require("../../helpers");
 
 async function getUser(req, res, next) {
   let connection;
@@ -12,7 +12,7 @@ async function getUser(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT id, registration_date, email, role, name, image, birth_date, social_security_number, address, location, phone_number, (SELECT COUNT(id) FROM medical_consultations WHERE id_user=users.id) AS number_of_consults
+        SELECT id, registration_date, email, role, name, image, birth_date, social_security_number, dni, address, location, phone_number, (SELECT COUNT(id) FROM medical_consultations WHERE id_user=users.id) AS number_of_consults
         FROM users
         WHERE id=?
         `,
@@ -28,7 +28,7 @@ async function getUser(req, res, next) {
     const [userData] = result;
 
     const responseData = {
-      registrationDate: formatDateToDB(userData.registration_date),
+      registrationDate: userData.registration_date,
       name: userData.name,
       image: userData.image,
       birthDate: formatBirthdayToDB(userData.birth_date),
@@ -38,7 +38,8 @@ async function getUser(req, res, next) {
     if (userData.id === req.auth.id || req.auth.role === "admin") {
       responseData.email = userData.email;
       responseData.role = userData.role;
-      responseData.rocialSecurityNumber = userData.social_security_number;
+      responseData.socialSecurityNumber = userData.social_security_number;
+      responseData.dni = userData.dni;
       responseData.address = userData.address;
       responseData.location = userData.location;
       responseData.phoneNumber = userData.phone_number;

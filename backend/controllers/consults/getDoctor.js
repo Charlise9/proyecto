@@ -10,7 +10,7 @@ async function getDoctor(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT doctors.name, doctors.id, doctors.email, doctors.collegiate_number, doctors.experience, doctors.speciality, doctors.image 
+        SELECT doctors.name, doctors.id, doctors.email, doctors.collegiate_number, doctors.experience, doctors.speciality, doctors.image, doctors.dni, doctors.phone_number, doctors.phone_number, doctors.birth_date, doctors.address, doctors.location, doctors.registration_date 
         FROM doctors
         WHERE doctors.id=?
         `,

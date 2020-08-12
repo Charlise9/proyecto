@@ -34,6 +34,9 @@ async function newUser(req, res, next) {
     // enviar un mensaje de confirmación de registro al email indicado
 
     const registrationCode = randomString(40);
+
+    // se crea una url para confirmar el código
+
     const validationURL = `${process.env.PUBLIC_HOST}/users/validate/${registrationCode}`;
 
     // Enviamos la url anterior por mail

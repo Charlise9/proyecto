@@ -1,6 +1,8 @@
 import jwt from 'jwt-decode';
 import axios from 'axios';
 
+/* import { es } from 'date-fns/locale'; */
+
 
 // FUNCIÓN PARA LOGIN DE PACIENTE
 export function loginPatient(user, password) {
@@ -122,7 +124,5 @@ export function logout() {
     localStorage.removeItem('ROLE');
     localStorage.removeItem('KIND_OF_USER');
     localStorage.removeItem('NAME');
-
-
-
 }
+

@@ -61,7 +61,7 @@ const routes = [
     }
   },
   {
-    path: '/viewdoctorprofile',
+    path: '/viewdoctorprofile/:id',
     name: 'ViewDoctorProfile',
     component: () => import('../views/ViewDoctorProfile.vue'),
     meta: {
@@ -70,7 +70,7 @@ const routes = [
     }
   },
   {
-    path: '/viewuserprofile',
+    path: '/viewuserprofile/:id',
     name: 'ViewUserProfile',
     component: () => import('../views/ViewUserProfile.vue'),
     meta: {

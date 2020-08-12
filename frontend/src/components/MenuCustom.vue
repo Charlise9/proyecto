@@ -5,8 +5,14 @@
       <router-link :to="{  name: 'About' }">About</router-link>
       <router-link v-show="hide" :to="{  name: 'LoginPatient' }">Login Paciente</router-link>
       <router-link v-show="hide" :to="{  name: 'LoginDoctor' }">Login Médico</router-link>
-      <router-link v-show="iAmUser" :to="{  name: 'ViewUserProfile' }">Pefil usuario</router-link>
-      <router-link v-show="iAmDoctor" :to="{  name: 'ViewDoctorProfile' }">Pefil doctor</router-link>
+      <router-link
+        v-show="iAmUser"
+        :to="{  name: 'ViewUserProfile', params:{ id:userId} }"
+      >Pefil usuario</router-link>
+      <router-link
+        v-show="iAmDoctor"
+        :to="{  name: 'ViewDoctorProfile', params:{id:userId} }"
+      >Pefil doctor</router-link>
 
       <p v-show="logged">{{ username }}</p>
       <!-- <p v-show="loggedDoctor">{{doctorname}}</p> -->
@@ -41,6 +47,10 @@ export default {
       setTimeout(() => {
         location.reload();
       }, 1);
+    },
+
+    getUserId() {
+      this.userId = getId();
     },
     /* async setUserName(userId) {userId
       userId = getId();
@@ -137,6 +147,7 @@ export default {
     this.getName();
     this.getLogin();
     this.getKindOfUser();
+    this.getUserId();
   },
 };
 </script>

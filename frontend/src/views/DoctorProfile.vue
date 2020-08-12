@@ -96,7 +96,7 @@ export default {
         this.positives = statistics.positives;
         this.negatives = statistics.negatives;
       } catch (error) {
-        console.error;
+        console.log(error);
       }
     },
     getLogin() {
