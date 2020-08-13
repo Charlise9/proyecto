@@ -89,8 +89,8 @@ const editDoctorSchema = Joi.object().keys({
     .max(9)
     .error(generateError("El campo dni debe tener 9 caracteres", 400)),
   birthDate: Joi.string()
-    .min(10)
-    .max(10)
+    .min(1)
+    .max(100)
     .error(
       generateError(
         "El campo fecha de nacimiento tiene que tener un formato AAAA-MM-DD",

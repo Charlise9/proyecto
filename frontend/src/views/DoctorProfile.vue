@@ -1,6 +1,6 @@
 <template>
   <div class="doctorprofile">
-    <vue-headful title="Hack A DOCTOR | perfil-doctor" />
+    <vue-headful title="Hack A DOCTOR | info-doctor" />
     <h1>DR/A {{ name }}</h1>
 
     <p>

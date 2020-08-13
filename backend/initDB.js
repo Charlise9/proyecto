@@ -168,7 +168,7 @@ async function main() {
       `);
 
     console.log("Metiendo datos de prueba en users");
-    const users = 30;
+    const users = 100;
 
     for (let index = 0; index < users; index++) {
       const name = faker.name.findName();
@@ -225,7 +225,7 @@ async function main() {
     }
 
     console.log("Metiendo datos de prueba en medical_consultations");
-    const medicalConsultationsEntries = 50;
+    const medicalConsultationsEntries = 100;
 
     for (let index = 0; index < medicalConsultationsEntries; index++) {
       const date = formatDateToDB(faker.date.recent());
@@ -237,12 +237,12 @@ async function main() {
         }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
           2,
           users + 1
-        )}", "${random(2, doctors + 1)}")
+        )}", "${random(1, doctors + 1)}")
       `);
     }
 
     console.log("metiendo datos de prueba en consultation_answers");
-    const consultationAnswersEntries = 50;
+    const consultationAnswersEntries = 100;
 
     for (let index = 0; index < consultationAnswersEntries; index++) {
       const date = formatDateToDB(faker.date.recent());

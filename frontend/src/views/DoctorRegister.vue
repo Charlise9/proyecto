@@ -9,7 +9,8 @@
     <input type="password" v-model="repeatPassword" placeholder="Confirmar contraseña" />
     <input type="number" v-model="collegiateNumber" placeholder="Nº de colegiado" />
     <input type="text" v-model="speciality" placeholder="Especialidad" />
-    <input type="date" v-model="experience" placeholder="Fecha de colegiado" />
+    <label for="Experience">Fecha de colegiado</label>
+    <input type="date" id="Experience" v-model="experience" placeholder="Fecha de colegiado" />
 
     <button @click="validatingData()">Registrarse</button>
   </div>

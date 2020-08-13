@@ -22,6 +22,10 @@
           <b>Especialidad:</b>
           <span>{{ doctor.speciality }}</span>
         </p>
+        <p>
+          <b>Experiencia:</b>
+          <span>{{ doctor.experience }}</span>
+        </p>
         <router-link :to="{  name: 'DoctorProfile', params:{ id:doctor.id }}">
           <button>Ver perfil</button>
         </router-link>
