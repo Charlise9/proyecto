@@ -66,11 +66,12 @@ export default {
       } else {
         console.log(this.userDoctor, this.passwordDoctor);
         loginDoctor(this.userDoctor, this.passwordDoctor);
+
+        setTimeout(() => {
+          this.$router.push("/");
+          location.reload();
+        }, 500);
       }
-      setTimeout(() => {
-        this.$router.push("/");
-        location.reload();
-      }, 500);
     },
     // FUNCIÓN PARA ENVIAR UN CÓDIGO DE RECUPERACIÓN DE CONTRASEÑA
     async sendRecoverCode() {

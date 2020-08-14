@@ -71,7 +71,22 @@
         <input type="email" placeholder="Email" v-model="newEmail" />
 
         <button @click="editInfo =! editInfo">Cancelar</button>
-        <button @click="updateInfo()">Confirmar cambios</button>
+        <button @click="sweetalertEdit()">Confirmar cambios</button>
+      </div>
+    </div>
+
+    <button @click="editPass=true">Cambiar contraseña</button>
+
+    <!-- MODAL PARA CAMBIAR LA CONTRASEÑA -->
+
+    <div v-show="editPass" class="modal">
+      <div class="modalBox">
+        <h3>Actualiza tu contraseña</h3>
+        <input type="password" placeholder="Tu contraseña actual" v-model="oldPassword" />
+        <input type="password" placeholder="Contraseña nueva" v-model="newPassword" />
+        <input type="password" placeholder="Confirmar contraseña nueva" v-model="repeatNewPassword" />
+        <button @click="editPass =! editPass">Cancelar</button>
+        <button @click="sweetalertEditPass()">Actualizar contraseña</button>
       </div>
     </div>
 
@@ -86,6 +101,7 @@
 /* import patientprofile from "@/components/PatientProfileCustom.vue"; */
 import axios from "axios";
 import { getAuthToken } from "../helpers/utils";
+import Swal from "sweetalert2";
 
 export default {
   name: "ViewUserProfile",
@@ -105,9 +121,70 @@ export default {
       newSocialSecurityNumber: "",
       newPhoneNumber: "",
       newEmail: "",
+      editPass: false,
+      oldPassword: "",
+      newPassword: "",
+      repeatNewPassword: "",
     };
   },
   methods: {
+    sweetalertEdit() {
+      Swal.fire({
+        text: "¿Seguro que quieres editar tus datos?",
+        icon: "question",
+        confirmButtonText: "Sí",
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            title: "¡DATOS ACTUALIZADOS!",
+            text:
+              "Si has actualizado el email, se te ha enviado un correo de confirmación",
+            icon: "success",
+            confirmButtonText: "Ok",
+            onClose: () => {
+              this.updateInfo();
+              location.reload();
+            },
+          });
+        }
+      });
+    },
+    sweetalertError() {
+      Swal.fire({
+        title: "¡ALERTA!",
+        text: "Tienes campos vacíos",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
+    },
+    sweetalertErrorPassword() {
+      Swal.fire({
+        title: "¡ALERTA!",
+        text: "No coinciden las contraseñas",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
+    },
+    sweetalertEditPass() {
+      Swal.fire({
+        text: "Vas a cambiar la contraseña, ¿estás seguro?",
+        icon: "question",
+        confirmButtonText: "Sí",
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            title: "CONTRASEÑA ACTUALIZADA!",
+            icon: "success",
+            confirmButtonText: "Ok",
+            onClose: () => {
+              this.updatePass();
+            },
+          });
+        }
+      });
+    },
     // FUNCIÓN PARA VER EL PERFIL DE USUARIO
     async getProfile(id) {
       id = this.$route.params.id;
@@ -164,10 +241,49 @@ export default {
         console.log(response.data.data);
 
         this.editInfo = false;
+
+        location.reload();
       } catch (error) {
         console.log(error);
-      } finally {
-        location.reload();
+      }
+    },
+
+    // FUNCIÓN PARA EDITAR LA CONTRASEÑA
+    async updatePass(id) {
+      id = this.$route.params.id;
+
+      if (
+        this.oldPassword === "" ||
+        this.newPassword === "" ||
+        this.repeatNewPassword === ""
+      ) {
+        this.sweetalertError();
+      } else if (this.newPassword !== this.repeatNewPassword) {
+        this.sweetalertErrorPassword();
+      } else {
+        try {
+          // LLAMADA DE AXIOS
+          const response = await axios.post(
+            `http://localhost:3000/users/${id}/password`,
+            {
+              oldPassword: this.oldPassword,
+              newPassword: this.newPassword,
+            },
+            {
+              headers: {
+                Authorization: `${getAuthToken()}`,
+              },
+            }
+          );
+
+          this.oldPassword = "";
+          this.newPassword = "";
+          this.repeatNewPassword = "";
+
+          this.editPass = false;
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },
