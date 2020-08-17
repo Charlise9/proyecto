@@ -12,7 +12,7 @@
         </p>
         <p>
           Fecha:
-          <span>{{ consult.date }}</span>
+          <span>{{consult.date}}</span>
         </p>
         <p>
           Gravedad:
@@ -43,7 +43,7 @@
           <span>{{ consult.answer_id }}</span>
         </p>
 
-        <router-link :to="{  name: 'DoctorAnswersHistory', params:{ id:consult.consultation_id }}">
+        <router-link :to="{  name: 'ViewAnswer', params:{ id:consult.answer_id }}">
           <button>Ver respuesta</button>
         </router-link>
       </li>
@@ -52,10 +52,26 @@
 </template>
 
 <script>
+/* import moment from "moment";
+moment.locale("es"); */
+
 export default {
   name: "DoctorConsultsHistoryCustom",
   props: {
     consults: Array,
+  },
+  data() {
+    return {
+      date: "",
+    };
+  },
+  methods: {
+    /*  formatDate(date) {
+      let m = moment(date, "YYYY-MM-DDTHH:mm:ssZ");
+
+      moment.utc(m).format("DD-MM-YYYY");
+      console.log(date);
+    }, */
   },
 };
 </script>

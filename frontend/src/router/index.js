@@ -107,8 +107,17 @@ const routes = [
   },
   {
     path: '/consults-history/answer/:id',
-    name: 'DoctorAnswersHistory',
-    component: () => import('../views/DoctorAnswersHistory.vue'),
+    name: 'ViewAnswer',
+    component: () => import('../views/ViewAnswer.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+  {
+    path: '/viewdoctorprofile/:id/unanswered-consults/',
+    name: 'UnansweredConsults',
+    component: () => import('../views/UnansweredConsults.vue'),
     meta: {
       // RUTA PÚBLICA
       allowAnon: false

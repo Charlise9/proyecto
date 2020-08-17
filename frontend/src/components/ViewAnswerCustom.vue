@@ -1,0 +1,64 @@
+<template>
+  <div>
+    <ul>
+      <li v-for="answer in answers" :key="answer.id">
+        <p>
+          Respuesta nº:
+          <span>{{ answer.answer_id }}</span>
+        </p>
+        <p>
+          Realizada por el Dr./a.:
+          <span>{{ answer.doctor_name}}</span>
+        </p>
+        <p>
+          Especialista en:
+          <span>{{ answer.speciality}}</span>
+        </p>
+        <p>
+          En la fecha:
+          <span>{{answer.date}}</span>
+        </p>
+        <p>
+          Al paciente:
+          <span>{{answer.patient_name}}</span>
+        </p>
+        <p>
+          En relación a la consulta nº:
+          <span>{{answer.consult_id}}</span>
+        </p>
+        <p>
+          DIAGNÓSTICO:
+          <span>{{answer.diagnosis}}</span>
+        </p>
+        <p>
+          TRATAMIENTO:
+          <span>{{answer.treatment}}</span>
+        </p>
+        <p>
+          OBSERVACIONES:
+          <span>{{answer.observations}}</span>
+        </p>
+        <p>
+          ¿Fue efectivo el tratamiento?:
+          <span>{{answer.rate}}</span>
+        </p>
+        <p>
+          Resultado verificado:
+          <span>{{answer.verified}}</span>
+        </p>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ViewAnswerCustom.vue",
+  props: {
+    answers: Array,
+  },
+};
+</script>
+
+<style scoped>
+</style>

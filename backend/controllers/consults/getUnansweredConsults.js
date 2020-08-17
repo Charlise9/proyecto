@@ -24,11 +24,11 @@ async function getUnansweredConsults(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT medical_consultations.id, medical_consultations.date, medical_consultations.seriusness, medical_consultations.symptoms, medical_consultations.medical_history, medical_consultations.description, medical_consultations.image, (SELECT name FROM users WHERE id_user = users.id) AS consult_patient, medical_consultations.id_consultation_answer
+        SELECT medical_consultations.id, medical_consultations.date, medical_consultations.seriusness, medical_consultations.symptoms, medical_consultations.medical_history, medical_consultations.description, medical_consultations.image, medical_consultations.document, (SELECT name FROM users WHERE id_user = users.id) AS consult_patient, consultation_answers.id_medical_consultation
         FROM medical_consultations
-            INNER JOIN doctors
-            ON medical_consultations.id_doctor = doctors.id
-        WHERE doctors.id=? AND medical_consultations.id_consultation_answer IS null
+            LEFT JOIN doctors ON medical_consultations.id_doctor = doctors.id
+            LEFT JOIN consultation_answers ON medical_consultations.id = consultation_answers.id_medical_consultation
+        WHERE doctors.id=? AND consultation_answers.id_medical_consultation IS null
         ORDER BY ${orderBy} ${orderDirection}
 
         `,

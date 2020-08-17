@@ -95,41 +95,46 @@
       </div>
     </div>
 
+    <router-link :to="{  name: 'UnansweredConsults', params:{ id:doctorId }}">
+      <button>Consultas pendientes de responder</button>
+    </router-link>
+
     <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
       <button>Ver historial de consultas</button>
     </router-link>
 
-    <h2>Estadísticas</h2>
+    <button @click="seeStatistics=true">Estadísticas</button>
 
-    <p>
-      Consultas recibidas:
-      <span>{{ questions.number_of_consults }}</span>
-    </p>
-
-    <p>
-      Consultas respondidas:
-      <span>{{statistics.number_of_answers}}</span>
-    </p>
-
-    <p>
-      Votos positivos:
-      <span>{{statistics.positives}}</span>
-    </p>
-
-    <p>
-      Votos negativos:
-      <span>{{statistics.negatives}}</span>
-    </p>
-
-    <p>
-      Votos verificados:
-      <span>{{ statistics.verifieds }}</span>
-    </p>
-
-    <p>
-      Votos pendientes de verificar:
-      <span>{{ statistics.not_verifieds }}</span>
-    </p>
+    <div v-show="seeStatistics" class="modal">
+      <div class="modalBox">
+        <h2>Estadísticas</h2>
+        <p>
+          Consultas recibidas:
+          <span>{{ questions.number_of_consults }}</span>
+        </p>
+        <p>
+          Consultas respondidas:
+          <span>{{statistics.number_of_answers}}</span>
+        </p>
+        <p>
+          Votos positivos:
+          <span>{{statistics.positives}}</span>
+        </p>
+        <p>
+          Votos negativos:
+          <span>{{statistics.negatives}}</span>
+        </p>
+        <p>
+          Votos verificados:
+          <span>{{ statistics.verifieds }}</span>
+        </p>
+        <p>
+          Votos pendientes de verificar:
+          <span>{{ statistics.not_verifieds }}</span>
+        </p>
+        <button @click="seeStatistics =! seeStatistics">Cerrar</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -160,6 +165,7 @@ export default {
       oldPassword: "",
       newPassword: "",
       repeatNewPassword: "",
+      seeStatistics: false,
     };
   },
   methods: {
@@ -234,7 +240,7 @@ export default {
           }
         );
 
-        console.log(response.data.data);
+        /* console.log(response.data.data); */
 
         const info = response.data.data;
 
