@@ -95,6 +95,10 @@
       </div>
     </div>
 
+    <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
+      <button>Ver historial de consultas</button>
+    </router-link>
+
     <h2>Estadísticas</h2>
 
     <p>
@@ -142,6 +146,7 @@ export default {
       doctors: {},
       questions: {},
       statistics: {},
+      doctorId: "",
       seeInfo: false,
       editInfo: false,
       newName: "",
@@ -237,6 +242,7 @@ export default {
         this.questions = response.data.data.questions;
         this.statistics = response.data.data.statistics;
 
+        this.doctorId = info.doctor.id;
         this.newName = info.doctor.name;
         this.newAddress = info.doctor.address;
         this.newLocation = info.doctor.location;

@@ -37,9 +37,12 @@
       Votos negativos:
       <span>{{ negatives }}</span>
     </p>
-    <button v-show="logged">Ver historial de consultas</button>
 
-    <router-link :to="{  name: 'SendConsult', params:{ id:id }}">
+    <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
+      <button v-show="logged">Ver historial de consultas</button>
+    </router-link>
+
+    <router-link :to="{  name: 'SendConsult', params:{ id:doctorId }}">
       <button>Enviar consulta</button>
     </router-link>
   </div>
@@ -55,6 +58,7 @@ export default {
   data() {
     return {
       id: null,
+      doctorId: "",
       name: "",
       email: "",
       collegiate_number: "",
@@ -77,12 +81,13 @@ export default {
         // LLAMADA DE AXIOS
         const response = await axios.get("http://localhost:3000/doctors/" + id);
 
-        console.log(response.data.data);
+        /* console.log(response.data.data); */
 
         const doctor = response.data.data.doctor;
         const questions = response.data.data.questions;
         const statistics = response.data.data.statistics;
 
+        this.doctorId = doctor.id;
         this.name = doctor.name;
         this.email = doctor.email;
         this.collegiate_number = doctor.collegiate_number;

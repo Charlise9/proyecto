@@ -43,6 +43,10 @@ const getUserAnswers = require("./controllers/consults/getUserAnswers");
 const getAnswer = require("./controllers/consults/getAnswer");
 const voteAnswer = require("./controllers/consults/voteAnswer");
 const verifiedVote = require("./controllers/consults/verifiedVote");
+const getDoctorAnswer = require("./controllers/consults/getDoctorAnswer");
+
+
+
 
 const app = express();
 
@@ -169,6 +173,11 @@ app.get("/doctors/:id", getDoctor);
 // Sólo pacientes registrados, médico y admin
 app.get("/doctors/:id/consults", isUser, getDoctorConsults);
 
+// Ver hisotrial de respuestas del médico
+// GET - /doctors/:id/answers
+// Sólo pacientes registrados, médico y admin
+app.get("/doctors/:id/answers", getDoctorAnswer)
+
 // Enviar consulta al médico (HECHO)
 // POST - /doctors/:id/consults
 // Sólo pacientes registrados
@@ -209,12 +218,14 @@ app.get("/doctors/:id/consults", isDoctor, getDoctorConsults);
 // Ver respuesta dada a X consulta (HECHO)
 // GET -/consults/:id/answers
 // Sólo el médico que la hizo
-app.get("/consults/:id_doctor/:id_consult/answers", isDoctor, getAnswer);
+app.get("/consults/answers/:id", getAnswer);
 
 // Verificar una nota de paciente
 // POST -/doctors/:id/answers/verified
 // Sólo el médico que respondió la consulta
 app.post("/doctors/answers/:id/verified", isDoctor, verifiedVote);
+
+
 
 // Middleware finales
 

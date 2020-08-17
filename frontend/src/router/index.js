@@ -97,6 +97,24 @@ const routes = [
     }
   },
   {
+    path: '/viewdoctorprofile/consults-history/:id',
+    name: 'DoctorConsultsHistory',
+    component: () => import('../views/DoctorConsultsHistory.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+  {
+    path: '/consults-history/answer/:id',
+    name: 'DoctorAnswersHistory',
+    component: () => import('../views/DoctorAnswersHistory.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+  {
     path: '*',
     name: 'Error',
     component: () => import('../views/Error.vue'),
