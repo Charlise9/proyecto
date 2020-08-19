@@ -3,6 +3,7 @@
     <vue-headful title="Hack A DOCTOR | mi perfil-paciente" />
 
     <h1>{{ patients.name}}</h1>
+    <img :src="getImageName(patients.image)" />
 
     <!--    MODAL PARA VER LA INFO DEL USUARIO -->
 
@@ -48,7 +49,7 @@
     </div>
 
     <!-- MODAL PARA EDITAR LOS DATOS DE USUARIO  -->
-
+    ￼
     <div v-show="editInfo" class="modal">
       <div class="modalBox">
         <h3>Actualiza tu información</h3>
@@ -69,7 +70,8 @@
         />
         <input type="number" placeholder="Nº de teléfono" v-model="newPhoneNumber" />
         <input type="email" placeholder="Email" v-model="newEmail" />
-
+        <input type="file" ref="avatar" @change="profileImage" />
+        ￼
         <button @click="editInfo =! editInfo">Cancelar</button>
         <button @click="sweetalertEdit()">Confirmar cambios</button>
       </div>
@@ -82,7 +84,7 @@
     <div v-show="editPass" class="modal">
       <div class="modalBox">
         <h3>Actualiza tu contraseña</h3>
-        <input type="password" placeholder="Tu contraseña actual" v-model="oldPassword" />
+        <input type="password" placeholder="Tu co￼ntraseña actual" v-model="oldPassword" />
         <input type="password" placeholder="Contraseña nueva" v-model="newPassword" />
         <input type="password" placeholder="Confirmar contraseña nueva" v-model="repeatNewPassword" />
         <button @click="editPass =! editPass">Cancelar</button>
@@ -91,6 +93,7 @@
     </div>
 
     <p>
+      ￼
       Consultas realizadas:
       <span>{{ patients.numberOfConsultsDone }}</span>
     </p>
@@ -113,6 +116,7 @@ export default {
       patients: {},
       seeInfo: false,
       editInfo: false,
+      avatar: "",
       newName: "",
       newAddress: "",
       newLocation: "",
@@ -144,7 +148,6 @@ export default {
             confirmButtonText: "Ok",
             onClose: () => {
               this.updateInfo();
-              location.reload();
             },
           });
         }
@@ -165,6 +168,8 @@ export default {
         icon: "warning",
         confirmButtonText: "Ok",
       });
+      {
+      }
     },
     sweetalertEditPass() {
       Swal.fire({
@@ -185,6 +190,18 @@ export default {
         }
       });
     },
+    // FUNCIÓN PARA VER LA IMAGEN
+    getImageName(name) {
+      return "http://localhost:3000/uploads/" + name;
+
+      console.log(name);
+    },
+
+    // FUNCIÓN PARA SUBIR IMÁGENES
+    profileImage() {
+      this.avatar = this.$refs.avatar.files[0];
+    },
+
     // FUNCIÓN PARA VER EL PERFIL DE USUARIO
     async getProfile(id) {
       id = this.$route.params.id;
@@ -218,19 +235,21 @@ export default {
       id = this.$route.params.id;
 
       try {
+        let formData = new FormData();
+        formData.append("name", this.newName);
+        formData.append("email", this.newEmail);
+        formData.append("address", this.newAddress);
+        formData.append("location", this.newLocation);
+        formData.append("dni", this.newDni);
+        formData.append("birthDate", this.newBirthDate);
+        formData.append("socialSecurityNumber", this.newSocialSecurityNumber);
+        formData.append("phoneNumber", this.newPhoneNumber);
+        formData.append("avatar", this.avatar);
+
         // LLAMADA DE AXIOS
         const response = await axios.put(
           "http://localhost:3000/users/" + id,
-          {
-            name: this.newName,
-            email: this.newEmail,
-            address: this.newAddress,
-            location: this.newLocation,
-            dni: this.newDni,
-            birthDate: this.newBirthDate,
-            socialSecurityNumber: this.newSocialSecurityNumber,
-            phoneNumber: this.newPhoneNumber,
-          },
+          formData,
           {
             headers: {
               Authorization: `${getAuthToken()}`,
