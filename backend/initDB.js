@@ -8,7 +8,7 @@ const {
   formatExperience,
 } = require("./helpers");
 const { random } = require("lodash");
-const { add } = require("date-fns");
+const { add, format } = require("date-fns");
 
 const abc = [
   "A",
@@ -103,7 +103,7 @@ async function main() {
             address VARCHAR(100),
             location VARCHAR(50),
             collegiate_number VARCHAR(10) UNIQUE NOT NULL,
-            experience VARCHAR(20),
+            experience DATE,
             speciality VARCHAR(100),
             image TINYTEXT,
             role ENUM('admin', 'normal') DEFAULT 'normal' NOT NULL,
@@ -191,13 +191,13 @@ async function main() {
     console.log("Creando usuario médico administrador");
 
     await connection.query(`
-      INSERT INTO doctors(registration_date, name, email, password, collegiate_number, speciality, role, active, last_update, last_auth_update)
+      INSERT INTO doctors(registration_date, name, email, password, collegiate_number, speciality, experience, birth_date, role, active, last_update, last_auth_update)
       VALUES(UTC_TIMESTAMP, "Ágata Vázquez", "carlosbarrientosguillen@gmail.com", SHA2("${
       process.env.DEFAULT_ADMIN_PASSWORD
       }", 512), "${random(
         1000000000,
         9999999999
-      )}", "Ginecología", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      )}", "Ginecología", "2020-07-24", "1992-04-16", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
     console.log("Metiendo datos de prueba en doctors");
@@ -208,24 +208,24 @@ async function main() {
       const email = faker.internet.email();
       const dni = random(10000000, 99999999) + abc[random(0, 25)];
       const collegiateNumber = random(1000000000, 9999999999);
-      const birthDay = faker.date.between("1960-01-01", "2001-12-31");
+      const birthDay = faker.date.between("1960-01-01", "1994-12-31");
       const birth = formatBirthdayToDB(birthDay);
-      const experience = add(birthDay, { years: 25 });
-      const yearsExperience = formatExperience(experience);
+      const experience = format(add(birthDay, { years: 25 }), "yyyy-MM-dd");
+      /* const yearsExperience = formatExperience(experience); */
       const address = faker.address.streetAddress();
       const location = faker.address.city();
       const phoneNumber = random(600000000, 699999999);
 
       await connection.query(`
       INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, role, active, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${yearsExperience}", "${
+      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${experience}", "${
         speciality[random(0, 3)]
         }","normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
     `);
     }
 
     console.log("Metiendo datos de prueba en medical_consultations");
-    const medicalConsultationsEntries = 100;
+    const medicalConsultationsEntries = 220;
 
     for (let index = 0; index < medicalConsultationsEntries; index++) {
       const date = formatDateToDB(faker.date.recent());
@@ -242,7 +242,7 @@ async function main() {
     }
 
     console.log("metiendo datos de prueba en consultation_answers");
-    const consultationAnswersEntries = 100;
+    const consultationAnswersEntries = 200;
 
     for (let index = 0; index < consultationAnswersEntries; index++) {
       const date = formatDateToDB(faker.date.recent());

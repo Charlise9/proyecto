@@ -3,6 +3,24 @@
     <vue-headful title="Hack A DOCTOR  | Inicio" />
 
     <h1>Hack A DOCTOR</h1>
+
+    <div>
+      <p>Ordenar:</p>
+      <select v-model="order">
+        <option value></option>
+        <option value="date">Fecha</option>
+        <option value="experience">Experiencia</option>
+      </select>
+    </div>
+
+    <div>
+      <p>Orden asc/desc:</p>
+      <select v-model="direction">
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+      </select>
+    </div>
+
     <doctorscard v-on:doctorsList="getDoctors" :doctors="doctors" />
   </div>
 </template>
@@ -19,6 +37,8 @@ export default {
   data() {
     return {
       doctors: [],
+      order: "",
+      direction: "",
     };
   },
   methods: {
@@ -29,6 +49,8 @@ export default {
         const response = await axios.get("http://localhost:3000/doctors", {
           params: {
             search: search,
+            order: this.order,
+            direction: this.direction,
           },
         });
 

@@ -17,7 +17,7 @@
     </p>
     <p>
       Experiencia:
-      <span>{{experience}}</span>
+      <span>{{getFormat(experience)}}</span>
     </p>
 
     <h3>Estadísticas</h3>
@@ -51,6 +51,8 @@
 <script>
 import axios from "axios";
 import { isLoggedIn } from "../helpers/utils";
+import { formatDistanceToNowStrict } from "date-fns";
+import es from "date-fns/locale/es";
 
 export default {
   name: "DoctorProfile",
@@ -70,6 +72,7 @@ export default {
       positives: "",
       negatives: "",
       logged: false,
+      formatDistanceToNowStrict,
     };
   },
   methods: {
@@ -106,6 +109,11 @@ export default {
     },
     getLogin() {
       this.logged = isLoggedIn();
+    },
+    getFormat(date) {
+      return this.formatDistanceToNowStrict(new Date(date), {
+        locale: es,
+      });
     },
   },
   created() {

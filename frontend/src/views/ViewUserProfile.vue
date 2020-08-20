@@ -97,6 +97,10 @@
       Consultas realizadas:
       <span>{{ patients.numberOfConsultsDone }}</span>
     </p>
+
+    <router-link :to="{  name: 'PatientConsultsHistory', params:{ id:patientId }}">
+      <button>Ver historial de consultas</button>
+    </router-link>
   </div>
 </template>
 
@@ -117,6 +121,7 @@ export default {
       seeInfo: false,
       editInfo: false,
       avatar: "",
+      patientId: "",
       newName: "",
       newAddress: "",
       newLocation: "",
@@ -194,12 +199,12 @@ export default {
     getImageName(name) {
       return "http://localhost:3000/uploads/" + name;
 
-      console.log(name);
+      /* console.log(name); */
     },
 
     // FUNCIÓN PARA SUBIR IMÁGENES
-    profileImage() {
-      this.avatar = this.$refs.avatar.files[0];
+    async profileImage() {
+      this.avatar = await this.$refs.avatar.files[0];
     },
 
     // FUNCIÓN PARA VER EL PERFIL DE USUARIO
@@ -214,10 +219,11 @@ export default {
           },
         });
 
-        console.log(response.data.data);
+        /* console.log(response.data.data); */
 
         this.patients = response.data.data;
 
+        this.patientId = response.data.data.id;
         this.newName = response.data.data.name;
         this.newAddress = response.data.data.address;
         this.newLocation = response.data.data.location;
@@ -306,8 +312,8 @@ export default {
       }
     },
   },
-  created() {
-    this.getProfile();
+  async created() {
+    await this.getProfile();
   },
 };
 </script>

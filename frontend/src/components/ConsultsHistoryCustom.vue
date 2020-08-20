@@ -15,6 +15,14 @@
           <span>{{consult.date}}</span>
         </p>
         <p>
+          Dirigida al doctor/a:
+          <span>{{consult.doctor_name}}</span>
+        </p>
+        <p>
+          Especialista en:
+          <span>{{consult.speciality}}</span>
+        </p>
+        <p>
           Gravedad:
           <span>{{ consult.seriusness }}</span>
         </p>
@@ -56,7 +64,7 @@
 moment.locale("es"); */
 
 export default {
-  name: "DoctorConsultsHistoryCustom",
+  name: "ConsultsHistoryCustom",
   props: {
     consults: Array,
   },

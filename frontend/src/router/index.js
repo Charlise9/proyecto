@@ -97,9 +97,18 @@ const routes = [
     }
   },
   {
-    path: '/viewdoctorprofile/consults-history/:id',
+    path: '/profile/consults-history/:id',
     name: 'DoctorConsultsHistory',
     component: () => import('../views/DoctorConsultsHistory.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+  {
+    path: '/profile/consults-history/:id',
+    name: 'PatientConsultsHistory',
+    component: () => import('../views/PatientConsultsHistory.vue'),
     meta: {
       // RUTA PÚBLICA
       allowAnon: false

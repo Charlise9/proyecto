@@ -36,6 +36,7 @@ async function getUser(req, res, next) {
     };
 
     if (userData.id === req.auth.id || req.auth.role === "admin") {
+      responseData.id = userData.id;
       responseData.email = userData.email;
       responseData.role = userData.role;
       responseData.socialSecurityNumber = userData.social_security_number;

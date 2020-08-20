@@ -16,11 +16,11 @@ async function listDoctors(req, res, next) {
       (direction && direction.toLowerCase()) === "desc" ? "DESC" : "ASC";
 
     switch (order) {
-      case "name":
-        orderBy = "name";
+      case "experience":
+        orderBy = "experience";
         break;
       default:
-        orderBy = "experience";
+        orderBy = "name";
     }
 
     let queryResults;

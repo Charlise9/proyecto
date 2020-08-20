@@ -43,7 +43,7 @@ async function isDoctor(req, res, next) {
     }
 
     const tokenCreatedAt = new Date(tokenInfo.iat /* + 7200 */ * 1000);
-    const userLastAuthUpdate = new Date(result[0].lastAuthUpdate);
+    const userLastAuthUpdate = new Date(result[0].last_auth_update);
 
     console.log(tokenCreatedAt, userLastAuthUpdate);
 

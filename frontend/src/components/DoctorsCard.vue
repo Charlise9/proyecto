@@ -8,7 +8,7 @@
       placeholder="Buscar por nombre o especialidad"
     />
     <button @click="searching()">Buscar</button>
-    <br />
+
     <!--  <input type="search" v-model="searchSpeciality" placeholder="Buscar por especialidad" />
     <button>Buscar</button>
     -->
@@ -24,7 +24,7 @@
         </p>
         <p>
           <b>Experiencia:</b>
-          <span>{{ doctor.experience }}</span>
+          <span>{{ getFormat(doctor.experience) }}</span>
         </p>
         <router-link :to="{  name: 'DoctorProfile', params:{ id:doctor.id }}">
           <button>Ver perfil</button>
@@ -47,6 +47,9 @@
 </template>
 
 <script>
+import { formatDistanceToNowStrict } from "date-fns";
+import es from "date-fns/locale/es";
+
 export default {
   name: "DoctorsCard",
   props: {
@@ -55,12 +58,18 @@ export default {
   data() {
     return {
       searchInfo: "",
+      formatDistanceToNowStrict,
     };
   },
   methods: {
     searching() {
       let search = this.searchInfo;
       this.$emit("doctorsList", search);
+    },
+    getFormat(date) {
+      return this.formatDistanceToNowStrict(new Date(date), {
+        locale: es,
+      });
     },
   },
 

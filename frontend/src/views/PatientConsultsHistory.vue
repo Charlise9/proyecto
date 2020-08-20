@@ -1,5 +1,5 @@
 <template>
-  <div class="doctorConsultsHistory">
+  <div class="patientConsultsHistory">
     <vue-headful title="Hack A DOCTOR | Historial de consultas" />
 
     <h1>Historial de consultas</h1>
@@ -21,19 +21,19 @@
       </select>
     </div>-->
 
-    <doctorconsults :consults="consults" />
+    <patientconsults :consults="consults" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { getAuthToken } from "../helpers/utils";
-import doctorconsults from "@/components/ConsultsHistoryCustom.vue";
+import patientconsults from "@/components/ConsultsHistoryCustom.vue";
 
 export default {
-  name: "DoctorConsultsHistory",
+  name: "PatientConsultsHistory",
   components: {
-    doctorconsults,
+    patientconsults,
   },
   data() {
     return {
@@ -50,7 +50,7 @@ export default {
       try {
         // LLAMADA DE AXIOS A SERVER
         const response = await axios.get(
-          `http://localhost:3000/doctors/${id}/consults`,
+          `http://localhost:3000/users/${id}/consults`,
           {
             headers: {
               Authorization: `${getAuthToken()}`,
@@ -59,7 +59,7 @@ export default {
           }
         );
 
-        /* console.log(response.data.data); */
+        console.log(response.data.data);
 
         this.consults = response.data.data;
       } catch (error) {
@@ -67,8 +67,8 @@ export default {
       }
     },
   },
-  created() {
-    this.getConsults();
+  async created() {
+    await this.getConsults();
   },
 };
 </script>

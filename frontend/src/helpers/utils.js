@@ -1,5 +1,7 @@
 import jwt from 'jwt-decode';
 import axios from 'axios';
+import { format, formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
 
 /* import { es } from 'date-fns/locale'; */
 
@@ -126,3 +128,6 @@ export function logout() {
     localStorage.removeItem('NAME');
 }
 
+export function formatExperience(date) {
+    return formatDistanceToNow(new Date(date), { locale: es });
+}
