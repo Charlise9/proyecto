@@ -2,105 +2,131 @@
   <div class="ViewUserProfile">
     <vue-headful title="Hack A DOCTOR | mi perfil-paciente" />
 
-    <h1>{{ patients.name}}</h1>
-    <img :src="getImageName(patients.image)" />
+    <div v-if="isLoaded">
+      <h1>{{ patients.name}}</h1>
+      <img :src="getImageName(patients.image)" />
 
-    <!--    MODAL PARA VER LA INFO DEL USUARIO -->
+      <!--    MODAL PARA VER LA INFO DEL USUARIO -->
 
-    <button @click="seeInfo=true">Datos Usuario</button>
+      <button @click="seeInfo=true">Datos Usuario</button>
 
-    <div v-show="seeInfo" class="modal">
-      <div class="modalBox">
-        <p>
-          Fecha de registro:
-          <span>{{ patients.registrationDate }}</span>
-        </p>
-        <p>
-          Dirección:
-          <span>{{patients.address}}</span>
-        </p>
-        <p>
-          Localidad:
-          <span>{{patients.location}}</span>
-        </p>
-        <p>
-          DNI:
-          <span>{{patients.dni}}</span>
-        </p>
-        <p>
-          Fecha de nacimiento:
-          <span>{{ patients.birthDate }}</span>
-        </p>
-        <p>
-          Nº de la Seguridad Social:
-          <span>{{ patients.socialSecurityNumber }}</span>
-        </p>
-        <p>
-          Nº de Teléfono:
-          <span>{{ patients.phoneNumber }}</span>
-        </p>
-        <p>
-          Email:
-          <span>{{ patients.email }}</span>
-        </p>
-        <button @click="seeInfo =! seeInfo">Cerrar</button>
-        <button @click="editInfo=true, seeInfo=false">Editar</button>
+      <div v-if="seeInfo" class="modal">
+        <div class="modalBox">
+          <p>
+            Fecha de registro:
+            <span>{{ patients.registrationDate }}</span>
+          </p>
+          <p>
+            Dirección:
+            <span>{{patients.address}}</span>
+          </p>
+          <p>
+            Localidad:
+            <span>{{patients.location}}</span>
+          </p>
+          <p>
+            DNI:
+            <span>{{patients.dni}}</span>
+          </p>
+          <p>
+            Fecha de nacimiento:
+            <span>{{ patients.birthDate }}</span>
+          </p>
+          <p>
+            Nº de la Seguridad Social:
+            <span>{{ patients.socialSecurityNumber }}</span>
+          </p>
+          <p>
+            Nº de Teléfono:
+            <span>{{ patients.phoneNumber }}</span>
+          </p>
+          <p>
+            Email:
+            <span>{{ patients.email }}</span>
+          </p>
+          <button @click="seeInfo =! seeInfo">Cerrar</button>
+          <button @click="editInfo=true, seeInfo=false">Editar</button>
+        </div>
       </div>
-    </div>
 
-    <!-- MODAL PARA EDITAR LOS DATOS DE USUARIO  -->
-    ￼
-    <div v-show="editInfo" class="modal">
-      <div class="modalBox">
-        <h3>Actualiza tu información</h3>
-        <label for="Name">Nombre:</label>
-        <input type="text" id="Name" placeholder="Nombre" v-model="newName" />
-        <label for="Address">Dirección:</label>
-        <input type="text" id="Address" placeholder="Dirección" v-model="newAddress" />
-        <label for="Location">Localidad:</label>
-        <input type="text" id="Location" placeholder="Localización" v-model="newLocation" />
-        <label for="Dni">DNI:</label>
-        <input type="text" id="Dni" placeholder="DNI" v-model="newDni" />
-        <label for="BirthDate">Fecha de nacimiento:</label>
-        <input type="date" id="BirthDate" placeholder="Fecha de nacimiento" v-model="newBirthDate" />
-        <input
-          type="number"
-          placeholder="Nº de la Seguridad Social"
-          v-model="newSocialSecurityNumber"
-        />
-        <input type="number" placeholder="Nº de teléfono" v-model="newPhoneNumber" />
-        <input type="email" placeholder="Email" v-model="newEmail" />
-        <input type="file" ref="avatar" @change="profileImage" />
-        ￼
-        <button @click="editInfo =! editInfo">Cancelar</button>
-        <button @click="sweetalertEdit()">Confirmar cambios</button>
-      </div>
-    </div>
-
-    <button @click="editPass=true">Cambiar contraseña</button>
-
-    <!-- MODAL PARA CAMBIAR LA CONTRASEÑA -->
-
-    <div v-show="editPass" class="modal">
-      <div class="modalBox">
-        <h3>Actualiza tu contraseña</h3>
-        <input type="password" placeholder="Tu co￼ntraseña actual" v-model="oldPassword" />
-        <input type="password" placeholder="Contraseña nueva" v-model="newPassword" />
-        <input type="password" placeholder="Confirmar contraseña nueva" v-model="repeatNewPassword" />
-        <button @click="editPass =! editPass">Cancelar</button>
-        <button @click="sweetalertEditPass()">Actualizar contraseña</button>
-      </div>
-    </div>
-
-    <p>
+      <!-- MODAL PARA EDITAR LOS DATOS DE USUARIO  -->
       ￼
-      Consultas realizadas:
-      <span>{{ patients.numberOfConsultsDone }}</span>
-    </p>
+      <div v-if="editInfo" class="modal">
+        <div class="modalBox">
+          <h3>Actualiza tu información</h3>
+          <label for="Name">Nombre:</label>
+          <input type="text" id="Name" placeholder="Nombre" v-model="newName" />
+          <label for="Address">Dirección:</label>
+          <input type="text" id="Address" placeholder="Dirección" v-model="newAddress" />
+          <label for="Location">Localidad:</label>
+          <input type="text" id="Location" placeholder="Localización" v-model="newLocation" />
+          <label for="Dni">DNI:</label>
+          <input type="text" id="Dni" placeholder="DNI" v-model="newDni" />
+          <label for="BirthDate">Fecha de nacimiento:</label>
+          <input
+            type="date"
+            id="BirthDate"
+            placeholder="Fecha de nacimiento"
+            v-model="newBirthDate"
+          />
+          <label for="SSNumber">Nº de la Seguridad Social:</label>
+          <input
+            type="number"
+            id="SSNumber"
+            placeholder="Nº de la Seguridad Social"
+            v-model="newSocialSecurityNumber"
+          />
+          <label for="PhoneNumber">Nº de teléfono:</label>
+          <input
+            type="number"
+            id="PhoneNumber"
+            placeholder="Nº de teléfono"
+            v-model="newPhoneNumber"
+          />
+          <label for="Email">Email:</label>
+          <input type="email" id="Email" placeholder="Email" v-model="newEmail" />
+          <label for="ProfilePic">Foto de perfil:</label>
+          <input type="file" id="ProfilePic" ref="avatar" @change="profileImage" />
+          ￼
+          <button @click="editInfo =! editInfo">Cancelar</button>
+          <button @click="sweetalertEdit()">Confirmar cambios</button>
+        </div>
+      </div>
 
-    <router-link :to="{  name: 'PatientConsultsHistory', params:{ id:patientId }}">
-      <button>Ver historial de consultas</button>
-    </router-link>
+      <button @click="editPass=true">Cambiar contraseña</button>
+
+      <!-- MODAL PARA CAMBIAR LA CONTRASEÑA -->
+
+      <div v-if="editPass" class="modal">
+        <div class="modalBox">
+          <h3>Actualiza tu contraseña</h3>
+          <input type="password" placeholder="Tu co￼ntraseña actual" v-model="oldPassword" />
+          <input type="password" placeholder="Contraseña nueva" v-model="newPassword" />
+          <input
+            type="password"
+            placeholder="Confirmar contraseña nueva"
+            v-model="repeatNewPassword"
+          />
+          <button @click="editPass =! editPass">Cancelar</button>
+          <button @click="sweetalertEditPass()">Actualizar contraseña</button>
+        </div>
+      </div>
+
+      <p>
+        ￼
+        Consultas realizadas:
+        <span>{{ patients.numberOfConsultsDone }}</span>
+      </p>
+
+      <router-link :to="{  name: 'PatientConsultsHistory', params:{ id:patientId }}">
+        <button>Ver historial de consultas</button>
+      </router-link>
+    </div>
+
+    <!-- SPINNER -->
+    <div v-else>
+      <div class="loader">Cargando...</div>
+    </div>
   </div>
 </template>
 
@@ -117,7 +143,7 @@ export default {
   },
   data() {
     return {
-      patients: {},
+      patients: null,
       seeInfo: false,
       editInfo: false,
       avatar: "",
@@ -134,7 +160,14 @@ export default {
       oldPassword: "",
       newPassword: "",
       repeatNewPassword: "",
+      isLoaded: false,
     };
+  },
+  computed: {
+    /* isLoaded() {
+      return patients !== null;
+      return false;
+    }, */
   },
   methods: {
     sweetalertEdit() {
@@ -221,6 +254,8 @@ export default {
 
         /* console.log(response.data.data); */
 
+        /* response.data.data ? this. */
+
         this.patients = response.data.data;
 
         this.patientId = response.data.data.id;
@@ -232,6 +267,8 @@ export default {
         this.newSocialSecurityNumber = response.data.data.socialSecurityNumber;
         this.newPhoneNumber = response.data.data.phoneNumber;
         this.newEmail = response.data.data.email;
+
+        this.isLoaded = true;
       } catch (error) {
         console.log(error);
       }
@@ -319,4 +356,71 @@ export default {
 </script>
 
 <style scoped>
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #422163;
+  background: -moz-linear-gradient(left, #422163 10%, rgba(66, 33, 99, 0) 42%);
+  background: -webkit-linear-gradient(
+    left,
+    #422163 10%,
+    rgba(66, 33, 99, 0) 42%
+  );
+  background: -o-linear-gradient(left, #422163 10%, rgba(66, 33, 99, 0) 42%);
+  background: -ms-linear-gradient(left, #422163 10%, rgba(66, 33, 99, 0) 42%);
+  background: linear-gradient(to right, #422163 10%, rgba(66, 33, 99, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #422163;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+}
+.loader:after {
+  background: #e2e9e8;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: "";
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 </style>

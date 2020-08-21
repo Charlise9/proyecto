@@ -3,18 +3,18 @@
     <div id="nav">
       <router-link :to="{  name: 'Home' }">Home</router-link>
       <router-link :to="{  name: 'About' }">About</router-link>
-      <router-link v-show="hide" :to="{  name: 'LoginPatient' }">Login Paciente</router-link>
-      <router-link v-show="hide" :to="{  name: 'LoginDoctor' }">Login Médico</router-link>
+      <router-link v-if="hide" :to="{  name: 'LoginPatient' }">Login Paciente</router-link>
+      <router-link v-if="hide" :to="{  name: 'LoginDoctor' }">Login Médico</router-link>
       <router-link
-        v-show="iAmUser"
+        v-if="iAmUser"
         :to="{  name: 'ViewUserProfile', params:{ id:userId} }"
       >Pefil usuario</router-link>
       <router-link
-        v-show="iAmDoctor"
+        v-if="iAmDoctor"
         :to="{  name: 'ViewDoctorProfile', params:{id:userId} }"
       >Pefil doctor</router-link>
 
-      <p v-show="logged">{{ username }}</p>
+      <p v-if="logged">{{ username }}</p>
       <!-- <p v-show="loggedDoctor">{{doctorname}}</p> -->
 
       <button @click="logoutUser()">Logout</button>

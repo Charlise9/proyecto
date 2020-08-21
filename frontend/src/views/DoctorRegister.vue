@@ -51,6 +51,18 @@ export default {
         confirmButtonText: "Ok",
       });
     },
+    sweetalertNewDoctor() {
+      Swal.fire({
+        title: "USUARIO CREADO!",
+        text:
+          "Se te ha enviado un correo de verificación al email que nos has proporcionado",
+        icon: "success",
+        confirmButtonText: "Ok",
+        onClose: () => {
+          this.addNewDoctor();
+        },
+      });
+    },
     validatingData() {
       if (
         this.name === "" ||
@@ -68,7 +80,7 @@ export default {
         this.createDoctor = false;
       } else {
         this.createDoctor = true;
-        this.addNewDoctor();
+        this.sweetalertNewDoctor();
       }
     },
     async addNewDoctor() {

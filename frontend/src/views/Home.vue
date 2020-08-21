@@ -8,7 +8,7 @@
       <p>Ordenar:</p>
       <select v-model="order">
         <option value></option>
-        <option value="date">Fecha</option>
+        <option value="alphabetic">A-Z</option>
         <option value="experience">Experiencia</option>
       </select>
     </div>
@@ -37,8 +37,8 @@ export default {
   data() {
     return {
       doctors: [],
-      order: "",
-      direction: "",
+      order: "alphabetic",
+      direction: "asc",
     };
   },
   methods: {

@@ -5,7 +5,6 @@ const {
   generateError,
   randomString,
   sendMail,
-  formatExperience,
 } = require("../../helpers");
 
 async function newDoctor(req, res, next) {
@@ -70,7 +69,7 @@ async function newDoctor(req, res, next) {
         password,
         collegiateNumber,
         speciality,
-        formatExperience(experience),
+        experience,
         registrationCode,
       ]
     );
