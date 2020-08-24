@@ -12,7 +12,7 @@
         </p>
         <p>
           Fecha:
-          <span>{{consult.date}}</span>
+          <span>{{ getFormat(consult.date) }}</span>
         </p>
         <p>
           Dirigida al doctor/a:
@@ -60,8 +60,7 @@
 </template>
 
 <script>
-/* import moment from "moment";
-moment.locale("es"); */
+import { format } from "date-fns";
 
 export default {
   name: "ConsultsHistoryCustom",
@@ -70,16 +69,13 @@ export default {
   },
   data() {
     return {
-      date: "",
+      format,
     };
   },
   methods: {
-    /*  formatDate(date) {
-      let m = moment(date, "YYYY-MM-DDTHH:mm:ssZ");
-
-      moment.utc(m).format("DD-MM-YYYY");
-      console.log(date);
-    }, */
+    getFormat(date) {
+      return this.format(new Date(date), "dd-MM-yyyy  HH:mm");
+    },
   },
 };
 </script>

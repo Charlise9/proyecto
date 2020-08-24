@@ -1,23 +1,20 @@
 <template>
   <div class="menu">
     <div id="nav">
-      <router-link :to="{  name: 'Home' }">Home</router-link>
-      <router-link :to="{  name: 'About' }">About</router-link>
-      <router-link v-if="hide" :to="{  name: 'LoginPatient' }">Login Paciente</router-link>
-      <router-link v-if="hide" :to="{  name: 'LoginDoctor' }">Login Médico</router-link>
-      <router-link
-        v-if="iAmUser"
-        :to="{  name: 'ViewUserProfile', params:{ id:userId} }"
-      >Pefil usuario</router-link>
+      <router-link :to="{  name: 'Home' }">Inicio</router-link>
+      <router-link :to="{  name: 'About' }">Más información</router-link>
+      <router-link v-if="hide" :to="{  name: 'LoginPatient' }">Acceso Paciente</router-link>
+      <router-link v-if="hide" :to="{  name: 'LoginDoctor' }">Acceso Médico</router-link>
+      <router-link v-if="iAmUser" :to="{  name: 'ViewUserProfile', params:{ id:userId} }">Mi perfil</router-link>
       <router-link
         v-if="iAmDoctor"
         :to="{  name: 'ViewDoctorProfile', params:{id:userId} }"
-      >Pefil doctor</router-link>
+      >Mi perfil</router-link>
 
       <p v-if="logged">{{ username }}</p>
       <!-- <p v-show="loggedDoctor">{{doctorname}}</p> -->
 
-      <button @click="logoutUser()">Logout</button>
+      <button @click="logoutUser()" v-show="canLogout">Logout</button>
     </div>
   </div>
 </template>
@@ -37,11 +34,13 @@ export default {
       hide: true,
       iAmUser: false,
       iAmDoctor: false,
+      canLogout: false,
     };
   },
   methods: {
     logoutUser() {
       this.hide = true;
+      this.canLogout = false;
       logout();
       this.$router.push("/");
       setTimeout(() => {
@@ -121,6 +120,7 @@ export default {
     getLogin() {
       this.logged = isLoggedIn();
       this.hide = false;
+      this.canLogout = true;
     },
     getKindOfUser() {
       const type = localStorage.getItem("KIND_OF_USER");
@@ -136,6 +136,7 @@ export default {
         this.iAmDoctor = false;
         this.iAmUser = false;
         this.hide = true;
+        this.canLogout = false;
       }
     },
   },

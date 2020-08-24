@@ -16,7 +16,7 @@
         </p>
         <p>
           En la fecha:
-          <span>{{answer.date}}</span>
+          <span>{{getFormat(answer.date)}}</span>
         </p>
         <p>
           Al paciente:
@@ -52,10 +52,22 @@
 </template>
 
 <script>
+import { format } from "date-fns";
+
 export default {
   name: "ViewAnswerCustom.vue",
   props: {
     answers: Array,
+  },
+  data() {
+    return {
+      format,
+    };
+  },
+  methods: {
+    getFormat(date) {
+      return this.format(new Date(date), "dd-MM-yyyy  HH:mm");
+    },
   },
 };
 </script>

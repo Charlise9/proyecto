@@ -12,7 +12,7 @@
         </p>
         <p>
           Fecha:
-          <span>{{notAnswer.date}}</span>
+          <span>{{getFormat(notAnswer.date)}}</span>
         </p>
         <p>
           Gravedad:
@@ -45,10 +45,22 @@
 </template>
 
 <script>
+import { format } from "date-fns";
+
 export default {
   name: "UnansweredConsultsCustom",
   props: {
     notAnswers: Array,
+  },
+  data() {
+    return {
+      format,
+    };
+  },
+  methods: {
+    getFormat(date) {
+      return this.format(new Date(date), "dd-MM-yyyy  HH:mm");
+    },
   },
 };
 </script>
