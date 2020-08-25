@@ -4,7 +4,9 @@
 
     <div v-if="isLoaded">
       <h1>{{ patients.name}}</h1>
-      <img :src="getImageName(patients.image)" />
+
+      <img class="profile" v-if="patients.image" :src="getImageName(patients.image)" />
+      <img class="profile" v-else src="@/assets/default-profile-picture.jpg" alt="Foto de perfil" />
 
       <!--    MODAL PARA VER LA INFO DEL USUARIO -->
 
@@ -148,7 +150,7 @@ export default {
       patients: null,
       seeInfo: false,
       editInfo: false,
-      avatar: "",
+      avatar: null,
       patientId: "",
       newName: "",
       newAddress: "",

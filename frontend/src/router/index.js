@@ -132,6 +132,17 @@ const routes = [
       allowAnon: false
     }
   },
+  /* AnswerConsults */
+  {
+    path: '/consults/:id/answer/',
+    name: 'AnswerConsults',
+    component: () => import('../views/AnswerConsults.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+
   {
     path: '*',
     name: 'Error',

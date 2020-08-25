@@ -4,7 +4,9 @@
 
     <div v-if="isLoaded">
       <h1>{{ doctors.name}}</h1>
-      <img :src="getImageName(doctors.image)" />
+
+      <img class="profile" v-if="doctors.image" :src="getImageName(doctors.image)" />
+      <img class="profile" v-else src="@/assets/default-profile-picture.jpg" alt="Foto de perfil" />
 
       <!-- MODAL PARA VER LOS DATOS -->
 
@@ -187,7 +189,7 @@ export default {
       doctorId: "",
       seeInfo: false,
       editInfo: false,
-      avatar: "",
+      avatar: null,
       newName: "",
       newAddress: "",
       newLocation: "",

@@ -38,7 +38,10 @@
           Documento adjunto:
           <span>{{notAnswer.document}}</span>
         </p>
-        <button>Responder</button>
+
+        <router-link :to="{  name: 'AnswerConsults', params:{ id:notAnswer.id }}">
+          <button>Responder</button>
+        </router-link>
       </li>
     </ul>
   </div>

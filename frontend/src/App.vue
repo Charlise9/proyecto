@@ -57,7 +57,86 @@ export default {
   margin: 2% auto;
   padding: 3rem;
   width: 80%;
-  border: 2px solid #e84a5f;
+  border: 2px solid #42b983;
   border-radius: 12px;
+}
+
+.profile {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid #42b983;
+  display: block;
+  margin: 2rem auto;
+}
+
+/* input:hover {
+  border: 2px solid #42b983;
+  cursor: pointer;
+} */
+input:focus {
+  outline: none;
+}
+button:focus {
+  outline: none;
+}
+button {
+  margin: 1rem;
+  background-color: #42b983;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  border-radius: 12px;
+  transition: all 0.5s;
+}
+button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.cancel {
+  background-color: #1b262c;
+  color: whitesmoke;
+}
+/* input {
+  margin: 0.1rem;
+  border-radius: 12px;
+  border: 2px solid #42b983;
+  width: 300px;
+  text-align: center;
+  display: block;
+}
+
+label {
+  display: inline-block;
+} */
+
+input[type="text"],
+select {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-left: 10rem;
+}
+
+.sendconsult {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.textArea {
+  height: 150px;
 }
 </style>

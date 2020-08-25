@@ -45,15 +45,6 @@ const speciality = [
   "Ginecología",
 ];
 
-let counter = 0;
-
-const picture = [
-  `https://randomuser.me/api/portraits/men/${counter += 1}.jpg`,
-  `https://randomuser.me/api/portraits/women/${counter += 1}.jpg`
-];
-
-const defaultPicture = "https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg";
-
 const seriousness = ["ALTA", "MEDIA", "BAJA"];
 
 let connection;
@@ -164,15 +155,15 @@ async function main() {
     console.log("Creando usuario paciente administrador");
 
     await connection.query(`
-      INSERT INTO users(registration_date, name, email, password, image, role, active, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "Carlos Barrientos", "carlosbarrientosguillen@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "${defaultPicture}", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      INSERT INTO users(registration_date, name, email, password, role, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "Carlos Barrientos", "carlosbarrientosguillen@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
     console.log("Creando usuario anónimo");
 
     await connection.query(`
-      INSERT INTO users(registration_date, name, email, password, image, role, active, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "Anónimo", "carlosbarrientos@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "${defaultPicture}", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      INSERT INTO users(registration_date, name, email, password, role, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "Anónimo", "carlosbarrientos@gmail.com", SHA2("${process.env.DEFAULT_ADMIN_PASSWORD}", 512), "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
     console.log("Metiendo datos de prueba en users");
@@ -189,24 +180,23 @@ async function main() {
       const address = faker.address.streetAddress();
       const location = faker.address.city();
       const phoneNumber = random(600000000, 699999999);
-      const profilePic = picture[random(0, 1)]
 
       await connection.query(`
-      INSERT INTO users(registration_date, name, email, password, dni, social_security_number, birth_date, address, location, phone_number, image, role, active, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${ssNumber}", "${birth}","${address}", "${location}", "${phoneNumber}", "${profilePic}", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      INSERT INTO users(registration_date, name, email, password, dni, social_security_number, birth_date, address, location, phone_number, role, active, last_update, last_auth_update)
+      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${ssNumber}", "${birth}","${address}", "${location}", "${phoneNumber}", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
     }
 
     console.log("Creando usuario médico administrador");
 
     await connection.query(`
-      INSERT INTO doctors(registration_date, name, email, password, collegiate_number, speciality, experience, birth_date, image, role, active, last_update, last_auth_update)
+      INSERT INTO doctors(registration_date, name, email, password, collegiate_number, speciality, experience, birth_date, role, active, last_update, last_auth_update)
       VALUES(UTC_TIMESTAMP, "Ágata Vázquez", "carlosbarrientosguillen@gmail.com", SHA2("${
       process.env.DEFAULT_ADMIN_PASSWORD
       }", 512), "${random(
         1000000000,
         9999999999
-      )}", "Ginecología", "2020-07-24", "1992-04-16","${defaultPicture}", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      )}", "Ginecología", "2020-07-24", "1992-04-16", "admin", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
 
     console.log("Metiendo datos de prueba en doctors");
@@ -224,13 +214,13 @@ async function main() {
       const address = faker.address.streetAddress();
       const location = faker.address.city();
       const phoneNumber = random(600000000, 699999999);
-      const profilePic = picture[random(0, 1)]
+
 
       await connection.query(`
-      INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, image, role, active, last_update, last_auth_update)
+      INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, role, active, last_update, last_auth_update)
       VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${experience}", "${
         speciality[random(0, 3)]
-        }", "${profilePic}", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+        }", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
     `);
     }
 

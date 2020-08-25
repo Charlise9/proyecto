@@ -124,7 +124,7 @@ export default {
     },
     getKindOfUser() {
       const type = localStorage.getItem("KIND_OF_USER");
-      console.log(type);
+      /* console.log(type); */
 
       if (type === "patient") {
         this.iAmUser = true;
@@ -154,4 +154,7 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 </style>

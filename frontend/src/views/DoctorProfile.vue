@@ -5,14 +5,17 @@
     <div v-if="isLoaded">
       <h1>DR/A {{ name }}</h1>
 
+      <img class="profile" v-if="image" :src="getImageName(image)" alt="Foto de perfil" />
+      <img class="profile" v-else src="@/assets/default-profile-picture.jpg" alt="Foto de perfil" />
+
       <p>
         Especialidad:
         <span>{{ speciality }}</span>
       </p>
-      <p>
+      <!-- <p>
         Correo:
         <span>{{ email }}</span>
-      </p>
+      </p>-->
       <p>
         Nº de colegiado:
         <span>{{ collegiate_number }}</span>
@@ -95,7 +98,7 @@ export default {
         // LLAMADA DE AXIOS
         const response = await axios.get("http://localhost:3000/doctors/" + id);
 
-        /* console.log(response.data.data); */
+        console.log(response.data.data);
 
         const doctor = response.data.data.doctor;
         const questions = response.data.data.questions;
@@ -127,6 +130,12 @@ export default {
       return this.formatDistanceToNowStrict(new Date(date), {
         locale: es,
       });
+    },
+    // FUNCIÓN PARA VER LA IMAGEN
+    getImageName(name) {
+      return "http://localhost:3000/uploads/" + name;
+
+      /* console.log(name); */
     },
   },
   created() {
