@@ -8,70 +8,68 @@ import { es } from "date-fns/locale";
 
 // FUNCIÓN PARA LOGIN DE PACIENTE
 export function loginPatient(user, password) {
-    try {
-        axios.post('http://localhost:3000/users/login', {
-            email: user,
-            password: password
+
+    return axios.post('http://localhost:3000/users/login', {
+        email: user,
+        password: password
+    })
+        .then((response) => {
+            console.log(response)
+            // ME GUARDO EL TOKEN
+            setAuthToken(response.data.data.token);
+
+            // ME GUARDO EL ROL
+            const tokenDecoded = jwt(response.data.data.token)
+            localStorage.setItem('ROLE', tokenDecoded.role)
+            console.log(tokenDecoded.role)
+
+            // ME GUARDO EL NOMBRE
+            localStorage.setItem('NAME', tokenDecoded.name)
+            console.log(tokenDecoded.name)
+
+            // ME GUARDO EL ID
+            localStorage.setItem('ID', tokenDecoded.id)
+            console.log(tokenDecoded.id)
+
+            // ME GUARDO EL TIPO DE USUARIO
+            localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
+            console.log(tokenDecoded.kind_of_user)
         })
-            .then((response) => {
-                console.log(response)
-                // ME GUARDO EL TOKEN
-                setAuthToken(response.data.data.token);
+        .catch(error => { console.log(error) })
 
-                // ME GUARDO EL ROL
-                const tokenDecoded = jwt(response.data.data.token)
-                localStorage.setItem('ROLE', tokenDecoded.role)
-                console.log(tokenDecoded.role)
-
-                // ME GUARDO EL NOMBRE
-                localStorage.setItem('NAME', tokenDecoded.name)
-                console.log(tokenDecoded.name)
-
-                // ME GUARDO EL ID
-                localStorage.setItem('ID', tokenDecoded.id)
-                console.log(tokenDecoded.id)
-
-                // ME GUARDO EL TIPO DE USUARIO
-                localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
-                console.log(tokenDecoded.kind_of_user)
-            });
-    } catch (error) {
-        console.error;
-    }
 }
 
 // FUNCIÓN PARA LOGIN DE MÉDICO
 export function loginDoctor(user, password) {
-    try {
-        axios.post('http://localhost:3000/doctors/login', {
-            email: user,
-            password: password
+
+    return axios.post('http://localhost:3000/doctors/login', {
+        email: user,
+        password: password
+    })
+        .then((response) => {
+            console.log(response)
+            // ME GUARDO EL TOKEN
+            setAuthToken(response.data.data.token);
+
+            // ME GUARDO EL ROL
+            const tokenDecoded = jwt(response.data.data.token)
+            localStorage.setItem('ROLE', tokenDecoded.role)
+            console.log(tokenDecoded.role)
+
+            // ME GUARDO EL NOMBRE
+            localStorage.setItem('NAME', tokenDecoded.name)
+            console.log(tokenDecoded.name)
+
+            // ME GUARDO EL ID
+            localStorage.setItem('ID', tokenDecoded.id)
+            console.log(tokenDecoded.id)
+
+            // ME GUARDO EL TIPO DE USUARIO
+            localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
+            console.log(tokenDecoded.kind_of_user)
         })
-            .then((response) => {
-                console.log(response)
-                // ME GUARDO EL TOKEN
-                setAuthToken(response.data.data.token);
+        .catch(error => { console.log(error) });
 
-                // ME GUARDO EL ROL
-                const tokenDecoded = jwt(response.data.data.token)
-                localStorage.setItem('ROLE', tokenDecoded.role)
-                console.log(tokenDecoded.role)
-
-                // ME GUARDO EL NOMBRE
-                localStorage.setItem('NAME', tokenDecoded.name)
-                console.log(tokenDecoded.name)
-
-                // ME GUARDO EL ID
-                localStorage.setItem('ID', tokenDecoded.id)
-                console.log(tokenDecoded.id)
-
-                // ME GUARDO EL TIPO DE USUARIO
-                localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
-                console.log(tokenDecoded.kind_of_user)
-            })
-    } catch (error) {
-        console.error;
-    }
 }
 
 // FUNCIÓN PARA GUARDAR EN LOCALSTORAGE EL JSONWEBTOKEN
@@ -131,3 +129,4 @@ export function logout() {
 export function formatExperience(date) {
     return formatDistanceToNow(new Date(date), { locale: es });
 }
+

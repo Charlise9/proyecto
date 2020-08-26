@@ -1,7 +1,15 @@
 <template>
   <div id="app">
-    <menucustom />
-    <router-view />
+    <menucustom
+      :username="username"
+      :logged="logged"
+      :hide="hide"
+      :canLogout="canLogout"
+      :userId="userId"
+      :iAmUser="iAmUser"
+      :iAmDoctor="iAmDoctor"
+    />
+    <router-view @login="getName" />
     <footercustom />
   </div>
 </template>
@@ -9,12 +17,51 @@
 <script>
 import menucustom from "@/components/MenuCustom.vue";
 import footercustom from "@/components/FooterCustom.vue";
+import { getId, isLoggedIn } from "@/helpers/utils";
 
 export default {
   name: "App",
   components: {
     menucustom,
     footercustom,
+  },
+  data() {
+    return {
+      username: "",
+      logged: false,
+      hide: true,
+      canLogout: false,
+      userId: "",
+      iAmUser: false,
+      iAmDoctor: false,
+    };
+  },
+  methods: {
+    getName() {
+      this.username = localStorage.getItem("NAME");
+      this.logged = isLoggedIn();
+      this.hide = false;
+      this.canLogout = true;
+      this.userId = getId();
+
+      const type = localStorage.getItem("KIND_OF_USER");
+
+      if (type === "patient") {
+        this.iAmUser = true;
+        this.iAmDoctor = false;
+      } else if (type === "doctor") {
+        this.iAmDoctor = true;
+        this.iAmUser = false;
+      } else {
+        this.iAmDoctor = false;
+        this.iAmUser = false;
+        this.hide = true;
+        this.canLogout = false;
+      }
+    },
+  },
+  created() {
+    this.getName();
   },
 };
 </script>
@@ -114,6 +161,7 @@ label {
 } */
 
 input[type="text"],
+input[type="search"],
 select {
   width: 70%;
   padding: 12px 20px;

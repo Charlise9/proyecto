@@ -64,13 +64,16 @@ export default {
       if (this.userPatient === "" || this.passwordPatient === "") {
         alert("Te faltan datos.");
       } else {
-        console.log(this.userPatient, this.passwordPatient);
-        loginPatient(this.userPatient, this.passwordPatient);
-
-        setTimeout(() => {
+        /* console.log(this.userPatient, this.passwordPatient); */
+        loginPatient(this.userPatient, this.passwordPatient).then(() => {
           this.$router.push("/");
+
+          this.$emit("login");
+        });
+
+        /* setTimeout(() => {
           location.reload();
-        }, 500);
+        }, 500); */
       }
     },
     // FUNCIÓN PARA ENVIAR UN CÓDIGO DE RECUPERACIÓN DE CONTRASEÑA

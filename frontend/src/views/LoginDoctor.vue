@@ -64,13 +64,12 @@ export default {
       if (this.userDoctor === "" || this.passwordDoctor === "") {
         alert("Te faltan datos.");
       } else {
-        console.log(this.userDoctor, this.passwordDoctor);
-        loginDoctor(this.userDoctor, this.passwordDoctor);
-
-        setTimeout(() => {
+        /* console.log(this.userDoctor, this.passwordDoctor); */
+        loginDoctor(this.userDoctor, this.passwordDoctor).then(() => {
           this.$router.push("/");
-          location.reload();
-        }, 500);
+
+          this.$emit("login");
+        });
       }
     },
     // FUNCIÓN PARA ENVIAR UN CÓDIGO DE RECUPERACIÓN DE CONTRASEÑA

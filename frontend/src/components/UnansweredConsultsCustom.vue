@@ -44,6 +44,8 @@
         </router-link>
       </li>
     </ul>
+
+    <button @click="goBack()">Volver</button>
   </div>
 </template>
 
@@ -63,6 +65,9 @@ export default {
   methods: {
     getFormat(date) {
       return this.format(new Date(date), "dd-MM-yyyy  HH:mm");
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };

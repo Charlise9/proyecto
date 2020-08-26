@@ -55,6 +55,10 @@
     <div v-else>
       <spinner />
     </div>
+
+    <div>
+      <button @click="goBack()">Volver</button>
+    </div>
   </div>
 </template>
 
@@ -136,6 +140,9 @@ export default {
       return "http://localhost:3000/uploads/" + name;
 
       /* console.log(name); */
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
   created() {

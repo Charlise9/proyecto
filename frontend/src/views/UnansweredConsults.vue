@@ -38,7 +38,7 @@ export default {
           }
         );
 
-        console.log(response.data.data);
+        /* console.log(response.data.data); */
 
         this.notAnswers = response.data.data;
       } catch (error) {
