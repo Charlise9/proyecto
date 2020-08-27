@@ -1,6 +1,6 @@
 const { getConnection } = require("../../db");
 
-const { /* formatDateToDB, */ formatBirthdayToDB } = require("../../helpers");
+const { formatBirthdayToDB } = require("../../helpers");
 
 async function getUser(req, res, next) {
   let connection;

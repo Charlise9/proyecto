@@ -72,6 +72,7 @@
           <input type="text" id="Location" placeholder="Localización" v-model="newLocation" />
           <label for="Dni">DNI:</label>
           <input type="text" id="Dni" placeholder="DNI" v-model="newDni" />
+
           <label for="BirthDate">Fecha de nacimiento:</label>
           <input
             type="date"
@@ -88,6 +89,7 @@
           />
           <label for="Email">Email:</label>
           <input type="email" id="Email" placeholder="Email" v-model="newEmail" />
+
           <label for="ProfilePic">Foto de perfil:</label>
           <input type="file" id="ProfilePic" ref="avatar" @change="profileImage" />
 
@@ -203,6 +205,7 @@ export default {
       repeatNewPassword: "",
       seeStatistics: false,
       isLoaded: false,
+      newAvatar: null,
       format,
       formatDistanceToNowStrict,
     };
@@ -224,7 +227,6 @@ export default {
             confirmButtonText: "Ok",
             onClose: () => {
               this.updateInfo();
-              location.reload();
             },
           });
         }
@@ -271,6 +273,10 @@ export default {
       return this.format(new Date(date), "dd-MM-yyyy");
     },
 
+    getFormatToDB(date) {
+      return this.format(new Date(date), "yyyy-MM-dd");
+    },
+
     // FUNCIÓN PARA FORMATEAR LA EXPERIENCIA
 
     getFormatExperience(date) {
@@ -288,7 +294,7 @@ export default {
 
     // FUNCIÓN PARA SUBIR IMÁGENES
     async profileImage() {
-      this.avatar = await this.$refs.avatar.files[0];
+      this.newAvatar = await this.$refs.avatar.files[0];
     },
 
     // FUNCIÓN PARA VER EL PERFIL DEL MÉDICO
@@ -306,7 +312,7 @@ export default {
           }
         );
 
-        /* console.log(response.data.data); */
+        console.log(response.data.data);
 
         const info = response.data.data;
 
@@ -319,7 +325,7 @@ export default {
         this.newAddress = info.doctor.address;
         this.newLocation = info.doctor.location;
         this.newDni = info.doctor.dni;
-        this.newBirthDate = info.doctor.birth_date;
+        this.newBirthDate = this.getFormatToDB(info.doctor.birth_date);
         this.newPhoneNumber = info.doctor.phone_number;
         this.newEmail = info.doctor.email;
 
@@ -341,7 +347,9 @@ export default {
         formData.append("dni", this.newDni);
         formData.append("birthDate", this.newBirthDate);
         formData.append("phoneNumber", this.newPhoneNumber);
-        formData.append("avatar", this.avatar);
+        if (this.newAvatar !== null) {
+          formData.append("avatar", this.newAvatar);
+        }
 
         // LLAMADA DE AXIOS
         const response = await axios.put(
@@ -354,8 +362,9 @@ export default {
           }
         );
 
-        console.log(response.data.data);
+        /* onsole.log(response.data.data); */
 
+        this.getProfile();
         this.editInfo = false;
       } catch (error) {
         console.log(error);

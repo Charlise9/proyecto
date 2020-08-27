@@ -1,5 +1,7 @@
 const { getConnection } = require("../../db");
 
+const { formatBirthdayToDB } = require("../../helpers");
+
 async function getDoctor(req, res, next) {
   let connection;
 
@@ -38,6 +40,7 @@ async function getDoctor(req, res, next) {
       status: "ok",
       data: {
         doctor: result[0],
+        birth_date: formatBirthdayToDB(result[0].birth_date),
         questions: questions[0],
         statistics: statistics[0],
       },

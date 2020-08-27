@@ -22,6 +22,8 @@
     </div>-->
 
     <doctorconsults :consults="consults" />
+
+    <button @click="goBack()">Volver</button>
   </div>
 </template>
 
@@ -65,6 +67,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
   created() {

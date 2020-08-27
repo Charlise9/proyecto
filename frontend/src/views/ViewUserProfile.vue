@@ -88,15 +88,9 @@
           <label for="Email">Email:</label>
           <input type="email" id="Email" placeholder="Email" v-model="newEmail" />
 
-          <div class="profilePic">
-            <label for="ProfilePic">Foto de perfil:</label>
-            <input type="file" id="ProfilePic" ref="avatar" @change="profileImage" />
+          <label for="ProfilePic">Foto de perfil:</label>
+          <input type="file" id="ProfilePic" ref="avatar" @change="profileImage" />
 
-            <label for="ProfilePic">
-              <span v-if="avatar === null">Seleccionar archivo</span>
-              <span v-else>{{ avatar.name }}</span>
-            </label>
-          </div>￼
           <button @click="editInfo =! editInfo">Cancelar</button>
           <button @click="sweetalertEdit()">Confirmar cambios</button>
         </div>
@@ -172,6 +166,7 @@ export default {
       newPassword: "",
       repeatNewPassword: "",
       isLoaded: false,
+      newAvatar: null,
       format,
     };
   },
@@ -255,7 +250,7 @@ export default {
 
     // FUNCIÓN PARA SUBIR IMÁGENES
     async profileImage() {
-      this.avatar = await this.$refs.avatar.files[0];
+      this.newAvatar = await this.$refs.avatar.files[0];
     },
 
     // FUNCIÓN PARA VER EL PERFIL DE USUARIO
@@ -270,9 +265,7 @@ export default {
           },
         });
 
-        /* console.log(response.data.data); */
-
-        /* response.data.data ? this. */
+        console.log(response.data.data);
 
         this.patients = response.data.data;
 
@@ -285,9 +278,6 @@ export default {
         this.newSocialSecurityNumber = response.data.data.socialSecurityNumber;
         this.newPhoneNumber = response.data.data.phoneNumber;
         this.newEmail = response.data.data.email;
-        /* this.avatar = response.data.data.image; */
-
-        /*  console.log(this.avatar); */
 
         this.isLoaded = true;
       } catch (error) {
@@ -308,7 +298,9 @@ export default {
         formData.append("birthDate", this.newBirthDate);
         formData.append("socialSecurityNumber", this.newSocialSecurityNumber);
         formData.append("phoneNumber", this.newPhoneNumber);
-        formData.append("avatar", this.avatar);
+        if (this.newAvatar !== null) {
+          formData.append("avatar", this.newAvatar);
+        }
 
         // LLAMADA DE AXIOS
         const response = await axios.put(
@@ -321,11 +313,8 @@ export default {
           }
         );
 
-        console.log(response.data.data);
-
-        /* this.editInfo = false; */
-
-        location.reload();
+        this.getProfile();
+        this.editInfo = false;
       } catch (error) {
         console.log(error);
       }
