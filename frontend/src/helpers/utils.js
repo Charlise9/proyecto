@@ -1,6 +1,6 @@
 import jwt from 'jwt-decode';
 import axios from 'axios';
-import { format, formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 
 /* import { es } from 'date-fns/locale'; */
@@ -14,26 +14,26 @@ export function loginPatient(user, password) {
         password: password
     })
         .then((response) => {
-            console.log(response)
+            /* console.log(response) */
             // ME GUARDO EL TOKEN
             setAuthToken(response.data.data.token);
 
             // ME GUARDO EL ROL
             const tokenDecoded = jwt(response.data.data.token)
             localStorage.setItem('ROLE', tokenDecoded.role)
-            console.log(tokenDecoded.role)
+            /* console.log(tokenDecoded.role) */
 
             // ME GUARDO EL NOMBRE
             localStorage.setItem('NAME', tokenDecoded.name)
-            console.log(tokenDecoded.name)
+            /* console.log(tokenDecoded.name) */
 
             // ME GUARDO EL ID
             localStorage.setItem('ID', tokenDecoded.id)
-            console.log(tokenDecoded.id)
+            /* console.log(tokenDecoded.id) */
 
             // ME GUARDO EL TIPO DE USUARIO
             localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
-            console.log(tokenDecoded.kind_of_user)
+            /* console.log(tokenDecoded.kind_of_user) */
         })
         .catch(error => { console.log(error) })
 
@@ -54,19 +54,19 @@ export function loginDoctor(user, password) {
             // ME GUARDO EL ROL
             const tokenDecoded = jwt(response.data.data.token)
             localStorage.setItem('ROLE', tokenDecoded.role)
-            console.log(tokenDecoded.role)
+            /* console.log(tokenDecoded.role) */
 
             // ME GUARDO EL NOMBRE
             localStorage.setItem('NAME', tokenDecoded.name)
-            console.log(tokenDecoded.name)
+            /* console.log(tokenDecoded.name) */
 
             // ME GUARDO EL ID
             localStorage.setItem('ID', tokenDecoded.id)
-            console.log(tokenDecoded.id)
+            /* console.log(tokenDecoded.id) */
 
             // ME GUARDO EL TIPO DE USUARIO
             localStorage.setItem('KIND_OF_USER', tokenDecoded.kind_of_user)
-            console.log(tokenDecoded.kind_of_user)
+            /* console.log(tokenDecoded.kind_of_user) */
         })
         .catch(error => { console.log(error) });
 

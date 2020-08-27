@@ -48,8 +48,8 @@ export default {
   name: "LoginPatient",
   data() {
     return {
-      userPatient: "",
-      passwordPatient: "",
+      userPatient: "carlosbarrientosguillen@gmail.com",
+      passwordPatient: "loremipsum",
       recuperationMail: "",
       seeRecoverModal: false,
       recoverCode: "",
@@ -87,7 +87,7 @@ export default {
           }
         );
 
-        console.log(response.data.data);
+        /* console.log(response.data.data); */
 
         this.recuperationMail = "";
         this.seeRecoverModal = false;
@@ -111,7 +111,7 @@ export default {
             }
           );
 
-          console.log(response.data);
+          /* console.log(response.data); */
 
           this.recoverCode = "";
           this.newPassword = "";

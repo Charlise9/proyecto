@@ -14,15 +14,12 @@
       <p v-if="logged">{{ username }}</p>
       <!-- <p v-show="loggedDoctor">{{doctorname}}</p> -->
 
-      <button @click="logoutUser()" v-show="canLogout">Logout</button>
+      <button @click="$emit('logout')" v-show="canLogout">Logout</button>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { logout, getId, getAuthToken, isLoggedIn } from "../helpers/utils";
-
 export default {
   name: "MenuCustom",
   props: {
@@ -33,62 +30,6 @@ export default {
     userId: String,
     iAmUser: Boolean,
     iAmDoctor: Boolean,
-  },
-  data() {
-    return {
-      /*  userId: "", */
-      /* hide: true, */
-      /* iAmUser: false,
-      iAmDoctor: false, */
-      /* canLogout: false, */
-    };
-  },
-  methods: {
-    logoutUser() {
-      this.hide = true;
-      this.canLogout = false;
-      logout();
-      this.$router.push("/");
-
-      /* setTimeout(() => {
-        location.reload();
-      }, 1); */
-    },
-
-    /* getUserId() {
-      this.userId = getId();
-    }, */
-
-    /* getLogin() {
-      this.logged = isLoggedIn();
-      this.hide = false;
-      this.canLogout = true;
-    }, */
-    /* getKindOfUser() {
-      const type = localStorage.getItem("KIND_OF_USER");
-
-      if (type === "patient") {
-        this.iAmUser = true;
-        this.iAmDoctor = false;
-      } else if (type === "doctor") {
-        this.iAmDoctor = true;
-        this.iAmUser = false;
-      } else {
-        this.iAmDoctor = false;
-        this.iAmUser = false;
-        this.hide = true;
-        this.canLogout = false;
-      }
-    }, */
-  },
-  created() {
-    /* this.setUserName();
-    this.setDoctorName();
-    this.getLoginUser();
-    this.getLoginDoctor(); */
-    /* this.getLogin(); */
-    /* this.getKindOfUser(); */
-    /* this.getUserId(); */
   },
 };
 </script>

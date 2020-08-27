@@ -8,6 +8,7 @@
       :userId="userId"
       :iAmUser="iAmUser"
       :iAmDoctor="iAmDoctor"
+      @logout="logoutUser"
     />
     <router-view @login="getName" />
     <footercustom />
@@ -17,7 +18,7 @@
 <script>
 import menucustom from "@/components/MenuCustom.vue";
 import footercustom from "@/components/FooterCustom.vue";
-import { getId, isLoggedIn } from "@/helpers/utils";
+import { logout, getId, isLoggedIn } from "@/helpers/utils";
 
 export default {
   name: "App",
@@ -57,6 +58,19 @@ export default {
         this.iAmUser = false;
         this.hide = true;
         this.canLogout = false;
+      }
+    },
+    logoutUser() {
+      this.hide = true;
+      this.canLogout = false;
+      this.logged = false;
+      this.iAmDoctor = false;
+      this.iAmUser = false;
+      logout();
+      /* this.$router.push("/"); */
+
+      if (this.$router.name !== "Home") {
+        this.$router.push({ name: "Home" });
       }
     },
   },

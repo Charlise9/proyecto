@@ -87,9 +87,16 @@
           />
           <label for="Email">Email:</label>
           <input type="email" id="Email" placeholder="Email" v-model="newEmail" />
-          <label for="ProfilePic">Foto de perfil:</label>
-          <input type="file" id="ProfilePic" ref="avatar" @change="profileImage" />
-          ￼
+
+          <div class="profilePic">
+            <label for="ProfilePic">Foto de perfil:</label>
+            <input type="file" id="ProfilePic" ref="avatar" @change="profileImage" />
+
+            <label for="ProfilePic">
+              <span v-if="avatar === null">Seleccionar archivo</span>
+              <span v-else>{{ avatar.name }}</span>
+            </label>
+          </div>￼
           <button @click="editInfo =! editInfo">Cancelar</button>
           <button @click="sweetalertEdit()">Confirmar cambios</button>
         </div>
@@ -191,6 +198,7 @@ export default {
             confirmButtonText: "Ok",
             onClose: () => {
               this.updateInfo();
+              this.editInfo = false;
             },
           });
         }
@@ -277,6 +285,9 @@ export default {
         this.newSocialSecurityNumber = response.data.data.socialSecurityNumber;
         this.newPhoneNumber = response.data.data.phoneNumber;
         this.newEmail = response.data.data.email;
+        /* this.avatar = response.data.data.image; */
+
+        /*  console.log(this.avatar); */
 
         this.isLoaded = true;
       } catch (error) {
@@ -312,7 +323,7 @@ export default {
 
         console.log(response.data.data);
 
-        this.editInfo = false;
+        /* this.editInfo = false; */
 
         location.reload();
       } catch (error) {
