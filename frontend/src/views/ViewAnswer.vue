@@ -3,6 +3,8 @@
     <vue-headful title="Hack A DOCTOR | Respuesta" />
 
     <viewanswercard :answers="answers" />
+
+    <button @click="goBack()">Volver</button>
   </div>
 </template>
 
@@ -19,6 +21,7 @@ export default {
   data() {
     return {
       answers: [],
+      idPatient: "",
     };
   },
   methods: {
@@ -37,12 +40,17 @@ export default {
           }
         );
 
-        /*  console.log(response.data.data); */
+        /* console.log(response.data.data); */
 
         this.answers = response.data.data;
+
+        /* this.idPatient = response.data.data[0].patient_id; */
       } catch (error) {
         console.log(eror);
       }
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
   created() {

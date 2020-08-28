@@ -81,6 +81,10 @@ export default {
 </script>
 
 <style>
+ul {
+  list-style: none;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

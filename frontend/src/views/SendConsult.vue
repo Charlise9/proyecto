@@ -30,20 +30,21 @@
       v-model="description"
     />
 
-    <!-- <label for="ConsultPic">Adjuntar imagen:</label>
+    <label for="ConsultPic">Adjuntar imagen:</label>
     <input type="file" id="ConsultPic" ref="image" @change="consultImage" />
 
-    <label for="ConsultDoc">Adjuntar imagen:</label>
-    <input type="file" id="ConsultDoc" ref="document" @change="consultDocument" />-->
+    <label for="ConsultDoc">Adjuntar documento:</label>
+    <input type="file" id="ConsultDoc" ref="document" @change="consultDocument" />
 
-    <button class="cancel">Cancelar</button>
-    <button @click="sendConsult()">Enviar</button>
+    <button class="cancel" @click="goBack()">Cancelar</button>
+    <button @click="sweetalertNewConsult()">Enviar</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { getAuthToken } from "../helpers/utils";
+import Swal from "sweetalert2";
 
 export default {
   name: "SendConsult",
@@ -53,11 +54,32 @@ export default {
       sypmtoms: null,
       medicalHistory: null,
       description: null,
-      /* image: null,
-      document: null, */
+      image: null,
+      document: null,
     };
   },
   methods: {
+    sweetalertNewConsult() {
+      Swal.fire({
+        text: "Vas a enviar una consulta, ¿estás seguro?",
+        icon: "question",
+        confirmButtonText: "Sí",
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            title: "¡CONSULTA ENVIADA!",
+            icon: "success",
+            confirmButtonText: "Ok",
+            onClose: () => {
+              this.sendConsult();
+              this.goBack();
+            },
+          });
+        }
+      });
+    },
+
     // FUNCIÓN PARA SUBIR IMÁGENES
     async consultImage() {
       this.image = await this.$refs.image.files[0];
@@ -78,8 +100,12 @@ export default {
         formData.append("symptoms", this.sypmtoms);
         formData.append("medicalHistory", this.medicalHistory);
         formData.append("description", this.description);
-        /* formData.append("image", this.image);
-        formData.append("document", this.document); */
+        if (this.image !== null) {
+          formData.append("image", this.image);
+        }
+        if (this.document !== null) {
+          formData.append("document", this.document);
+        }
 
         // LLAMADA DE AXIOS
         const response = await axios.post(
@@ -92,10 +118,13 @@ export default {
           }
         );
 
-        /* console.log(response.data.data); */
+        console.log(response.data.data);
       } catch (error) {
         console.log(error);
       }
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };

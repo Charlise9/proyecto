@@ -21,7 +21,7 @@
       </select>
     </div>
 
-    <doctorscard v-on:doctorsList="getDoctors" :doctors="doctors" />
+    <doctorscard @doctorsList="getDoctors" :doctors="doctors" />
   </div>
 </template>
 

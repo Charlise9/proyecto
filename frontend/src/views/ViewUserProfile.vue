@@ -265,7 +265,7 @@ export default {
           },
         });
 
-        console.log(response.data.data);
+        /* console.log(response.data.data); */
 
         this.patients = response.data.data;
 

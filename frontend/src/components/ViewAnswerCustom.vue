@@ -52,8 +52,6 @@
         </router-link>
       </li>
     </ul>
-
-    <button @click="goBack()">Volver</button>
   </div>
 </template>
 
@@ -64,19 +62,23 @@ export default {
   name: "ViewAnswerCustom.vue",
   props: {
     answers: Array,
+    idPatient: String,
   },
   data() {
     return {
       format,
-      canVote: true,
     };
+  },
+  computed: {
+    canVote() {
+      const idUser = localStorage.getItem("ID");
+      console.log(idUser);
+      return this.answers[0].patient_id === parseInt(idUser);
+    },
   },
   methods: {
     getFormat(date) {
       return this.format(new Date(date), "dd-MM-yyyy  HH:mm");
-    },
-    goBack() {
-      this.$router.go(-1);
     },
     rateFormat(vote) {
       if (vote === 0) {
@@ -85,17 +87,23 @@ export default {
         return "Positivo";
       }
     },
-    voteAnswer() {
+    /* voteAnswer(index) {
       const idUser = localStorage.getItem("ID");
-      if (answer.patient_id === idUser) {
+      if (this.answers[index].patient_id === idUser) {
         this.canVote = true;
       } else {
         this.canVote = false;
       }
-    },
+    }, */
+
+    /* canVote(index) {
+      const idUser = localStorage.getItem("ID");
+      return this.answers[index].patient_id === idUSer;
+    }, */
   },
+
   created() {
-    this.voteAnswer();
+    /* this.voteAnswer(); */
   },
 };
 </script>

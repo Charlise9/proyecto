@@ -4,7 +4,7 @@
 
     <h1>Historial de consultas</h1>
 
-    <!-- <div>
+    <div>
       <p>Ordenar:</p>
       <select v-model="order">
         <option value></option>
@@ -19,7 +19,9 @@
         <option value="asc">Ascendente</option>
         <option value="desc">Descendente</option>
       </select>
-    </div>-->
+    </div>
+
+    <button @click="getConsults()">Aplicar filtros</button>
 
     <doctorconsults :consults="consults" />
 
@@ -40,8 +42,8 @@ export default {
   data() {
     return {
       consults: [],
-      order: "",
-      direction: "",
+      order: "date",
+      direction: "asc",
     };
   },
   methods: {
@@ -52,11 +54,10 @@ export default {
       try {
         // LLAMADA DE AXIOS A SERVER
         const response = await axios.get(
-          `http://localhost:3000/doctors/${id}/consults`,
+          `http://localhost:3000/doctors/${id}/consults?order=${this.order}&direction=${this.direction}`,
           {
             headers: {
               Authorization: `${getAuthToken()}`,
-              /* order: */
             },
           }
         );
