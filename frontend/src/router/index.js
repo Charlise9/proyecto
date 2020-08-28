@@ -124,6 +124,15 @@ const routes = [
     }
   },
   {
+    path: '/consults-history/answer/:id/vote-answer',
+    name: 'VoteAnswer',
+    component: () => import('../views/VoteAnswer.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: false
+    }
+  },
+  {
     path: '/viewdoctorprofile/:id/unanswered-consults/',
     name: 'UnansweredConsults',
     component: () => import('../views/UnansweredConsults.vue'),

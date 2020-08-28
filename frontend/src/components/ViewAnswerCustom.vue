@@ -40,12 +40,16 @@
         </p>
         <p>
           ¿Fue efectivo el tratamiento?:
-          <span>{{answer.rate}}</span>
+          <span>{{rateFormat(answer.rate)}}</span>
         </p>
         <p>
           Resultado verificado:
           <span>{{answer.verified}}</span>
         </p>
+
+        <router-link v-if="canVote" :to="{  name: 'VoteAnswer', params:{ id:answer.answer_id }}">
+          <button>Votar respuesta</button>
+        </router-link>
       </li>
     </ul>
 
@@ -64,6 +68,7 @@ export default {
   data() {
     return {
       format,
+      canVote: true,
     };
   },
   methods: {
@@ -73,6 +78,24 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
+    rateFormat(vote) {
+      if (vote === 0) {
+        return "Negativo";
+      } else {
+        return "Positivo";
+      }
+    },
+    voteAnswer() {
+      const idUser = localStorage.getItem("ID");
+      if (answer.patient_id === idUser) {
+        this.canVote = true;
+      } else {
+        this.canVote = false;
+      }
+    },
+  },
+  created() {
+    this.voteAnswer();
   },
 };
 </script>

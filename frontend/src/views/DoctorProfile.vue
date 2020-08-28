@@ -44,7 +44,7 @@
       </p>
 
       <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
-        <button v-show="logged">Ver historial de consultas</button>
+        <button v-if="logged">Ver historial de consultas</button>
       </router-link>
 
       <router-link :to="{  name: 'SendConsult', params:{ id:doctorId }}">
