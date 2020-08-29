@@ -28,7 +28,7 @@ async function listDoctors(req, res, next) {
     if (search) {
       queryResults = await connection.query(
         `   
-            SELECT doctors.id, doctors.name, doctors.experience, doctors.speciality
+            SELECT doctors.id, doctors.name, doctors.experience, doctors.speciality, doctors.image
             FROM doctors
             WHERE name LIKE ? OR speciality LIKE ?
             ORDER BY ${orderBy} ${orderDirection}
@@ -37,7 +37,7 @@ async function listDoctors(req, res, next) {
       );
     } else {
       queryResults = await connection.query(
-        `SELECT doctors.id, doctors.name, doctors.experience, doctors.speciality
+        `SELECT doctors.id, doctors.name, doctors.experience, doctors.speciality, doctors.image
         FROM doctors
         ORDER BY ${orderBy} ${orderDirection}`
       );

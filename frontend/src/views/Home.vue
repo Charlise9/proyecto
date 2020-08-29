@@ -54,7 +54,7 @@ export default {
           },
         });
 
-        /* console.log(response.data); */
+        console.log(response.data);
 
         this.doctors = response.data.data;
       } catch (error) {

@@ -200,7 +200,7 @@ async function main() {
       `);
 
     console.log("Metiendo datos de prueba en doctors");
-    const doctors = 20;
+    const doctors = 23;
 
     for (let index = 0; index < doctors; index++) {
       const name = faker.name.findName();
