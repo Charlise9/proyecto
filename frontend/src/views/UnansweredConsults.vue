@@ -4,6 +4,8 @@
     <h1>Consultas pendientes de respuesta</h1>
 
     <unansweredcard :notAnswers="notAnswers" />
+
+    <button @click="goBack()">Volver</button>
   </div>
 </template>
 
@@ -44,6 +46,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    goBack() {
+      this.$router.go(-1);
     },
   },
   created() {

@@ -11,8 +11,10 @@
     <label for="Observations">Observaciones:</label>
     <input type="text" id="Observations" placeholder="Observaciones" v-model="observations" />
 
-    <button class="cancel" @click="goBack()">Cancelar</button>
-    <button @click="sweetalertAnswer()">Responder</button>
+    <div class="buttons">
+      <button class="cancel" @click="goBack()">Cancelar</button>
+      <button @click="sweetalertAnswer()">Responder</button>
+    </div>
   </div>
 </template>
 

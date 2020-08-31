@@ -23,7 +23,9 @@
 
     <patientconsults :consults="consults" />
 
-    <button @click="goBack()">Volver</button>
+    <router-link :to="{  name: 'ViewUserProfile', params:{ id:userId} }">
+      <button>Volver</button>
+    </router-link>
   </div>
 </template>
 
@@ -42,8 +44,10 @@ export default {
       consults: [],
       order: "",
       direction: "",
+      userId: "",
     };
   },
+
   methods: {
     // FUNCIÓN PARA VER EL HISTORIAL DE CONSULTAS
     async getConsults(id) {
@@ -64,6 +68,7 @@ export default {
         /* console.log(response.data.data); */
 
         this.consults = response.data.data;
+        this.userId = id;
       } catch (error) {
         console.log(error);
       }

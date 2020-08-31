@@ -85,7 +85,9 @@ async function editDoctor(req, res, next) {
 
       // Verificamos de nuevo el email recibido
       const registrationCode = randomString(40);
-      const validationURL = `${process.env.PUBLIC_HOST}/doctors/validate/${registrationCode}`;
+      /* const validationURL = `${process.env.PUBLIC_HOST}/doctors/validate/${registrationCode}`; */
+      const validationURL = `${process.env.FRONTEND_URL}/doctor-validate-mail?${registrationCode}`;
+
 
       //Enviamos la url anterior por mail
       try {

@@ -36,8 +36,10 @@
     <label for="ConsultDoc">Adjuntar documento:</label>
     <input type="file" id="ConsultDoc" ref="document" @change="consultDocument" />
 
-    <button class="cancel" @click="goBack()">Cancelar</button>
-    <button @click="sweetalertNewConsult()">Enviar</button>
+    <div class="buttons">
+      <button class="cancel" @click="goBack()">Cancelar</button>
+      <button @click="sweetalertNewConsult()">Enviar</button>
+    </div>
   </div>
 </template>
 

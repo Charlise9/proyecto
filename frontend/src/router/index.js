@@ -88,6 +88,15 @@ const routes = [
     }
   },
   {
+    path: '/patient-validate-mail',
+    name: 'PatientMailValidation',
+    component: () => import('../views/PatientMailValidation.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: true
+    }
+  },
+  {
     path: '/doctor-register',
     name: 'DoctorRegister',
     component: () => import('../views/DoctorRegister.vue'),
@@ -97,7 +106,16 @@ const routes = [
     }
   },
   {
-    path: '/profile/consults-history/:id',
+    path: '/doctor-validate-mail',
+    name: 'DoctorMailValidation',
+    component: () => import('../views/DoctorMailValidation.vue'),
+    meta: {
+      // RUTA PÚBLICA
+      allowAnon: true
+    }
+  },
+  {
+    path: '/doctor-profile/consults-history/:id',
     name: 'DoctorConsultsHistory',
     component: () => import('../views/DoctorConsultsHistory.vue'),
     meta: {
@@ -106,7 +124,7 @@ const routes = [
     }
   },
   {
-    path: '/profile/consults-history/:id',
+    path: '/patient-profile/consults-history/:id',
     name: 'PatientConsultsHistory',
     component: () => import('../views/PatientConsultsHistory.vue'),
     meta: {

@@ -10,7 +10,11 @@
     <input type="text" v-model="dni" placeholder="DNI" />
     <input type="number" v-model="socialSecurityNumber" placeholder="Nº de la Seguridad Social" />
 
-    <button @click="validatingData()">Registrarse</button>
+    <div class="buttons">
+      <button class="cancel" @click="goBack()">Cancelar</button>
+
+      <button @click="validatingData()">Registrarse</button>
+    </div>
   </div>
 </template>
 
@@ -105,9 +109,15 @@ export default {
         }
       }
     },
+    goBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
 
 <style scoped>
+.buttons {
+  display: block;
+}
 </style>

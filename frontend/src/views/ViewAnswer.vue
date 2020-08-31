@@ -5,6 +5,14 @@
     <viewanswercard :answers="answers" />
 
     <button @click="goBack()">Volver</button>
+
+    <!-- <router-link :to="{  name: 'PatientConsultsHistory', params:{ id:idPatient }}">
+      <button>Volver (paciente)</button>
+    </router-link>-->
+
+    <!-- <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
+      <button>Volver (doctor)</button>
+    </router-link>-->
   </div>
 </template>
 

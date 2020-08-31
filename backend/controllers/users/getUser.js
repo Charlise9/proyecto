@@ -12,7 +12,11 @@ async function getUser(req, res, next) {
 
     const [result] = await connection.query(
       `
-        SELECT id, registration_date, email, role, name, image, birth_date, social_security_number, dni, address, location, phone_number, (SELECT COUNT(id) FROM medical_consultations WHERE id_user=users.id) AS number_of_consults
+        SELECT id, registration_date, email, role, name, image, birth_date, social_security_number, dni, address, location, phone_number, (SELECT COUNT(id) FROM medical_consultations WHERE id_user=users.id) AS number_of_consults, (SELECT 	COUNT(CA.id)
+                                                                              FROM consultation_answers CA
+	                                                                                LEFT JOIN medical_consultations MC
+		                                                                                  ON CA.id_medical_consultation = MC.id
+                                                                              WHERE MC.id_user=users.id) AS number_of_answers
         FROM users
         WHERE id=?
         `,
@@ -33,6 +37,7 @@ async function getUser(req, res, next) {
       image: userData.image,
       birthDate: formatBirthdayToDB(userData.birth_date),
       numberOfConsultsDone: userData.number_of_consults,
+      numberOfAnswers: userData.number_of_answers,
     };
 
     if (userData.id === req.auth.id || req.auth.role === "admin") {

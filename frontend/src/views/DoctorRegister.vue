@@ -3,7 +3,7 @@
     <vue-headful title="Hack A DOCTOR  | Registro Médico" />
     <h1>Registrarse como médico</h1>
 
-    <input type="text" v-model="name" placeholder="Name" />
+    <input type="text" v-model="name" placeholder="Nombre" />
     <input type="email" v-model="email" placeholder="Email" />
     <input type="password" v-model="password" placeholder="Contraseña" />
     <input type="password" v-model="repeatPassword" placeholder="Confirmar contraseña" />
@@ -12,7 +12,11 @@
     <label for="Experience">Fecha de colegiado</label>
     <input type="date" id="Experience" v-model="experience" placeholder="Fecha de colegiado" />
 
-    <button @click="validatingData()">Registrarse</button>
+    <div class="buttons">
+      <button class="cancel" @click="goBack()">Cancelar</button>
+
+      <button @click="validatingData()">Registrarse</button>
+    </div>
   </div>
 </template>
 
@@ -111,9 +115,15 @@ export default {
         }
       }
     },
+    goBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
 
 <style scoped>
+.buttons {
+  display: block;
+}
 </style>

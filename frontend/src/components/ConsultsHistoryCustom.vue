@@ -40,7 +40,7 @@
             <span>{{ consult.description }}</span>
           </p>
           <p>
-            <b>Foto adjunta:</b>
+            <b>Imagen adjunta:</b>
 
             <span>
               <a v-if="consult.image" :href="getImageName(consult.image)" target="_blank">
@@ -59,7 +59,10 @@
             </span>
           </p>
 
-          <router-link :to="{  name: 'ViewAnswer', params:{ id:consult.answer_id }}">
+          <router-link
+            v-if="consult.answer_id !== null"
+            :to="{  name: 'ViewAnswer', params:{ id:consult.answer_id }}"
+          >
             <button>Ver respuesta</button>
           </router-link>
         </li>
@@ -158,7 +161,10 @@ export default {
       this.currentPage = page;
       this.currentIndex = page * this.elementsPerPage;
     },
-  },
+  } /* ,
+  created() {
+    this.seeAnswer();
+  }, */,
 };
 </script>
 

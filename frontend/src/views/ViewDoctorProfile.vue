@@ -93,8 +93,10 @@
           <label for="ProfilePic">Foto de perfil:</label>
           <input type="file" id="ProfilePic" ref="avatar" @change="profileImage" />
 
-          <button @click="editInfo =! editInfo">Cancelar</button>
-          <button @click="sweetalertEdit(), updateInfo()">Confirmar cambios</button>
+          <div class="buttons">
+            <button class="cancel" @click="editInfo =! editInfo">Cancelar</button>
+            <button @click="sweetalertEdit(), updateInfo()">Confirmar cambios</button>
+          </div>
         </div>
       </div>
 
@@ -112,8 +114,10 @@
             placeholder="Confirmar contraseña nueva"
             v-model="repeatNewPassword"
           />
-          <button @click="editPass =! editPass">Cancelar</button>
-          <button @click="sweetalertEditPass()">Actualizar contraseña</button>
+          <div class="buttons">
+            <button class="cancel" @click="editPass =! editPass">Cancelar</button>
+            <button @click="sweetalertEditPass()">Actualizar contraseña</button>
+          </div>
         </div>
       </div>
 

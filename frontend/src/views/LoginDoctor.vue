@@ -3,12 +3,15 @@
     <h1>Login de médico</h1>
     <input v-model="userDoctor" type="email" placeholder="Email de usuario" />
     <input v-model="passwordDoctor" type="password" placeholder="Contraseña" />
-    <button @click="loginDoctorUser()">Login</button>
-    <router-link :to="{  name: 'DoctorRegister' }">
-      <button>REGISTRARSE</button>
-    </router-link>
 
-    <button @click="seeRecoverModal=true">¿Has olvidado tu contraseña?</button>
+    <div class="buttons">
+      <button @click="loginDoctorUser()">Login</button>
+      <router-link :to="{  name: 'DoctorRegister' }">
+        <button>REGISTRARSE</button>
+      </router-link>
+
+      <button @click="seeRecoverModal=true">¿Has olvidado tu contraseña?</button>
+    </div>
 
     <!--  MODAL PARA RECUPERAR LA CONTRASEÑA -->
     <div v-show="seeRecoverModal" class="modal">
@@ -16,8 +19,11 @@
         <h3>Recupera tu contraseña</h3>
         <p>Introduce tu correo de usuario, al que se te enviará el código para recupear tu contraseña</p>
         <input type="email" placeholder="Email" v-model="recuperationMail" />
-        <button @click="seeRecoverModal =! seeRecoverModal">Cancelar</button>
-        <button @click="sendRecoverCode()">Enviar</button>
+
+        <div class="buttons">
+          <button class="cancel" @click="seeRecoverModal =! seeRecoverModal">Cancelar</button>
+          <button @click="sendRecoverCode()">Enviar</button>
+        </div>
       </div>
     </div>
 
@@ -33,8 +39,11 @@
           placeholder="Confirma la nueva contraseña"
           v-model="repeatNewPassword"
         />
-        <button @click="seeResetModal =! seeResetModal">Cancelar</button>
-        <button @click="resetPassword()">Confirmar</button>
+
+        <div class="buttons">
+          <button class="cancel" @click="seeResetModal =! seeResetModal">Cancelar</button>
+          <button @click="resetPassword()">Confirmar</button>
+        </div>
       </div>
     </div>
   </div>

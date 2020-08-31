@@ -15,35 +15,35 @@
       <div v-if="seeInfo" class="modal">
         <div class="modalBox">
           <p>
-            Fecha de registro:
+            <b>Fecha de registro:</b>
             <span>{{ getFormat(patients.registrationDate) }}</span>
           </p>
           <p>
-            Dirección:
+            <b>Dirección:</b>
             <span>{{patients.address}}</span>
           </p>
           <p>
-            Localidad:
+            <b>Localidad:</b>
             <span>{{patients.location}}</span>
           </p>
           <p>
-            DNI:
+            <b>DNI:</b>
             <span>{{patients.dni}}</span>
           </p>
           <p>
-            Fecha de nacimiento:
+            <b>Fecha de nacimiento:</b>
             <span>{{ getFormat(patients.birthDate) }}</span>
           </p>
           <p>
-            Nº de la Seguridad Social:
+            <b>Nº de la Seguridad Social:</b>
             <span>{{ patients.socialSecurityNumber }}</span>
           </p>
           <p>
-            Nº de Teléfono:
+            <b>Nº de Teléfono:</b>
             <span>{{ patients.phoneNumber }}</span>
           </p>
           <p>
-            Email:
+            <b>Email:</b>
             <span>{{ patients.email }}</span>
           </p>
           <button @click="seeInfo =! seeInfo">Cerrar</button>
@@ -115,15 +115,22 @@
         </div>
       </div>
 
+      <router-link :to="{  name: 'PatientConsultsHistory', params:{ id:patientId }}">
+        <button>Ver historial de consultas</button>
+      </router-link>
+
+      <h3>Estadísticas:</h3>
+
       <p>
         ￼
         Consultas realizadas:
         <span>{{ patients.numberOfConsultsDone }}</span>
       </p>
 
-      <router-link :to="{  name: 'PatientConsultsHistory', params:{ id:patientId }}">
-        <button>Ver historial de consultas</button>
-      </router-link>
+      <p>
+        Nº de respuestas recibidas:
+        <span>{{ patients.numberOfAnswers }}</span>
+      </p>
     </div>
 
     <!-- SPINNER -->

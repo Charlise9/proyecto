@@ -86,7 +86,9 @@ async function editUser(req, res, next) {
 
       // Verificamos de nuevo el email recibido
       const registrationCode = randomString(40);
-      const validationURL = `${process.env.PUBLIC_HOST}/users/validate/${registrationCode}`;
+      /* const validationURL = `${process.env.PUBLIC_HOST}/users/validate/${registrationCode}`; */
+      const validationURL = `${process.env.FRONTEND_URL}/patient-validate-mail?${registrationCode}`;
+
 
       //Enviamos la url anterior por mail
       try {

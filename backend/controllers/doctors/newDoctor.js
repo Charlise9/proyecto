@@ -44,7 +44,10 @@ async function newDoctor(req, res, next) {
     // enviar un mensaje de confirmación de registro al email indicado
 
     const registrationCode = randomString(40);
-    const validationURL = `${process.env.PUBLIC_HOST}/doctors/validate/${registrationCode}`;
+    /* const validationURL = `${process.env.PUBLIC_HOST}/doctors/validate/${registrationCode}`; */
+
+    const validationURL = `${process.env.FRONTEND_URL}/doctor-validate-mail?${registrationCode}`;
+
 
     // Enviamos la url anterior por mail
     try {

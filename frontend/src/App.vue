@@ -69,7 +69,7 @@ export default {
       logout();
       /* this.$router.push("/"); */
 
-      if (this.$router.name !== "Home") {
+      if (this.$route.name !== "Home") {
         this.$router.push({ name: "Home" });
       }
     },
@@ -165,6 +165,10 @@ button:hover {
   background-color: #1b262c;
   color: whitesmoke;
 }
+
+.buttons {
+  display: block;
+}
 /* input {
   margin: 0.1rem;
   border-radius: 12px;
@@ -178,7 +182,7 @@ label {
   display: inline-block;
 } */
 
-input[type="text"],
+input,
 input[type="search"],
 select {
   width: 70%;
