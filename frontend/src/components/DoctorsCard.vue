@@ -42,7 +42,7 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item" :class="{disabled: currentPage === 0}">
-            <button :disable="isDisabledPrev" class="page-link" @click="previousPage">&lt;</button>
+            <button class="page-link" @click="previousPage">&lt;</button>
           </li>
 
           <li
@@ -81,7 +81,6 @@ export default {
       currentIndex: 0,
       elementsPerPage: 6,
       currentPage: 0,
-      isDisabledPrev: false,
     };
   },
   computed: {
@@ -98,11 +97,6 @@ export default {
         pageArray.push(i);
       }
       return pageArray;
-    },
-    isDisabled() {
-      if (this.currentPage === 0) {
-        return (this.isDisabledPrev = true);
-      }
     },
   },
   methods: {
@@ -125,10 +119,12 @@ export default {
       this.currentPage = this.currentPage - 1;
       this.currentIndex = this.currentIndex - this.elementsPerPage;
     },
+    // FUNCIÓN PARA AVANZAR EN LA PAGINACIÓN
     nextPage() {
       this.currentPage = this.currentPage + 1;
       this.currentIndex = this.currentIndex + this.elementsPerPage;
     },
+    // FUNCIÓN PARA IR A LA PÁGINA CONCRETA QUE QUIERES
     goToPage(page) {
       this.currentPage = page;
       this.currentIndex = page * this.elementsPerPage;
@@ -155,13 +151,14 @@ export default {
 #list .name {
   border: none;
   text-decoration: none;
-  background-color: white;
+  background-color: transparent;
 }
 
 #list a {
   text-decoration: none;
   color: black;
   font-size: 20px;
+  background: transparent;
 }
 
 #list {
@@ -171,13 +168,14 @@ export default {
 }
 
 #list ul li {
-  border: 2px solid #e84a5f;
+  border: 2px solid #07689f;
   border-radius: 15px;
   margin: 2rem auto;
   display: inline-block;
   padding: 1rem 1rem;
   width: 12rem;
   height: 18rem;
+  background-color: #e4f9ff;
 }
 /* #list ul li img {
   width: 100px;
@@ -220,6 +218,8 @@ export default {
   display: block;
   margin: 1rem auto;
 }
+
+/* PAGINACIÓN */
 
 #navigation nav {
   display: block;
@@ -273,13 +273,14 @@ export default {
 }
 
 .active {
-  background-color: #42b983;
+  background-color: #07689f;
 }
 
 /* #navigation ul li  */
 .disabled {
   opacity: 0.4;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 #navigation button {
@@ -291,7 +292,7 @@ export default {
 }
 
 #navigation button:hover {
-  background-color: #42b983;
+  background-color: #a2d5f2;
 }
 
 @media (min-width: 576px) {

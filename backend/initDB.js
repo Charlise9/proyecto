@@ -183,7 +183,7 @@ async function main() {
 
       await connection.query(`
       INSERT INTO users(registration_date, name, email, password, dni, social_security_number, birth_date, address, location, phone_number, role, active, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${ssNumber}", "${birth}","${address}", "${location}", "${phoneNumber}", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
+      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("12345678", 512), "${dni}", "${ssNumber}", "${birth}","${address}", "${location}", "${phoneNumber}", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
       `);
     }
 
@@ -218,7 +218,7 @@ async function main() {
 
       await connection.query(`
       INSERT INTO doctors(registration_date, name, email, password, dni, phone_number, birth_date, address, location, collegiate_number, experience, speciality, role, active, last_update, last_auth_update)
-      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("${faker.internet.password()}", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${experience}", "${
+      VALUES(UTC_TIMESTAMP, "${name}", "${email}", SHA2("12345678", 512), "${dni}", "${phoneNumber}", "${birth}", "${address}", "${location}", "${collegiateNumber}", "${experience}", "${
         speciality[random(0, 3)]
         }", "normal", true, UTC_TIMESTAMP, UTC_TIMESTAMP)
     `);
@@ -234,7 +234,7 @@ async function main() {
       INSERT INTO medical_consultations(date, seriusness, symptoms, medical_history, description, id_user, id_doctor)
       VALUES("${date}", "${
         seriousness[random(0, 2)]
-        }", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${faker.lorem.text()}", "${random(
+        }", "${faker.lorem.sentence()}", "${faker.lorem.sentence()}", "${faker.lorem.paragraph()}", "${random(
           2,
           users + 1
         )}", "${random(1, doctors + 1)}")
@@ -250,7 +250,7 @@ async function main() {
 
       await connection.query(`
       INSERT INTO consultation_answers(date, diagnosis, treatment, observations, rate, verified, last_update, id_medical_consultation)
-      VALUES("${date}", "${faker.lorem.sentence()}", "${faker.lorem.sentences()}", "${faker.lorem.paragraphs()}", "${rate}", 1, UTC_TIMESTAMP, "${
+      VALUES("${date}", "${faker.lorem.sentence()}", "${faker.lorem.sentence()}", "${faker.lorem.sentences()}", "${rate}", 1, UTC_TIMESTAMP, "${
         index + 1
         }")
       `);

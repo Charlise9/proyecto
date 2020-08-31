@@ -42,10 +42,6 @@
           ¿Fue efectivo el tratamiento?:
           <span>{{rateFormat(answer.rate)}}</span>
         </p>
-        <p>
-          Resultado verificado:
-          <span>{{answer.verified}}</span>
-        </p>
 
         <router-link v-if="canVote" :to="{  name: 'VoteAnswer', params:{ id:answer.answer_id }}">
           <button>Votar respuesta</button>

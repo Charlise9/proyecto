@@ -150,14 +150,7 @@
             Votos negativos:
             <span>{{statistics.negatives}}</span>
           </p>
-          <p>
-            Votos verificados:
-            <span>{{ statistics.verifieds }}</span>
-          </p>
-          <p>
-            Votos pendientes de verificar:
-            <span>{{ statistics.not_verifieds }}</span>
-          </p>
+
           <button @click="seeStatistics =! seeStatistics">Cerrar</button>
         </div>
       </div>
