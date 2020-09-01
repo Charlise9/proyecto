@@ -167,7 +167,7 @@ async function main() {
       `);
 
     console.log("Metiendo datos de prueba en users");
-    const users = 100;
+    const users = 200;
 
     for (let index = 0; index < users; index++) {
       const name = faker.name.findName();
@@ -200,7 +200,7 @@ async function main() {
       `);
 
     console.log("Metiendo datos de prueba en doctors");
-    const doctors = 23;
+    const doctors = 28;
 
     for (let index = 0; index < doctors; index++) {
       const name = faker.name.findName();
@@ -225,7 +225,7 @@ async function main() {
     }
 
     console.log("Metiendo datos de prueba en medical_consultations");
-    const medicalConsultationsEntries = 220;
+    const medicalConsultationsEntries = 350;
 
     for (let index = 0; index < medicalConsultationsEntries; index++) {
       const date = formatDateToDB(faker.date.recent());
@@ -242,7 +242,7 @@ async function main() {
     }
 
     console.log("metiendo datos de prueba en consultation_answers");
-    const consultationAnswersEntries = 200;
+    const consultationAnswersEntries = 310;
 
     for (let index = 0; index < consultationAnswersEntries; index++) {
       const date = formatDateToDB(faker.date.recent());

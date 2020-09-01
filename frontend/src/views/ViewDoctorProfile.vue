@@ -22,7 +22,9 @@
           </p>
           <p>
             <b>Especialidad:</b>
-            <span>{{doctors.speciality}}</span>
+            <span>
+              <i>{{doctors.speciality}}</i>
+            </span>
           </p>
           <p>
             <b>Experiencia:</b>
@@ -97,7 +99,7 @@
 
           <div class="buttons">
             <button class="cancel" @click="editInfo =! editInfo">Cancelar</button>
-            <button @click="sweetalertEdit(), updateInfo()">Confirmar cambios</button>
+            <button @click="sweetalertEdit()">Confirmar cambios</button>
           </div>
         </div>
       </div>
@@ -420,5 +422,26 @@ export default {
 <style scoped>
 .span {
   padding-left: 1rem;
+  font-size: 20rem;
+}
+
+.ViewDoctorProfile {
+  position: relative;
+  min-height: 85vh;
+}
+
+.ViewDoctorProfile:before {
+  background-image: url("../assets/doctorprofile-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
 }
 </style>

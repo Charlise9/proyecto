@@ -4,9 +4,9 @@
 
     <img id="choice" src="@/assets/morpheus.gif" alt="Choice" />
 
-    <p>Escoge...</p>
+    <h3>Escoge...</h3>
 
-    <p>¿Fue efectivo el tratamiento?</p>
+    <h3>¿Fue efectivo el tratamiento?</h3>
 
     <button id="negative" @click="negativeVote()">No</button>
 
@@ -113,5 +113,25 @@ export default {
 .goback {
   display: block;
   margin: 2rem auto;
+}
+
+.VoteAnswer {
+  position: relative;
+  min-height: 85vh;
+}
+
+.VoteAnswer:before {
+  background-image: url("../assets/vote-wallpaper.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
 }
 </style>

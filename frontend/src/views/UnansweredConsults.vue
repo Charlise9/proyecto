@@ -24,6 +24,9 @@ export default {
       notAnswers: [],
     };
   },
+  props: {
+    userId: String,
+  },
   methods: {
     // FUNCIÓN PARA VER LAS CONSULTAS PENDIENTES DE RESPUESTA QUE TIENE UN MÉDICO
     async getNotAnswer(id) {
@@ -58,4 +61,23 @@ export default {
 </script>
 
 <style scoped>
+.unansweredConsults {
+  position: relative;
+  min-height: 85vh;
+}
+
+.unansweredConsults:before {
+  background-image: url("../assets/unansweredconsults-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+}
 </style>

@@ -168,7 +168,7 @@ h3 {
 }
 
 .modalBox {
-  background-color: #fefefe;
+  background-color: #e4f9ff;
   margin: 2% auto;
   padding: 3rem;
   width: 80%;
@@ -182,6 +182,7 @@ h3 {
 
 .modalBox span {
   padding-left: 1rem;
+  font-size: 1.2rem;
 }
 
 .profile {
@@ -232,18 +233,6 @@ button:hover {
 .buttons {
   display: block;
 }
-/* input {
-  margin: 0.1rem;
-  border-radius: 12px;
-  border: 2px solid #42b983;
-  width: 300px;
-  text-align: center;
-  display: block;
-}
-
-label {
-  display: inline-block;
-} */
 
 input,
 input[type="search"],
@@ -262,12 +251,6 @@ label {
   display: block;
   text-align: center;
   font-weight: bold;
-}
-
-.sendconsult {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
 }
 
 .textArea {

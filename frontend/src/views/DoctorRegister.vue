@@ -110,6 +110,10 @@ export default {
           this.collegiateNumber = "";
           this.speciality = "";
           this.experience = "";
+
+          setTimeout(() => {
+            this.$router.push({ name: "Home" });
+          }, 500);
         } catch (error) {
           console.error;
         }
@@ -125,5 +129,25 @@ export default {
 <style scoped>
 .buttons {
   display: block;
+}
+
+.doctorregister {
+  position: relative;
+  min-height: 85vh;
+}
+
+.doctorregister:before {
+  background-image: url("../assets/register-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
 }
 </style>

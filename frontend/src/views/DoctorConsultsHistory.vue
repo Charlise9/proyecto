@@ -4,7 +4,7 @@
 
     <h1>Historial de consultas</h1>
 
-    <div>
+    <div class="filters">
       <p>Ordenar:</p>
       <select v-model="order">
         <option value></option>
@@ -13,7 +13,7 @@
       </select>
     </div>
 
-    <div>
+    <div class="filters">
       <p>Orden asc/desc:</p>
       <select v-model="direction">
         <option value="asc">Ascendente</option>
@@ -80,4 +80,28 @@ export default {
 </script>
 
 <style scoped>
+.filters {
+  width: 73vh;
+  margin: 0 auto;
+}
+
+.doctorConsultsHistory {
+  position: relative;
+  min-height: 85vh;
+}
+
+.doctorConsultsHistory:before {
+  background-image: url("../assets/doctorconsultshistory-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+}
 </style>

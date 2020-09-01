@@ -170,4 +170,24 @@ export default {
 .body span {
   padding-left: 1rem;
 }
+
+.doctorprofile {
+  position: relative;
+  min-height: 85vh;
+}
+
+.doctorprofile:before {
+  background-image: url("../assets/doctorprofile-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+}
 </style>

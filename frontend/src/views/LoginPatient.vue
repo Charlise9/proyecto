@@ -57,8 +57,8 @@ export default {
   name: "LoginPatient",
   data() {
     return {
-      userPatient: "carlosbarrientosguillen@gmail.com",
-      passwordPatient: "loremipsum",
+      userPatient: "",
+      passwordPatient: "",
       recuperationMail: "",
       seeRecoverModal: false,
       recoverCode: "",
@@ -136,4 +136,23 @@ export default {
 </script>
 
 <style scoped>
+.login {
+  position: relative;
+  min-height: 85vh;
+}
+
+.login:before {
+  background-image: url("../assets/login-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+}
 </style>

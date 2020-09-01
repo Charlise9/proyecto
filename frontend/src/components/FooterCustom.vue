@@ -17,5 +17,6 @@ export default {
   padding: 30px;
   font-size: 0.75rem;
   color: #2c3e50;
+  font-family: var(--titleFont);
 }
 </style>

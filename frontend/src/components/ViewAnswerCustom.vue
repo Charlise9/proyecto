@@ -1,53 +1,55 @@
 <template>
   <div>
-    <ul>
-      <li v-for="answer in answers" :key="answer.id">
-        <p>
-          Respuesta nº:
-          <span>{{ answer.answer_id }}</span>
-        </p>
-        <p>
-          Realizada por el Dr./a.:
-          <span>{{ answer.doctor_name}}</span>
-        </p>
-        <p>
-          Especialista en:
-          <span>{{ answer.speciality}}</span>
-        </p>
-        <p>
-          En la fecha:
-          <span>{{getFormat(answer.date)}}</span>
-        </p>
-        <p>
-          Al paciente:
-          <span>{{answer.patient_name}}</span>
-        </p>
-        <p>
-          En relación a la consulta nº:
-          <span>{{answer.consult_id}}</span>
-        </p>
-        <p>
-          DIAGNÓSTICO:
-          <span>{{answer.diagnosis}}</span>
-        </p>
-        <p>
-          TRATAMIENTO:
-          <span>{{answer.treatment}}</span>
-        </p>
-        <p>
-          OBSERVACIONES:
-          <span>{{answer.observations}}</span>
-        </p>
-        <p>
-          ¿Fue efectivo el tratamiento?:
-          <span>{{rateFormat(answer.rate)}}</span>
-        </p>
+    <div id="list">
+      <ul>
+        <li v-for="answer in answers" :key="answer.id">
+          <p>
+            <b>Respuesta nº:</b>
+            <span>{{ answer.answer_id }}</span>
+          </p>
+          <p>
+            <b>Realizada por el Dr./a.:</b>
+            <span>{{ answer.doctor_name}}</span>
+          </p>
+          <p>
+            <b>Especialista en:</b>
+            <span>{{ answer.speciality}}</span>
+          </p>
+          <p>
+            <b>En la fecha:</b>
+            <span>{{getFormat(answer.date)}}</span>
+          </p>
+          <p>
+            <b>Al paciente:</b>
+            <span>{{answer.patient_name}}</span>
+          </p>
+          <p>
+            <b>En relación a la consulta nº:</b>
+            <span>{{answer.consult_id}}</span>
+          </p>
+          <p>
+            <b>DIAGNÓSTICO:</b>
+            <span>{{answer.diagnosis}}</span>
+          </p>
+          <p>
+            <b>TRATAMIENTO:</b>
+            <span>{{answer.treatment}}</span>
+          </p>
+          <p>
+            <b>OBSERVACIONES:</b>
+            <span>{{answer.observations}}</span>
+          </p>
+          <p>
+            <b>¿Fue efectivo el tratamiento?:</b>
+            <span>{{rateFormat(answer.rate)}}</span>
+          </p>
 
-        <router-link v-if="canVote" :to="{  name: 'VoteAnswer', params:{ id:answer.answer_id }}">
-          <button>Votar respuesta</button>
-        </router-link>
-      </li>
-    </ul>
+          <router-link v-if="canVote" :to="{  name: 'VoteAnswer', params:{ id:answer.answer_id }}">
+            <button>Votar respuesta</button>
+          </router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -83,26 +85,45 @@ export default {
         return "Positivo";
       }
     },
-    /* voteAnswer(index) {
-      const idUser = localStorage.getItem("ID");
-      if (this.answers[index].patient_id === idUser) {
-        this.canVote = true;
-      } else {
-        this.canVote = false;
-      }
-    }, */
-
-    /* canVote(index) {
-      const idUser = localStorage.getItem("ID");
-      return this.answers[index].patient_id === idUSer;
-    }, */
-  },
-
-  created() {
-    /* this.voteAnswer(); */
   },
 };
 </script>
 
 <style scoped>
+#list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+#list ul {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 900px;
+}
+
+#list ul li {
+  border: 2px solid #07689f;
+  border-radius: 15px;
+  margin: 2rem auto;
+  display: block;
+  padding: 1rem;
+  width: 27rem;
+  height: 27rem;
+  background-color: #e4f9ff;
+}
+#list ul li p {
+  display: block;
+  padding: 0.3rem;
+  font-size: 1rem;
+}
+
+#list ul li p span {
+  margin-left: 0.3rem;
+  font-size: 1rem;
+}
 </style>

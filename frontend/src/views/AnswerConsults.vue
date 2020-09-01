@@ -88,4 +88,23 @@ export default {
 </script>
 
 <style scoped>
+.answerConsults {
+  position: relative;
+  min-height: 85vh;
+}
+
+.answerConsults:before {
+  background-image: url("../assets/consult-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+}
 </style>
