@@ -47,6 +47,7 @@ export default {
             confirmButtonText: "Ok",
             onClose: () => {
               this.sendAnswer();
+              this.$router.push({ name: "UnansweredConsults" });
             },
           });
         }

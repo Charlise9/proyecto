@@ -197,7 +197,7 @@ export default {
   display: block;
   padding: 1rem;
   width: 22rem;
-  height: 24rem;
+  height: 27rem;
   background-color: #e4f9ff;
 }
 #list ul li p {
@@ -297,6 +297,7 @@ export default {
   background-color: transparent;
   border: 1px solid #cccccc;
   color: black;
+  font-family: var(--bodyFont);
 }
 
 #navigation button:hover {

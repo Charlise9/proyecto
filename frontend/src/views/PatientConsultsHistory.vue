@@ -24,7 +24,7 @@
     <patientconsults :consults="consults" />
 
     <router-link :to="{  name: 'ViewUserProfile', params:{ id:userId} }">
-      <button>Volver</button>
+      <button class="back">Volver</button>
     </router-link>
   </div>
 </template>

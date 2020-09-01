@@ -2,9 +2,9 @@
   <div class="home">
     <vue-headful title="Hack A DOCTOR  | Inicio" />
 
-    <h1>Hack A DOCTOR</h1>
+    <h1 id="title">Hack A DOCTOR</h1>
 
-    <div>
+    <div class="filters">
       <p>Ordenar:</p>
       <select v-model="order">
         <option value></option>
@@ -13,7 +13,7 @@
       </select>
     </div>
 
-    <div>
+    <div class="filters">
       <p>Orden asc/desc:</p>
       <select v-model="direction">
         <option value="asc">Ascendente</option>
@@ -81,3 +81,30 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.filters {
+  width: 73vh;
+  margin: 0 auto;
+}
+
+.home {
+  position: relative;
+  min-height: 85vh;
+}
+
+.home:before {
+  background-image: url("../assets/home-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  min-height: 100%;
+  z-index: -1;
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 100%;
+}
+</style>

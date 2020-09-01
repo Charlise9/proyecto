@@ -5,7 +5,7 @@
 
     <unansweredcard :notAnswers="notAnswers" />
 
-    <button @click="goBack()">Volver</button>
+    <button class="back" @click="goBack()">Volver</button>
   </div>
 </template>
 

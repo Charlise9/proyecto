@@ -12,7 +12,7 @@
 
     <button id="positive" @click="positiveVote()">Si</button>
 
-    <button class="goback" @click="goBack()">Volver</button>
+    <button class="goback back" @click="goBack()">Volver</button>
   </div>
 </template>
 

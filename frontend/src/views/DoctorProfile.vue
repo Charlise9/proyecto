@@ -8,48 +8,48 @@
       <img class="profile" v-if="image" :src="getImageName(image)" alt="Foto de perfil" />
       <img class="profile" v-else src="@/assets/default-profile-picture.jpg" alt="Foto de perfil" />
 
-      <p>
-        Especialidad:
-        <span>{{ speciality }}</span>
-      </p>
-      <!-- <p>
-        Correo:
-        <span>{{ email }}</span>
-      </p>-->
-      <p>
-        Nº de colegiado:
-        <span>{{ collegiate_number }}</span>
-      </p>
-      <p>
-        Experiencia:
-        <span>{{getFormat(experience)}}</span>
-      </p>
+      <div class="body">
+        <p>
+          <b>Especialidad:</b>
+          <span>{{ speciality }}</span>
+        </p>
+        <p>
+          <b>Nº de colegiado:</b>
+          <span>{{ collegiate_number }}</span>
+        </p>
+        <p>
+          <b>Experiencia:</b>
+          <span>{{getFormat(experience)}}</span>
+        </p>
 
-      <h3>Estadísticas</h3>
-      <p>
-        Nº de consultas:
-        <span>{{ number_of_consults }}</span>
-      </p>
-      <p>
-        Nº de respuestas:
-        <span>{{ number_of_answers }}</span>
-      </p>
-      <p>
-        Votos positivos:
-        <span>{{ positives }}</span>
-      </p>
-      <p>
-        Votos negativos:
-        <span>{{ negatives }}</span>
-      </p>
+        <h3>Estadísticas</h3>
+        <p>
+          <b>Nº de consultas:</b>
+          <span>{{ number_of_consults }}</span>
+        </p>
+        <p>
+          <b>Nº de respuestas:</b>
+          <span>{{ number_of_answers }}</span>
+        </p>
+        <p>
+          <b>Votos positivos:</b>
+          <span>{{ positives }}</span>
+        </p>
+        <p>
+          <b>Votos negativos:</b>
+          <span>{{ negatives }}</span>
+        </p>
+      </div>
 
-      <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
-        <button v-if="logged">Ver historial de consultas</button>
-      </router-link>
+      <div class="menuButtons">
+        <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
+          <button v-if="logged">Ver historial de consultas</button>
+        </router-link>
 
-      <router-link :to="{  name: 'SendConsult', params:{ id:doctorId }}">
-        <button>Enviar consulta</button>
-      </router-link>
+        <router-link :to="{  name: 'SendConsult', params:{ id:doctorId }}">
+          <button>Enviar consulta</button>
+        </router-link>
+      </div>
     </div>
 
     <div v-else>
@@ -57,7 +57,7 @@
     </div>
 
     <div>
-      <button @click="goBack()">Volver</button>
+      <button class="back" @click="goBack()">Volver</button>
     </div>
   </div>
 </template>
@@ -153,4 +153,21 @@ export default {
 </script>
 
 <style scoped>
+.menuButtons button {
+  display: block;
+  margin: 1rem auto;
+  text-decoration: none;
+}
+
+.menuButtons a {
+  text-decoration: none;
+}
+
+.body p {
+  margin: 1rem;
+}
+
+.body span {
+  padding-left: 1rem;
+}
 </style>

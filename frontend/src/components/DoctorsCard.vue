@@ -173,7 +173,7 @@ export default {
   margin: 2rem auto;
   display: inline-block;
   padding: 1rem 1rem;
-  width: 12rem;
+  width: 14rem;
   height: 18rem;
   background-color: #e4f9ff;
 }
@@ -206,8 +206,8 @@ export default {
 }
 
 #searching {
-  width: 90%;
-  margin: 0.5rem auto;
+  width: 60vh;
+  margin: 1rem auto;
 }
 
 #profile {
@@ -274,6 +274,7 @@ export default {
 
 .active {
   background-color: #07689f;
+  color: whitesmoke;
 }
 
 /* #navigation ul li  */
@@ -289,6 +290,11 @@ export default {
   background-color: transparent;
   border: 1px solid #cccccc;
   color: black;
+  font-family: var(--bodyFont);
+}
+
+#navigation button .active {
+  color: whitesmoke;
 }
 
 #navigation button:hover {

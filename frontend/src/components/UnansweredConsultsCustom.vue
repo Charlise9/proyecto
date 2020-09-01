@@ -295,6 +295,7 @@ span {
   background-color: transparent;
   border: 1px solid #cccccc;
   color: black;
+  font-family: var(--bodyFont);
 }
 
 #navigation button:hover {

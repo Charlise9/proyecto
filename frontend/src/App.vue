@@ -81,20 +81,70 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  --titleFont: Pacifico, sans-serif;
+  --bodyFont: Comfortaa, sans-serif;
+}
+
 ul {
   list-style: none;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--bodyFont) /* Avenir, Helvetica, Arial, sans-serif */;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
+#app h1,
+h3 {
+  font-family: var(--titleFont);
+}
+
 #nav {
-  padding: 30px;
+  /* text-align: center;
+  margin: 2rem 1rem;
+  min-height: 40px; */
+  /* padding: 0 2rem; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #cffffe;
+  /* position: fixed; */
+  width: 100%;
+  height: 4rem;
+}
+
+.homeButtons {
+  display: inline-block;
+  /* float: left; */
+  padding-left: 2rem;
+}
+
+#nav .profileButtons {
+  text-align: center;
+  display: inline-block;
+  /* float: right; */
+  padding-right: 4rem;
+}
+
+#nav .profileButtons p {
+  display: inline-block;
+  margin: 1rem;
+}
+
+#nav .profileButtons button {
+  margin-top: 1rem;
 }
 
 #nav a {
@@ -104,7 +154,7 @@ ul {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #ff9234;
 }
 
 .modal {
@@ -124,6 +174,14 @@ ul {
   width: 80%;
   border: 2px solid #42b983;
   border-radius: 12px;
+}
+
+.modalBox p {
+  margin: 1rem;
+}
+
+.modalBox span {
+  padding-left: 1rem;
 }
 
 .profile {
@@ -156,6 +214,7 @@ button {
   font-size: 12px;
   border-radius: 12px;
   transition: all 0.5s;
+  font-family: var(--bodyFont);
 }
 button:hover {
   cursor: pointer;
@@ -164,6 +223,10 @@ button:hover {
 .cancel {
   background-color: #1b262c;
   color: whitesmoke;
+}
+
+.back {
+  background-color: #07689f;
 }
 
 .buttons {
@@ -192,12 +255,13 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-family: var(--bodyFont);
 }
 
 label {
   display: block;
-  text-align: left;
-  margin-left: 10rem;
+  text-align: center;
+  font-weight: bold;
 }
 
 .sendconsult {

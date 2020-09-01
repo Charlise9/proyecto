@@ -8,53 +8,55 @@
       <img class="profile" v-if="doctors.image" :src="getImageName(doctors.image)" />
       <img class="profile" v-else src="@/assets/default-profile-picture.jpg" alt="Foto de perfil" />
 
+      <h3>DATOS PERSONALES</h3>
+
       <!-- MODAL PARA VER LOS DATOS -->
 
-      <button @click="seeInfo=true">Datos Usuario</button>
+      <button class="infoButtons" @click="seeInfo=true">Datos Usuario</button>
 
       <div v-if="seeInfo" class="modal">
         <div class="modalBox">
           <p>
-            Fecha de registro:
+            <b>Fecha de registro:</b>
             <span>{{ getFormat(doctors.registration_date) }}</span>
           </p>
           <p>
-            Especialidad:
+            <b>Especialidad:</b>
             <span>{{doctors.speciality}}</span>
           </p>
           <p>
-            Experiencia:
+            <b>Experiencia:</b>
             <span>{{ getFormatExperience(doctors.experience) }}</span>
           </p>
           <p>
-            Dirección:
+            <b>Dirección:</b>
             <span>{{doctors.address}}</span>
           </p>
           <p>
-            Localidad:
+            <b>Localidad:</b>
             <span>{{doctors.location}}</span>
           </p>
           <p>
-            Fecha de nacimiento:
+            <b>Fecha de nacimiento:</b>
             <span>{{ getFormat(doctors.birth_date) }}</span>
           </p>
           <p>
-            Nº de colegiado:
+            <b>Nº de colegiado:</b>
             <span>{{ doctors.collegiate_number }}</span>
           </p>
           <p>
-            DNI:
+            <b>DNI:</b>
             <span>{{ doctors.dni }}</span>
           </p>
           <p>
-            Nº de Teléfono:
+            <b>Nº de Teléfono:</b>
             <span>{{ doctors.phone_number }}</span>
           </p>
           <p>
-            Email:
+            <b>Email:</b>
             <span>{{ doctors.email }}</span>
           </p>
-          <button @click="seeInfo =! seeInfo">Cerrar</button>
+          <button class="back" @click="seeInfo =! seeInfo">Cerrar</button>
           <button @click="editInfo=true, seeInfo=false">Editar</button>
         </div>
       </div>
@@ -100,7 +102,7 @@
         </div>
       </div>
 
-      <button @click="editPass=true">Cambiar contraseña</button>
+      <button class="infoButtons" @click="editPass=true">Cambiar contraseña</button>
 
       <!-- MODAL PARA CAMBIAR LA CONTRASEÑA -->
 
@@ -121,17 +123,7 @@
         </div>
       </div>
 
-      <!-- BOTÓN PARA VER LAS CONSULTAS PENDIENTES DE CONTESTAR -->
-      <router-link :to="{  name: 'UnansweredConsults', params:{ id:doctorId }}">
-        <button>Consultas pendientes de responder</button>
-      </router-link>
-
-      <!-- BOTÓN PARA VER EL HISTORIAL DE CONSULTAS -->
-      <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
-        <button>Ver historial de consultas</button>
-      </router-link>
-
-      <button @click="seeStatistics=true">Estadísticas</button>
+      <button class="infoButtons" @click="seeStatistics=true">Estadísticas</button>
 
       <!-- MODAL PARA VER LAS ESTADÍSTICAS -->
 
@@ -139,25 +131,37 @@
         <div class="modalBox">
           <h2>Estadísticas</h2>
           <p>
-            Consultas recibidas:
+            <b>Consultas recibidas:</b>
             <span>{{ questions.number_of_consults }}</span>
           </p>
           <p>
-            Consultas respondidas:
+            <b>Consultas respondidas:</b>
             <span>{{statistics.number_of_answers}}</span>
           </p>
           <p>
-            Votos positivos:
+            <b>Votos positivos:</b>
             <span>{{statistics.positives}}</span>
           </p>
           <p>
-            Votos negativos:
+            <b>Votos negativos:</b>
             <span>{{statistics.negatives}}</span>
           </p>
 
-          <button @click="seeStatistics =! seeStatistics">Cerrar</button>
+          <button class="back" @click="seeStatistics =! seeStatistics">Cerrar</button>
         </div>
       </div>
+
+      <h3>CONSULTAS</h3>
+
+      <!-- BOTÓN PARA VER LAS CONSULTAS PENDIENTES DE CONTESTAR -->
+      <router-link :to="{  name: 'UnansweredConsults', params:{ id:doctorId }}">
+        <button>Consultas pendientes de responder {{ questions.number_of_consults - statistics.number_of_answers }}</button>
+      </router-link>
+
+      <!-- BOTÓN PARA VER EL HISTORIAL DE CONSULTAS -->
+      <router-link :to="{  name: 'DoctorConsultsHistory', params:{ id:doctorId }}">
+        <button>Ver historial de consultas</button>
+      </router-link>
     </div>
 
     <!-- SPINNER -->
@@ -414,4 +418,7 @@ export default {
 </script>
 
 <style scoped>
+.span {
+  padding-left: 1rem;
+}
 </style>

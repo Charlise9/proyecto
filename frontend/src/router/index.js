@@ -61,7 +61,7 @@ const routes = [
     }
   },
   {
-    path: '/viewdoctorprofile/:id',
+    path: '/doctor-my-profile/:id',
     name: 'ViewDoctorProfile',
     component: () => import('../views/ViewDoctorProfile.vue'),
     meta: {
@@ -70,7 +70,7 @@ const routes = [
     }
   },
   {
-    path: '/viewuserprofile/:id',
+    path: '/user-my-profile/:id',
     name: 'ViewUserProfile',
     component: () => import('../views/ViewUserProfile.vue'),
     meta: {
@@ -151,7 +151,7 @@ const routes = [
     }
   },
   {
-    path: '/viewdoctorprofile/:id/unanswered-consults/',
+    path: '/doctor-profile/:id/unanswered-consults/',
     name: 'UnansweredConsults',
     component: () => import('../views/UnansweredConsults.vue'),
     meta: {
