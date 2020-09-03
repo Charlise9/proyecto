@@ -2,15 +2,13 @@
   <div class="VoteAnswer">
     <h1>Votar respuesta</h1>
 
-    <img id="choice" src="@/assets/morpheus.gif" alt="Choice" />
-
-    <h3>Escoge...</h3>
+    <img id="choice" src="@/assets/vote-wallpaper.jpg" alt="Choice" />
 
     <h3>¿Fue efectivo el tratamiento?</h3>
 
     <button id="negative" @click="negativeVote()">No</button>
 
-    <button id="positive" @click="positiveVote()">Si</button>
+    <button @click="positiveVote()">Si</button>
 
     <button class="goback back" @click="goBack()">Volver</button>
   </div>
@@ -106,10 +104,6 @@ export default {
   background-color: rgb(206, 25, 25);
 }
 
-#positive {
-  background-color: rgb(26, 79, 226);
-}
-
 .goback {
   display: block;
   margin: 2rem auto;
@@ -121,7 +115,7 @@ export default {
 }
 
 .VoteAnswer:before {
-  background-image: url("../assets/vote-wallpaper.gif");
+  background-image: url("../assets/vote-background.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

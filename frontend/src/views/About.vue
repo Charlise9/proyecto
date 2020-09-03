@@ -3,7 +3,7 @@
     <vue-headful title="Clientes  | About" />
 
     <div class="info">
-      <h1 class="title">Hack A DOCTOR</h1>
+      <h1 class="title">e - DOCTOR</h1>
       <img class="mypicture" src="@/assets/carlosbarrientos.jpg" alt="Carlos Barrientos" />
       <div class="aboutinfo">
         <h3>Información personal</h3>
