@@ -1,6 +1,6 @@
 <template>
   <div class="viewAnswer">
-    <vue-headful title="Hack A DOCTOR | Respuesta" />
+    <vue-headful title="e-DOCTOR | Respuesta" />
 
     <viewanswercard :answers="answers" />
 

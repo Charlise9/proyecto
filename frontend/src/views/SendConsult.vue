@@ -1,5 +1,7 @@
 <template>
   <div class="sendconsult">
+    <vue-headful title="e-DOCTOR | Enviar consulta" />
+
     <h1>Enviar Consulta</h1>
 
     <label for="Seriusness">Gravedad:</label>

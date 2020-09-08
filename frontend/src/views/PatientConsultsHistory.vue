@@ -1,6 +1,6 @@
 <template>
   <div class="patientConsultsHistory">
-    <vue-headful title="Hack A DOCTOR | Historial de consultas" />
+    <vue-headful title="e-DOCTOR | Historial de consultas" />
 
     <h1>Historial de consultas</h1>
 

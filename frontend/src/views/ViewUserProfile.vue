@@ -377,6 +377,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin: 1rem auto;
+}
+
 .ViewUserProfile {
   position: relative;
   min-height: 85vh;

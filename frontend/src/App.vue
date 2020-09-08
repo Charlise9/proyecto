@@ -99,7 +99,7 @@ ul {
 }
 
 #app {
-  font-family: var(--bodyFont) /* Avenir, Helvetica, Arial, sans-serif */;
+  font-family: var(--bodyFont);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -109,6 +109,16 @@ ul {
 #app h1,
 h3 {
   font-family: var(--titleFont);
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#app h1 {
+  font-size: 2rem;
+}
+
+#app h1 span {
+  color: red;
 }
 
 #nav {
@@ -194,10 +204,6 @@ h3 {
   margin: 2rem auto;
 }
 
-/* input:hover {
-  border: 2px solid #42b983;
-  cursor: pointer;
-} */
 input:focus {
   outline: none;
 }
@@ -208,7 +214,7 @@ button {
   margin: 1rem;
   background-color: #42b983;
   border: none;
-  color: white;
+  color: black;
   padding: 10px 25px;
   text-align: center;
   text-decoration: none;
@@ -216,6 +222,7 @@ button {
   border-radius: 12px;
   transition: all 0.5s;
   font-family: var(--bodyFont);
+  font-weight: bold;
 }
 button:hover {
   cursor: pointer;

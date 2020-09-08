@@ -206,7 +206,7 @@ export default {
 }
 
 #searching {
-  width: 60vh;
+  width: 43.5%;
   margin: 1rem auto;
 }
 

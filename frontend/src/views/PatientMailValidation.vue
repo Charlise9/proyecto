@@ -1,5 +1,7 @@
 <template>
   <div class="mailValidation">
+    <vue-headful title="e-DOCTOR | Usuario activado" />
+
     <h1>Usuario activado</h1>
     <h3>Ya puedes loguearte</h3>
 

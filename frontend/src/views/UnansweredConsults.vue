@@ -1,6 +1,6 @@
 <template>
   <div class="unansweredConsults">
-    <vue-headful title="Hack A DOCTOR | Consultas pendientes de responder" />
+    <vue-headful title="e-DOCTOR | Consultas pendientes de responder" />
     <h1>Consultas pendientes de respuesta</h1>
 
     <unansweredcard :notAnswers="notAnswers" />

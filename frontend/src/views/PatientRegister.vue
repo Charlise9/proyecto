@@ -1,6 +1,6 @@
 <template>
   <div class="patientregister">
-    <vue-headful title="Hack A DOCTOR  | Registro Paciente" />
+    <vue-headful title="e-DOCTOR  | Registro Paciente" />
     <h1>Registrarse como paciente</h1>
 
     <input type="text" v-model="name" placeholder="Name" />

@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import { isLoggedIn } from '../helpers/utils'
 
+
+
 Vue.use(VueRouter)
 
 const routes = [

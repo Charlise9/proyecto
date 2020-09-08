@@ -1,14 +1,16 @@
 <template>
   <div class="VoteAnswer">
+    <vue-headful title="e-DOCTOR | votar respuesta" />
     <h1>Votar respuesta</h1>
+    <div class="vote">
+      <!-- <img id="choice" src="@/assets/vote-wallpaper.jpg" alt="Choice" /> -->
 
-    <img id="choice" src="@/assets/vote-wallpaper.jpg" alt="Choice" />
+      <h3>¿Fue efectivo el tratamiento?</h3>
 
-    <h3>¿Fue efectivo el tratamiento?</h3>
+      <button id="negative" @click="negativeVote()">No</button>
 
-    <button id="negative" @click="negativeVote()">No</button>
-
-    <button @click="positiveVote()">Si</button>
+      <button @click="positiveVote()">Si</button>
+    </div>
 
     <button class="goback back" @click="goBack()">Volver</button>
   </div>
@@ -95,7 +97,7 @@ export default {
 
 <style scoped>
 #choice {
-  width: 50%;
+  width: 30%;
   display: block;
   margin: 2rem auto;
 }
@@ -127,5 +129,16 @@ export default {
   display: block;
   position: absolute;
   width: 100%;
+}
+
+.vote {
+  background-image: url("../assets/vote-wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding: 5rem;
+
+  /* border: 2px solid #07689f;
+  border-radius: 15px; */
 }
 </style>

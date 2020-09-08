@@ -1,6 +1,6 @@
 <template>
   <div class="error">
-    <vue-headful title="Hack A DOCTOR | Error" />
+    <vue-headful title="e-DOCTOR | Error" />
 
     <h1>Te has perdido hamijo</h1>
     <h3>No quieres que te atienda este doctor, hazme caso...</h3>

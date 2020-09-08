@@ -1,6 +1,6 @@
 <template>
   <div class="ViewDoctorProfile">
-    <vue-headful title="Hack A DOCTOR | mi perfil-doctor" />
+    <vue-headful title="e-DOCTOR | mi perfil-doctor" />
 
     <div v-if="isLoaded">
       <h1>{{ doctors.name}}</h1>

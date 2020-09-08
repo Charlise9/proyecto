@@ -1,24 +1,32 @@
 <template>
   <div class="home">
-    <vue-headful title="Hack A DOCTOR  | Inicio" />
+    <vue-headful title="e-DOCTOR  | Inicio" />
 
-    <h1 id="title">e - DOCTOR</h1>
-
-    <div class="filters">
-      <p>Ordenar:</p>
-      <select v-model="order">
-        <option value></option>
-        <option value="alphabetic">A-Z</option>
-        <option value="experience">Experiencia</option>
-      </select>
-    </div>
+    <h1 id="title">
+      <span>e -</span> DOCTOR
+    </h1>
 
     <div class="filters">
-      <p>Orden asc/desc:</p>
-      <select v-model="direction">
-        <option value="asc">Ascendente</option>
-        <option value="desc">Descendente</option>
-      </select>
+      <div>
+        <p>
+          <b>Ordenar:</b>
+        </p>
+        <select v-model="order">
+          <option value></option>
+          <option value="alphabetic">A-Z</option>
+          <option value="experience">Experiencia</option>
+        </select>
+      </div>
+
+      <div>
+        <p>
+          <b>Orden asc/desc:</b>
+        </p>
+        <select v-model="direction">
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
+        </select>
+      </div>
     </div>
 
     <doctorscard @doctorsList="getDoctors" :doctors="doctors" />
@@ -83,9 +91,16 @@ export default {
 </script>
 
 <style scoped>
+#app .home h1 {
+  padding-top: 3rem;
+  margin-bottom: 3rem;
+  font-size: 4rem;
+}
+
 .filters {
-  width: 73vh;
-  margin: 0 auto;
+  width: 20%;
+  margin: 1rem auto;
+  padding: 12px 20px;
 }
 
 .home {

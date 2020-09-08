@@ -1,5 +1,7 @@
 <template>
   <div class="login">
+    <vue-headful title="e-DOCTOR | Login paciente" />
+
     <h1>Login de paciente</h1>
     <input v-model="userPatient" type="email" placeholder="Email de usuario" />
     <input v-model="passwordPatient" type="password" placeholder="Contraseña" />

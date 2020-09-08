@@ -1,5 +1,7 @@
 <template>
   <div class="answerConsults">
+    <vue-headful title="e-DOCTOR | Responder consulta" />
+
     <h1>Responder</h1>
 
     <label for="Diagnosis">Diagnóstico:</label>

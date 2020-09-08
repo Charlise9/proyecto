@@ -1,6 +1,6 @@
 <template>
   <div class="doctorprofile">
-    <vue-headful title="Hack A DOCTOR | info-doctor" />
+    <vue-headful title="e-DOCTOR | info-doctor" />
 
     <div v-if="isLoaded">
       <h1>DR/A {{ name }}</h1>
@@ -161,6 +161,20 @@ export default {
 
 .menuButtons a {
   text-decoration: none;
+}
+
+.body {
+  border: 2px solid #07689f;
+  border-radius: 15px;
+  margin: 1rem auto;
+  display: inline-block;
+  padding: 1rem 1rem;
+  background-color: #e4f9ff;
+}
+
+.body h3 {
+  padding: 1rem;
+  margin: 1rem;
 }
 
 .body p {
