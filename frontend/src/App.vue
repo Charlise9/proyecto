@@ -235,6 +235,7 @@ button:hover {
 
 .back {
   background-color: #07689f;
+  color: whitesmoke;
 }
 
 .buttons {

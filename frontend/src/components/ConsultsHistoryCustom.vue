@@ -75,7 +75,10 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item" :class="{disabled: currentPage === 0}">
-            <button class="page-link" @click="previousPage">&lt;</button>
+            <button class="page-link" @click="previousPage">
+              <img class="icon" src="@/assets/anterior.png" alt="anterior" />
+              <!-- &lt; -->
+            </button>
           </li>
 
           <li
@@ -89,7 +92,10 @@
           </li>
 
           <li class="page-item" :class="{disabled: currentPage === pages.length -1}">
-            <button class="page-link" @click="nextPage">&gt;</button>
+            <button class="page-link" @click="nextPage">
+              <img class="icon" src="@/assets/siguiente.png" alt="siguiente" />
+              <!-- &gt; -->
+            </button>
           </li>
         </ul>
       </nav>
@@ -278,6 +284,11 @@ export default {
   padding-left: 0;
   list-style: none;
   border-radius: 0.25rem;
+}
+
+#navigation .icon {
+  height: 10px;
+  width: 20px;
 }
 
 .active {

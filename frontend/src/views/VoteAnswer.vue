@@ -7,9 +7,15 @@
 
       <h3>¿Fue efectivo el tratamiento?</h3>
 
-      <button id="negative" @click="negativeVote()">No</button>
+      <button id="negative" @click="negativeVote()">
+        <img class="icon" src="@/assets/cross.jpg" alt="mal" />
+        <!-- No -->
+      </button>
 
-      <button @click="positiveVote()">Si</button>
+      <button id="negative" @click="positiveVote()">
+        <img class="icon" src="@/assets/check_40622.jpg" alt="bien" />
+        <!-- Si -->
+      </button>
     </div>
 
     <button class="goback back" @click="goBack()">Volver</button>
@@ -103,7 +109,8 @@ export default {
 }
 
 #negative {
-  background-color: rgb(206, 25, 25);
+  background-color: transparent;
+  margin-top: 5rem;
 }
 
 .goback {
