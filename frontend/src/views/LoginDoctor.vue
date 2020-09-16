@@ -59,8 +59,8 @@ export default {
   name: "LoginDoctor",
   data() {
     return {
-      userDoctor: "",
-      passwordDoctor: "",
+      userDoctor: "soyelmejormedico@gmail.com",
+      passwordDoctor: "12345678",
       recuperationMail: "",
       seeRecoverModal: false,
       recoverCode: "",
